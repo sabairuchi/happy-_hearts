@@ -1,10 +1,8 @@
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FileText, ArrowRight, Sparkles } from 'lucide-react';
+import { CheckCircle2, FileText, Calendar, ArrowRight, Sparkles } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
-import { FloatingDecorations } from '../components/FloatingDecorations';
 import styles from './Admission.module.css';
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -76,66 +74,51 @@ export default function Admission() {
   return (
     <PageWrapper>
       {/* HERO SECTION */}
-      <section className={styles.heroSection} style={{ position: 'relative' }}>
-        <FloatingDecorations variant="hero" />
+      <section className={styles.heroSection}>
         <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
         <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
         <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
         <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
 
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65 }}
-          >
-            <span className="badge-pill badge-yellow">
-              <Sparkles size={16} /> 🚀 Admissions Open 2026-2027
-            </span>
-            <h1 className={styles.heroTitle}>
-              Give Your Child the <span className="text-gradient">Best Start</span> in Life 🎨
-            </h1>
-            <p className={styles.heroDesc}>
-              Join the Happy Hearts family! Simple digital admission process, transparent fee structures, and immediate status tracking.
-            </p>
-            <div className={styles.ctaGroup}>
-              <Link to="/admission/apply">
-                <Button size="lg" variant="primary" icon={<ArrowRight size={20} />}>
-                  Apply Now for Admission
-                </Button>
-              </Link>
-              <Link to="/admission/status">
-                <Button size="lg" variant="secondary" icon={<FileText size={20} />}>
-                  Track Existing Application
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+        <div className="container">
+          <span className="badge-pill badge-yellow">
+            <Sparkles size={16} /> 🚀 Admissions Open 2026-2027
+          </span>
+          <h1 className={styles.heroTitle}>
+            Give Your Child the <span className="text-gradient">Best Start</span> in Life 🎨
+          </h1>
+          <p className={styles.heroDesc}>
+            Join the Happy Hearts family! Simple digital admission process, transparent fee structures, and immediate status tracking.
+          </p>
+          <div className={styles.ctaGroup}>
+            <Link to="/admission/apply">
+              <Button size="lg" variant="primary" icon={<ArrowRight size={20} />}>
+                Apply Now for Admission
+              </Button>
+            </Link>
+            <Link to="/admission/status">
+              <Button size="lg" variant="secondary" icon={<FileText size={20} />}>
+                Track Application Status
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <WavyDivider fill="#FFF9F0" />
+      <WavyDivider fill="#FFFBEB" />
 
-      {/* PROGRAMS AVAILABLE */}
-      <section className={styles.section}>
+      {/* PROGRAMS & FEES (Alternating Background 1: Soft Yellow Tint) */}
+      <section className={styles.section} style={{ background: 'linear-gradient(180deg, #FFFBEB 0%, #F0F9FF 100%)' }}>
         <div className="container">
-          <motion.div
-            className={styles.sectionHeader}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="badge-pill badge-mint">🎓 Educational Programs</span>
-            <h2>Select the Right Stage for Your Child 🧸</h2>
-            <p>Our age-tailored curriculums balance play-based exploration with cognitive milestones.</p>
-          </motion.div>
+          <div className={styles.sectionHeader}>
+            <span className="badge-pill badge-mint">🎓 Programs & Fees</span>
+            <h2 className={styles.sectionTitle}>Available Programs & Age Criteria 🧸</h2>
+          </div>
 
           <div className={styles.programGrid}>
             {programs.map((p, idx) => (
-              <Card
-                key={idx}
-                delay={idx * 0.08}
+              <Card 
+                key={idx} 
                 className={styles.programCard}
                 style={{
                   backgroundColor: p.bg,
@@ -143,102 +126,125 @@ export default function Admission() {
                   borderTop: `6px solid ${p.badgeColor}`
                 }}
               >
-                <div className={styles.programImgWrapper}>
-                  <img 
-                    src={p.image} 
-                    alt={p.alt} 
-                    className={styles.programImg}
-                    onError={(e) => {
-                      e.currentTarget.src = '/images/story-circle.jpg';
-                    }}
-                  />
-                  <span className={styles.programBadge} style={{ backgroundColor: 'rgba(255,255,255,0.9)', color: p.badgeColor }}>
-                    {p.age}
-                  </span>
-                </div>
-
-                <div className={styles.programContent}>
-                  <h3>{p.name}</h3>
-                  <p>{p.desc}</p>
-                  <div className={styles.feeBadge}>
-                    <strong>Fee: {p.fee}</strong>
-                  </div>
-                  <Link to="/admission/apply">
-                    <Button variant="primary" fullWidth icon={<ArrowRight size={18} />}>
-                      Enroll in {p.name.split(' ')[0]}
-                    </Button>
-                  </Link>
-                </div>
+                <img 
+                  src={p.image} 
+                  alt={p.alt} 
+                  className={styles.programImg}
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/story-circle.jpg';
+                  }}
+                />
+                <span className={styles.programBadge} style={{ backgroundColor: 'rgba(255,255,255,0.9)', color: p.badgeColor }}>
+                  {p.age}
+                </span>
+                <h3 className={styles.programName}>{p.name}</h3>
+                <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', marginBottom: '1.25rem', lineHeight: '1.6' }}>
+                  {p.desc}
+                </p>
+                <div className={styles.feeTag}>{p.fee}</div>
+                <Link to="/admission/apply">
+                  <Button fullWidth variant="accent" size="sm">
+                    Select Program & Apply
+                  </Button>
+                </Link>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <WavyDivider fill="#FFF3E0" />
+      <WavyDivider fill="#FFF1F2" />
 
-      {/* ADMISSION STEPS */}
-      <section className={styles.section} style={{ position: 'relative' }}>
-        <FloatingDecorations variant="section" />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
-            className={styles.sectionHeader}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="badge-pill badge-yellow">📋 Simple 4-Step Process</span>
-            <h2>How to Enroll at Happy Hearts 🌈</h2>
-            <p>Our digital admissions portal makes enrollment seamless, transparent, and hassle-free.</p>
-          </motion.div>
+      {/* PROCESS & DOCUMENTS (Alternating Background 2: Soft Coral Pink Tint) */}
+      <section className={styles.section} style={{ background: 'linear-gradient(180deg, #FFF1F2 0%, #ECFDF5 100%)' }}>
+        <div className="container">
+          <div className={styles.gridTwo}>
+            <Card className={styles.infoBox} style={{ backgroundColor: '#FFF0F0', border: '2.5px solid #FF6B5A' }}>
+              <h3 className={styles.infoTitle}>
+                <FileText color="#FF5240" size={26} /> Required Documents for Application
+              </h3>
+              <div className={styles.checkList}>
+                <div className={styles.checkItem}>
+                  <CheckCircle2 size={22} color="#059669" style={{ flexShrink: 0 }} />
+                  <span>Recent passport-size photograph of the child</span>
+                </div>
+                <div className={styles.checkItem}>
+                  <CheckCircle2 size={22} color="#059669" style={{ flexShrink: 0 }} />
+                  <span>Government-issued Birth Certificate</span>
+                </div>
+                <div className={styles.checkItem}>
+                  <CheckCircle2 size={22} color="#059669" style={{ flexShrink: 0 }} />
+                  <span>Parent/Guardian National ID or Passport copy</span>
+                </div>
+                <div className={styles.checkItem}>
+                  <CheckCircle2 size={22} color="#059669" style={{ flexShrink: 0 }} />
+                  <span>Proof of residential address (Utility bill, lease)</span>
+                </div>
+                <div className={styles.checkItem}>
+                  <CheckCircle2 size={22} color="#059669" style={{ flexShrink: 0 }} />
+                  <span>Immunization & vaccination record (optional/recommended)</span>
+                </div>
+              </div>
+            </Card>
 
-          <div className={styles.stepsGrid}>
-            {steps.map((s, idx) => (
-              <Card
-                key={idx}
-                delay={idx * 0.1}
+            <Card className={styles.infoBox} style={{ backgroundColor: '#F0F9FF', border: '2.5px solid #0284C7' }}>
+              <h3 className={styles.infoTitle}>
+                <Calendar color="#0284C7" size={26} /> Important Admission Dates
+              </h3>
+              <div className={styles.checkList}>
+                <div className={styles.checkItem}>
+                  <strong>Phase 1 Applications:</strong> Open now through March 31st
+                </div>
+                <div className={styles.checkItem}>
+                  <strong>School Campus Visits:</strong> Monday – Saturday, 9 AM – 3 PM
+                </div>
+                <div className={styles.checkItem}>
+                  <strong>Session Commencement:</strong> Academic Term starts Sept 1st
+                </div>
+                <div className={styles.checkItem}>
+                  <strong>Sibling Discount:</strong> Up to 15% discount applied automatically on 2nd child enrolment.
+                </div>
+              </div>
+
+              <div style={{ marginTop: '2rem' }}>
+                <Link to="/admission/apply">
+                  <Button fullWidth variant="primary" icon={<ArrowRight size={18} />}>Start Application Form</Button>
+                </Link>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <WavyDivider fill="#F0F9FF" />
+
+      {/* 4 STEP PROCESS (Alternating Background 3: Soft Sky Blue Tint) */}
+      <section className={styles.section} style={{ background: 'linear-gradient(180deg, #F0F9FF 0%, #FFFCF5 100%)' }}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <span className="badge-pill badge-sky">✨ Easy Steps</span>
+            <h2 className={styles.sectionTitle}>How the Digital Admission Works 🚀</h2>
+          </div>
+
+          <div className={styles.processSteps}>
+            {steps.map((step) => (
+              <Card 
+                key={step.num} 
                 className={styles.stepCard}
                 style={{
-                  backgroundColor: s.bg,
-                  border: `2.5px solid ${s.border}`
+                  backgroundColor: step.bg,
+                  border: `2.5px solid ${step.border}`,
+                  borderTop: `6px solid ${step.color}`
                 }}
               >
-                <div className={styles.stepNumCircle} style={{ backgroundColor: s.border, color: '#FFFFFF' }}>
-                  {s.num}
+                <div className={styles.stepNum} style={{ backgroundColor: 'white', color: step.color }}>
+                  {step.num}
                 </div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '8px', color: 'var(--color-text-main)' }}>{step.title}</h4>
+                <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>{step.desc}</p>
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      <WavyDivider fill="#FFE5E5" />
-
-      {/* FINAL ADMISSION CTA */}
-      <section className={styles.section} style={{ position: 'relative' }}>
-        <FloatingDecorations variant="section" />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
-            className={styles.finalCtaBox}
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Ready to Submit Your Child's Application? 🚀</h2>
-            <p>Limited seats available for the upcoming term. Complete the application online in less than 10 minutes.</p>
-            <div className={styles.ctaGroup}>
-              <Link to="/admission/apply">
-                <Button size="lg" variant="primary" style={{ border: '2px solid #FFFFFF' }}>Start Online Application</Button>
-              </Link>
-              <Link to="/contact">
-                <Button size="lg" variant="secondary">Book Campus Tour</Button>
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </PageWrapper>

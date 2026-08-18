@@ -39,9 +39,9 @@ export default function Gallery() {
       id: 1, 
       category: 'Activities', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=900&auto=format&fit=crop', 
-      title: 'Creative Finger Painting & Sensory Studio 🎨', 
-      desc: 'Toddlers exploring primary color mixing, tactile canvas creation, and fine motor finger expression with certified non-toxic washable paints.' 
+      img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop', 
+      title: 'Playgroup Finger Painting & Art Studio 🎨', 
+      desc: 'Playgroup toddlers exploring primary color mixing, tactile canvas creation, and fine motor finger expression with certified non-toxic washable paints.' 
     },
     { 
       id: 2, 
@@ -186,7 +186,7 @@ export default function Gallery() {
               <Sparkles size={16} /> 📸 Life at Happy Hearts
             </span>
             <h1>Vibrant <span className="text-gradient">Toddler Photo Gallery</span> 🎨</h1>
-            <p>Explore real moments of laughter, sensory play, creative art, and daily toddler adventures at Happy Hearts Preschool & Crèche.</p>
+            <p>Explore real playgroup moments of laughter, sensory art, Montessori puzzles, and daily toddler adventures at Happy Hearts.</p>
           </motion.div>
         </div>
       </section>
@@ -228,20 +228,21 @@ export default function Gallery() {
                   onClick={() => setSelectedPhotoIndex(idx)}
                   style={{ borderColor: photo.color, borderTop: `6px solid ${photo.color}` }}
                 >
-                  <img src={photo.img} alt={photo.title} className={styles.galleryImg} />
+                  <div className={styles.imageContainer}>
+                    <img src={photo.img} alt={photo.title} className={styles.galleryImg} />
+                    <div className={styles.photoOverlay}>
+                      <span className={styles.zoomIcon}><Maximize2 size={24} /></span>
+                      <span className={styles.photoHoverText}>Click to View Fullscreen</span>
+                    </div>
+                  </div>
                   
-                  {/* Always-Visible Card Title Bar */}
+                  {/* Clean Always-Visible Card Explanation Bar */}
                   <div className={styles.cardHeaderBar} style={{ borderTop: `2px solid ${photo.color}` }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                      <span className={styles.photoCatBadge} style={{ backgroundColor: photo.color }}>{photo.category}</span>
+                    </div>
                     <h4 className={styles.cardHeaderTitle}>{photo.title}</h4>
                     <p className={styles.cardHeaderDesc}>{photo.desc}</p>
-                    <span className={styles.photoCatBadge} style={{ backgroundColor: photo.color }}>{photo.category}</span>
-                  </div>
-
-                  <div className={styles.photoOverlay}>
-                    <span className={styles.zoomIcon}><Maximize2 size={22} /></span>
-                    <span className={styles.photoTitle}>{photo.title}</span>
-                    <p className={styles.photoOverlayDesc}>{photo.desc}</p>
-                    <span className={styles.photoCatBadge} style={{ backgroundColor: photo.color }}>{photo.category}</span>
                   </div>
                 </motion.div>
               ))}

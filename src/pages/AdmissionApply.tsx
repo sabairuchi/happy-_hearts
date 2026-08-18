@@ -190,6 +190,14 @@ export default function AdmissionApply() {
   return (
     <PageWrapper>
       <div className={styles.applyPageWrapper}>
+        {/* Floating Playful Stickers */}
+        <span className="floating-sticker" style={{ top: '6%', left: '3%', animationDelay: '0s' }}>🎈</span>
+        <span className="floating-sticker" style={{ top: '15%', right: '4%', animationDelay: '1.2s' }}>🎨</span>
+        <span className="floating-sticker" style={{ bottom: '15%', left: '4%', animationDelay: '2.4s' }}>🧸</span>
+        <span className="floating-sticker" style={{ bottom: '8%', right: '5%', animationDelay: '0.8s' }}>⭐</span>
+        <span className="floating-sticker" style={{ top: '50%', left: '2%', animationDelay: '3.1s' }}>📝</span>
+        <span className="floating-sticker" style={{ top: '45%', right: '2%', animationDelay: '1.9s' }}>🚀</span>
+
         <div className="container">
           <div className={styles.wizardContainer}>
           {/* Corner Exit / Cut Sign Button */}
@@ -203,12 +211,17 @@ export default function AdmissionApply() {
             <X size={22} />
           </button>
 
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, textAlign: 'center', marginBottom: '0.5rem' }}>
-            Digital Admission Application
-          </h2>
-          <p style={{ textAlign: 'center', color: 'var(--color-text-muted)', marginBottom: '2rem', fontSize: '0.95rem' }}>
-            Step {step} of 5 — {step === 1 ? 'Child Information' : step === 2 ? 'Parent & Guardian Details' : step === 3 ? 'Emergency Contact' : step === 4 ? 'Document Upload' : 'Review & Submit'}
-          </p>
+          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+            <span className="badge-pill badge-yellow" style={{ marginBottom: '8px', display: 'inline-flex' }}>
+              ✨ Happy Hearts Admission Application 2026/2027
+            </span>
+            <h2 style={{ fontSize: '2rem', fontWeight: 800, margin: '6px 0' }}>
+              Digital Admission Application <span className="text-gradient">🎨</span>
+            </h2>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', fontWeight: 600 }}>
+              Step {step} of 5 — <strong style={{ color: '#FF5252' }}>{step === 1 ? 'Child Information' : step === 2 ? 'Parent & Guardian Details' : step === 3 ? 'Emergency Contact' : step === 4 ? 'Document Upload' : 'Review & Submit'}</strong>
+            </p>
+          </div>
 
           {/* Stepper Header */}
           <div className={styles.stepBar}>

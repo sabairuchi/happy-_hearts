@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { CheckCircle2, FileText, Calendar, ArrowRight, Sparkles, Tag } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
+import { FloatingDecorations } from '../components/FloatingDecorations';
 import styles from './Admission.module.css';
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -20,22 +22,23 @@ export default function Admission() {
   const programs = [
     {
       name: 'Toddler Crèche & Daycare',
+      shortName: 'Toddler',
       age: '6 Months - 2 Years',
       desc: 'Safe, nurturing environment with sensory play, loving caregivers, and structured nap & meal routines.',
       fee: '$200/mo + Crèche Care',
-      image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop',
-      alt: 'Daycare caregiver nurturing toddlers during nap and play routine',
+      image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop',
+      alt: 'Happy daycare caregiver nurturing toddlers during nap and play routine',
       bg: '#FFF0F0',
       border: '#FF6B5A',
       badgeColor: '#FF5240',
       btnBg: 'linear-gradient(135deg, #FF5252 0%, #FF7043 100%)',
-      btnShadow: '0 8px 20px rgba(255, 82, 82, 0.35)',
-      features: ['👶 1:3 Infant Nurse Ratio', '🍎 Organic Meal & Snack', '⏰ Flexible Day Care Hours']
+      btnShadow: '0 6px 16px rgba(255, 82, 82, 0.3)'
     },
     {
       name: 'Playgroup Sunshine',
+      shortName: 'Playgroup',
       age: '1.5 - 2.5 Years',
-      desc: 'Interactive social play, language development, music & motor skill activities.',
+      desc: 'Interactive social play, language development, finger painting, music & motor skill activities.',
       fee: '$250/mo tuition',
       image: '/images/finger-painting.jpg',
       alt: 'Playgroup toddlers finger painting and learning together at a classroom table',
@@ -43,13 +46,13 @@ export default function Admission() {
       border: '#FFC107',
       badgeColor: '#D97706',
       btnBg: 'linear-gradient(135deg, #FFC107 0%, #FF9800 100%)',
-      btnShadow: '0 8px 20px rgba(255, 160, 0, 0.35)',
-      features: ['🎨 Finger Painting & Crafts', '🎵 Nursery Rhyme Music', '🧩 Tactile Toy Building']
+      btnShadow: '0 6px 16px rgba(255, 160, 0, 0.3)'
     },
     {
       name: 'Nursery Explorers',
+      shortName: 'Nursery',
       age: '2.5 - 3.5 Years',
-      desc: 'Early literacy, numbers, creative arts, and foundational independence.',
+      desc: 'Early literacy, numbers, story circle reading, creative arts, and foundational independence.',
       fee: '$280/mo tuition',
       image: '/images/story-circle.jpg',
       alt: 'Nursery children listening to teacher picture book storytelling in library circle',
@@ -57,22 +60,21 @@ export default function Admission() {
       border: '#10B981',
       badgeColor: '#059669',
       btnBg: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-      btnShadow: '0 8px 20px rgba(16, 185, 129, 0.35)',
-      features: ['📚 Story Circle & Phonics', '🌱 Nature & STEM Curiosity', '🧸 Group Play & Empathy']
+      btnShadow: '0 6px 16px rgba(16, 185, 129, 0.3)'
     },
     {
       name: 'Kindergarten Stars',
+      shortName: 'Kindergarten',
       age: '3.5 - 5.0 Years',
-      desc: 'Comprehensive school-readiness curriculum focusing on cognitive, social, and emotional growth.',
+      desc: 'Comprehensive school-readiness curriculum focusing on early math, writing, and cognitive growth.',
       fee: '$300/mo tuition',
-      image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=600&auto=format&fit=crop',
-      alt: 'Kindergarten children building Montessori puzzles and STEM blocks',
+      image: '/images/montessori-puzzle.jpg',
+      alt: 'Kindergarten children building Montessori shape puzzles and STEM blocks',
       bg: '#F0F9FF',
       border: '#0284C7',
       badgeColor: '#0284C7',
       btnBg: 'linear-gradient(135deg, #0284C7 0%, #03A9F4 100%)',
-      btnShadow: '0 8px 20px rgba(2, 132, 199, 0.35)',
-      features: ['✏️ Early Writing & Math', '🔬 Interactive Science Kits', '🏆 Kindergarten Readiness']
+      btnShadow: '0 6px 16px rgba(2, 132, 199, 0.3)'
     }
   ];
 
@@ -86,99 +88,112 @@ export default function Admission() {
   return (
     <PageWrapper>
       {/* HERO SECTION */}
-      <section className={styles.heroSection}>
+      <section className={styles.heroSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="hero" />
         <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
         <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
         <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
         <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
 
-        <div className="container">
-          <span className="badge-pill badge-yellow">
-            <Sparkles size={16} /> 🚀 Admissions Open 2026-2027
-          </span>
-          <h1 className={styles.heroTitle}>
-            Give Your Child the <span className="text-gradient">Best Start</span> in Life 🎨
-          </h1>
-          <p className={styles.heroDesc}>
-            Join the Happy Hearts family! Simple digital admission process, transparent fee structures, and immediate status tracking.
-          </p>
-          <div className={styles.ctaGroup}>
-            <Link to="/admission/apply">
-              <Button size="lg" variant="primary" icon={<ArrowRight size={20} />}>
-                Apply Now for Admission
-              </Button>
-            </Link>
-            <Link to="/admission/status">
-              <Button size="lg" variant="secondary" icon={<FileText size={20} />}>
-                Track Application Status
-              </Button>
-            </Link>
-          </div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65 }}
+          >
+            <span className="badge-pill badge-yellow">
+              <Sparkles size={16} /> 🚀 Admissions Open 2026-2027
+            </span>
+            <h1 className={styles.heroTitle}>
+              Give Your Child the <span className="text-gradient">Best Start</span> in Life 🎨
+            </h1>
+            <p className={styles.heroDesc}>
+              Join the Happy Hearts family! Simple digital admission process, transparent fee structures, and immediate status tracking.
+            </p>
+            <div className={styles.ctaGroup}>
+              <Link to="/admission/apply">
+                <Button size="lg" variant="primary" icon={<ArrowRight size={20} />}>
+                  Apply Now for Admission
+                </Button>
+              </Link>
+              <Link to="/admission/status">
+                <Button size="lg" variant="secondary" icon={<FileText size={20} />}>
+                  Track Application Status
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       <WavyDivider fill="#FFFBEB" />
 
-      {/* PROGRAMS & FEES */}
-      <section className={styles.section} style={{ background: 'linear-gradient(180deg, #FFFBEB 0%, #F0F9FF 100%)' }}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
+      {/* PROGRAMS & FEES SECTION */}
+      <section className={styles.section} style={{ background: 'linear-gradient(180deg, #FFFBEB 0%, #F0F9FF 100%)', position: 'relative' }}>
+        <FloatingDecorations variant="subtle" />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div 
+            className={styles.sectionHeader}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <span className="badge-pill badge-mint">🎓 Programs & Fees</span>
             <h2 className={styles.sectionTitle}>Available Programs & Age Criteria 🧸</h2>
-          </div>
+          </motion.div>
 
           <div className={styles.programGrid}>
             {programs.map((p, idx) => (
-              <Card 
-                key={idx} 
-                className={styles.programCard}
-                style={{
-                  backgroundColor: p.bg,
-                  border: `2.5px solid ${p.border}`,
-                  borderTop: `6px solid ${p.badgeColor}`
-                }}
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                style={{ height: '100%' }}
               >
-                <div className={styles.imgHeader}>
-                  <img 
-                    src={p.image} 
-                    alt={p.alt} 
-                    className={styles.programImg}
-                    onError={(e) => {
-                      e.currentTarget.src = '/images/story-circle.jpg';
-                    }}
-                  />
-                  <span className={styles.programBadge} style={{ backgroundColor: p.badgeColor, color: '#FFFFFF' }}>
-                    {p.age}
-                  </span>
-                </div>
-
-                <div className={styles.programContent}>
-                  <h3 className={styles.programName}>{p.name}</h3>
-                  <p className={styles.programDesc}>{p.desc}</p>
-                  
-                  <div className={styles.featuresList}>
-                    {p.features.map((feat, fIdx) => (
-                      <span key={fIdx} className={styles.featureItem}>
-                        {feat}
-                      </span>
-                    ))}
+                <div
+                  className={styles.programCard}
+                  style={{
+                    backgroundColor: p.bg,
+                    border: `2px solid ${p.border}`
+                  }}
+                >
+                  <div className={styles.imgHeader}>
+                    <img 
+                      src={p.image} 
+                      alt={p.alt} 
+                      className={styles.programImg}
+                      onError={(e) => {
+                        e.currentTarget.src = '/images/story-circle.jpg';
+                      }}
+                    />
+                    <span className={styles.programBadge} style={{ backgroundColor: p.badgeColor, color: '#FFFFFF' }}>
+                      {p.age}
+                    </span>
                   </div>
 
-                  <div className={styles.feeTag}>
-                    <Tag size={18} color={p.badgeColor} />
-                    <span>{p.fee}</span>
-                  </div>
+                  <div className={styles.programContent}>
+                    <h3 className={styles.programName}>{p.name}</h3>
+                    <p className={styles.programDesc}>{p.desc}</p>
 
-                  <Link 
-                    to="/admission/apply" 
-                    className={styles.applyBtn} 
-                    style={{ background: p.btnBg, boxShadow: p.btnShadow }}
-                  >
-                    <span>Apply for {p.name.split(' ')[0]}</span>
-                    <ArrowRight size={18} />
-                  </Link>
+                    <div className={styles.feeTag}>
+                      <Tag size={16} color={p.badgeColor} />
+                      <span>{p.fee}</span>
+                    </div>
+
+                    <Link 
+                      to="/admission/apply" 
+                      className={styles.applyBtn} 
+                      style={{ background: p.btnBg, boxShadow: p.btnShadow }}
+                    >
+                      <span>Apply for {p.shortName}</span>
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
                 </div>
-              </Card>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -101,18 +101,61 @@ export default function About() {
 
           <div className={styles.facilitiesGrid}>
             {[
-              { title: 'Interactive Learning Zones', desc: 'Equipped with Montessori toys, reading nooks, and STEM discovery kits.' },
-              { title: 'Outdoor Green Playground', desc: 'Soft-impact flooring, sensory garden, and child-safe climbing structures.' },
-              { title: 'Nutritious Meal Service', desc: 'Freshly prepared organic meals and snacks planned by pediatric nutritionists.' },
-              { title: 'Rest & Quiet Rooms', desc: 'Sanitized, peaceful sleeping quarters for infants and crèche toddlers.' }
+              {
+                title: 'Interactive Learning Zones',
+                desc: 'Equipped with Montessori toys, reading nooks, and STEM discovery kits.',
+                image: 'https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=800&auto=format&fit=crop',
+                bg: '#FFF0F0',
+                border: '#FF6B5A',
+                badgeColor: '#FF5240'
+              },
+              {
+                title: 'Outdoor Green Playground',
+                desc: 'Soft-impact flooring, sensory garden, and child-safe climbing structures.',
+                image: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800&auto=format&fit=crop',
+                bg: '#ECFDF5',
+                border: '#10B981',
+                badgeColor: '#059669'
+              },
+              {
+                title: 'Nutritious Meal Service',
+                desc: 'Freshly prepared organic meals and snacks planned by pediatric nutritionists.',
+                image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&auto=format&fit=crop',
+                bg: '#FFFBEB',
+                border: '#FFC107',
+                badgeColor: '#D97706'
+              },
+              {
+                title: 'Rest & Quiet Rooms',
+                desc: 'Sanitized, peaceful sleeping quarters for infants and crèche toddlers.',
+                image: 'https://images.unsplash.com/photo-1560707303-4e980ce876ad?q=80&w=800&auto=format&fit=crop',
+                bg: '#F0F9FF',
+                border: '#0284C7',
+                badgeColor: '#0284C7'
+              }
             ].map((facility, idx) => (
-              <div key={idx} className={styles.facilityCard}>
-                <CheckCircle size={24} className={styles.facilityIcon} />
-                <div>
-                  <h4>{facility.title}</h4>
+              <Card
+                key={idx}
+                className={styles.facilityCard}
+                style={{
+                  backgroundColor: facility.bg,
+                  border: `2.5px solid ${facility.border}`,
+                  borderTop: `6px solid ${facility.badgeColor}`,
+                  padding: '0',
+                  overflow: 'hidden'
+                }}
+              >
+                <div className={styles.facilityImageWrapper}>
+                  <img src={facility.image} alt={facility.title} className={styles.facilityImg} />
+                </div>
+                <div className={styles.facilityBody}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                    <CheckCircle size={22} color={facility.badgeColor} />
+                    <h4 style={{ margin: 0 }}>{facility.title}</h4>
+                  </div>
                   <p>{facility.desc}</p>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>

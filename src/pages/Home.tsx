@@ -175,7 +175,7 @@ export default function Home() {
             <div className={styles.heroImageFrame}>
               <img 
                 src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=900&auto=format&fit=crop" 
-                alt="Happy children learning in classroom" 
+                alt="Preschool children actively learning and building together in a bright Happy Hearts classroom" 
                 className={styles.heroImg} 
               />
             </div>
@@ -292,7 +292,7 @@ export default function Home() {
             <div className={styles.organicShape}>
               <img 
                 src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop" 
-                alt="Children engaging in play-based learning" 
+                alt="Preschool toddlers engaging in hands-on play-based sensory learning" 
                 className={styles.organicImg} 
               />
             </div>

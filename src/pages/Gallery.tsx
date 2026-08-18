@@ -15,6 +15,7 @@ interface Photo {
   img: string;
   title: string;
   desc: string;
+  alt: string;
 }
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -39,17 +40,19 @@ export default function Gallery() {
       id: 1, 
       category: 'Activities', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=900&auto=format&fit=crop', 
       title: 'Playgroup Finger Painting & Art Studio 🎨', 
-      desc: 'Playgroup toddlers exploring primary color mixing, tactile canvas creation, and fine motor finger expression with certified non-toxic washable paints.' 
+      desc: 'Playgroup toddlers exploring primary color mixing, tactile canvas creation, and fine motor finger expression with certified non-toxic washable paints.',
+      alt: 'Preschool children actively finger painting with colorful paints at a classroom art table under teacher guidance'
     },
     { 
       id: 2, 
       category: 'Playtime', 
       color: '#FFD93D', 
-      img: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=900&auto=format&fit=crop', 
       title: 'Tactile Wooden Block & Train Track Play 🧱', 
-      desc: 'Developing early spatial awareness, cause-and-effect reasoning, and cooperative tower building with natural wooden Montessori toys.' 
+      desc: 'Developing early spatial awareness, cause-and-effect reasoning, and cooperative tower building with natural wooden Montessori toys.',
+      alt: 'Preschool toddlers building wooden block towers and train tracks together on the playroom floor'
     },
     { 
       id: 3, 
@@ -57,7 +60,8 @@ export default function Gallery() {
       color: '#6BCB77', 
       img: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=900&auto=format&fit=crop', 
       title: 'Outdoor Playground & Green Nature Walk 🌿', 
-      desc: 'Toddlers enjoying fresh air, soft-impact climbing mounds, sensory garden exploration, and gross motor physical development.' 
+      desc: 'Toddlers enjoying fresh air, soft-impact climbing mounds, sensory garden exploration, and gross motor physical development.',
+      alt: 'Preschool children playing on the green outdoor playground with climbing structures and grass'
     },
     { 
       id: 4, 
@@ -65,7 +69,8 @@ export default function Gallery() {
       color: '#4D96FF', 
       img: 'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=900&auto=format&fit=crop', 
       title: 'Interactive Story Circle & Rhyme Time 📚', 
-      desc: 'Teacher-led picture book storytelling, vocal expression, and early vocabulary building in our comfortable cushioned library corner.' 
+      desc: 'Teacher-led picture book storytelling, vocal expression, and early vocabulary building in our comfortable cushioned library corner.',
+      alt: 'Preschool teacher sitting with young children in a circle reading a colorful picture book'
     },
     { 
       id: 5, 
@@ -73,63 +78,71 @@ export default function Gallery() {
       color: '#845EC2', 
       img: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=900&auto=format&fit=crop', 
       title: 'Infant & Toddler Care Sanctuary 🧸', 
-      desc: 'Tranquil, clean, and sanitised sleeping quarters with dedicated 1:3 nurse supervision for infant crèche and daycare toddlers.' 
+      desc: 'Tranquil, clean, and sanitised sleeping quarters with dedicated 1:3 nurse supervision for infant crèche and daycare toddlers.',
+      alt: 'Attentive daycare caregiver interacting warmly with a toddler in a clean nursery sanctuary'
     },
     { 
       id: 6, 
       category: 'Activities', 
       color: '#6BCB77', 
-      img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=900&auto=format&fit=crop', 
       title: 'Montessori Shape Matching & Puzzles 🧩', 
-      desc: 'Fostering cognitive problem solving, hand-eye precision, and geometric pattern recognition with child-safe Montessori puzzle kits.' 
+      desc: 'Fostering cognitive problem solving, hand-eye precision, and geometric pattern recognition with child-safe Montessori puzzle kits.',
+      alt: 'Preschool toddler actively solving a wooden Montessori shape-matching puzzle at a low table'
     },
     { 
       id: 7, 
       category: 'Events', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=900&auto=format&fit=crop', 
       title: 'Preschool Birthday Celebrations 🎂', 
-      desc: 'Celebrating milestone birthdays with organic fruit treats, festive party hats, group songs, and warm hugs from classmates.' 
+      desc: 'Celebrating milestone birthdays with organic fruit treats, festive party hats, group songs, and warm hugs from classmates.',
+      alt: 'Preschool children wearing party hats and celebrating a classmate birthday together'
     },
     { 
       id: 8, 
       category: 'Events', 
       color: '#FFD93D', 
-      img: 'https://images.unsplash.com/photo-1544733422-251e532ca221?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1472162072942-cd5147eb3902?q=80&w=900&auto=format&fit=crop', 
       title: 'Annual Junior Sports & Obstacle Day 🏆', 
-      desc: 'Encouraging team cooperation, active balance, physical stamina, and sportsmanship through gentle toddler obstacle courses.' 
+      desc: 'Encouraging team cooperation, active balance, physical stamina, and sportsmanship through gentle toddler obstacle courses.',
+      alt: 'Preschool toddlers participating in an active outdoor sports obstacle game on green grass'
     },
     { 
       id: 9, 
       category: 'Activities', 
       color: '#4D96FF', 
-      img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=900&auto=format&fit=crop', 
       title: 'Rhyme & Percussion Music Class 🎵', 
-      desc: 'Singing nursery rhymes, shaking wooden maracas, and developing rhythmic auditory processing with specialized music educators.' 
+      desc: 'Singing nursery rhymes, shaking wooden maracas, and developing rhythmic auditory processing with specialized music educators.',
+      alt: 'Preschool teacher and children playing rhythm instruments and singing songs together in music class'
     },
     { 
       id: 10, 
       category: 'Playtime', 
       color: '#6BCB77', 
-      img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=900&auto=format&fit=crop', 
       title: 'Sensory Sandbox & Splash Play 🏖️', 
-      desc: 'Tactile sand sculpting, sieve pouring, and water float experiments promoting early scientific curiosity and sensory fun.' 
+      desc: 'Tactile sand sculpting, sieve pouring, and water float experiments promoting early scientific curiosity and sensory fun.',
+      alt: 'Preschool children playing in a sensory sandbox with buckets, scoops, and sand toys'
     },
     { 
       id: 11, 
       category: 'Classroom', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1584727638096-042c45049ebe?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=900&auto=format&fit=crop', 
       title: 'Nutritious Organic Snack & Table Etiquette 🍎', 
-      desc: 'Freshly sliced fruit bowls, organic milk, and social mealtime etiquette guided by attentive classroom teachers.' 
+      desc: 'Freshly sliced fruit bowls, organic milk, and social mealtime etiquette guided by attentive classroom teachers.',
+      alt: 'Preschool children sitting together at a classroom table eating healthy fruit snacks with teacher guidance'
     },
     { 
       id: 12, 
       category: 'Playtime', 
       color: '#845EC2', 
-      img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=900&auto=format&fit=crop', 
       title: 'Empathy & Peer Friendship Building 🧸', 
-      desc: 'Building emotional intelligence, turn-taking cooperation, and genuine lifelong peer friendships in a loving community.' 
+      desc: 'Building emotional intelligence, turn-taking cooperation, and genuine lifelong peer friendships in a loving community.',
+      alt: 'Two preschool children sharing toys and smiling together in classroom'
     }
   ];
 
@@ -231,7 +244,7 @@ export default function Gallery() {
                   <div className={styles.imageContainer}>
                     <img 
                       src={photo.img} 
-                      alt={photo.title} 
+                      alt={photo.alt} 
                       className={styles.galleryImg} 
                       onError={(e) => {
                         e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';
@@ -314,7 +327,7 @@ export default function Gallery() {
             >
               <img 
                 src={selectedPhoto.img} 
-                alt={selectedPhoto.title} 
+                alt={selectedPhoto.alt} 
                 className={styles.lightboxImg}
                 onError={(e) => {
                   e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';

@@ -2,7 +2,8 @@ import { useCustomCursor } from '../hooks/useCustomCursor';
 import styles from './CustomCursor.module.css';
 
 export default function CustomCursor() {
-  const { position, isHovering, isMouseDown, isEnabled, trail, splatters } = useCustomCursor();
+  const { position, isHovering, isMouseDown, isEnabled, currentColor, splashes, clickSplatters } =
+    useCustomCursor();
 
   if (!isEnabled) {
     return null;
@@ -10,24 +11,24 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Trail Particles */}
-      {trail.map((particle) => (
+      {/* Wall Paint Splash Droplets */}
+      {splashes.map((s) => (
         <div
-          key={particle.id}
-          className={styles.trailParticle}
+          key={s.id}
+          className={styles.splashBlob}
           style={{
-            transform: `translate3d(${particle.x}px, ${particle.y}px, 0)`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            backgroundColor: particle.color,
-            borderRadius: particle.shape === 'splash' ? '40% 60% 70% 30% / 50% 40% 60% 50%' : '50%',
-            boxShadow: `0 2px 6px ${particle.color}66`,
+            transform: `translate3d(${s.x}px, ${s.y}px, 0) rotate(${s.rotation}deg)`,
+            width: `${s.size}px`,
+            height: `${s.size}px`,
+            backgroundColor: s.color,
+            borderRadius: s.borderRadius,
+            boxShadow: `0 2px 6px ${s.color}66`,
           }}
         />
       ))}
 
       {/* Click Splatters */}
-      {splatters.map((s) => (
+      {clickSplatters.map((s) => (
         <div
           key={s.id}
           className={styles.clickSplatter}
@@ -37,52 +38,48 @@ export default function CustomCursor() {
             width: `${s.size}px`,
             height: `${s.size}px`,
             backgroundColor: s.color,
-            borderRadius: '45% 55% 65% 35% / 55% 45% 55% 45%',
             ['--dx' as string]: `${s.dx}px`,
             ['--dy' as string]: `${s.dy}px`,
           }}
         />
       ))}
 
-      {/* Main Paintbrush Cursor */}
+      {/* Small Wall Painting Brush Cursor */}
       <div
-        className={styles.paintbrushContainer}
+        className={styles.wallBrushContainer}
         style={{
           transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
         }}
       >
         <div
-          className={`${styles.paintbrushWrapper} ${isHovering ? styles.hovering : ''} ${
+          className={`${styles.wallBrushWrapper} ${isHovering ? styles.hovering : ''} ${
             isMouseDown ? styles.clicking : ''
           }`}
         >
-          {/* Preschool Paintbrush SVG (Hotspot aligned at top-left tip 0,0) */}
+          {/* Authentic Small Wall Paint Brush SVG (24px, flat bristles, ferrule, small handle) */}
           <svg
-            width="26"
-            height="26"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             className={styles.brushSvg}
           >
-            {/* Paint tip glow blob */}
-            <circle cx="4" cy="4" r="3.5" fill="#FF6B6B" opacity="0.9" />
-
-            {/* Paintbrush Bristles */}
+            {/* Wet Wall Paint Tip on Bristle Edge */}
             <path
-              d="M3.5 2.5C2.5 2.5 1.5 3.5 1.5 5C1.5 7 4 9.5 6 11L9.5 7.5C8 5.5 5.5 2.5 3.5 2.5Z"
-              fill="#FF6B6B"
+              d="M 2 2 C 2 1.2 2.8 0.5 3.8 0.5 H 12.2 C 13.2 0.5 14 1.2 14 2 V 6 H 2 Z"
+              fill={currentColor}
             />
 
-            {/* Metal Ferrule */}
-            <path
-              d="M6 11L9.5 7.5L11.5 9.5L8 13L6 11Z"
-              fill="#CBD5E1"
-            />
+            {/* Flat Wall Brush Bristles */}
+            <rect x="2" y="6" width="12" height="4" fill="#CBD5E1" />
 
-            {/* Wooden Handle */}
+            {/* Metal Ferrule Band */}
+            <rect x="2.5" y="10" width="11" height="3" fill="#64748B" rx="0.5" />
+
+            {/* Small Wooden Handle */}
             <path
-              d="M11.5 9.5L8 13L18 23C18.5 23.5 19.5 23.5 20 23L21.5 21.5C22 21 22 20 21.5 19.5L11.5 9.5Z"
-              fill="#D97706"
+              d="M 6 13 V 21 C 6 22 7 23 8 23 C 9 23 10 22 10 21 V 13 Z"
+              fill="#B45309"
             />
           </svg>
         </div>

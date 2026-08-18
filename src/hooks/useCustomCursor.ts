@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 
-export interface TrailParticle {
+export interface WallPaintSplash {
   id: number;
   x: number;
   y: number;
   size: number;
   color: string;
   rotation: number;
-  shape: 'dot' | 'splash';
+  borderRadius: string;
 }
 
 export interface ClickSplatter {
@@ -20,12 +20,12 @@ export interface ClickSplatter {
   dy: number;
 }
 
-const BRAND_PALETTE = [
-  '#FF6B6B', // Coral
-  '#FFD93D', // Yellow
+const HAPPY_HEARTS_PALETTE = [
+  '#FF6B6B', // Coral Red
+  '#FFD93D', // Sunshine Yellow
   '#6BCB77', // Mint Green
   '#4D96FF', // Sky Blue
-  '#845EC2'  // Purple
+  '#845EC2'  // Playful Purple
 ];
 
 export const useCustomCursor = () => {
@@ -33,10 +33,11 @@ export const useCustomCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
-  const [trail, setTrail] = useState<TrailParticle[]>([]);
-  const [splatters, setSplatters] = useState<ClickSplatter[]>([]);
+  const [currentColor, setCurrentColor] = useState(HAPPY_HEARTS_PALETTE[0]);
+  const [splashes, setSplashes] = useState<WallPaintSplash[]>([]);
+  const [clickSplatters, setClickSplatters] = useState<ClickSplatter[]>([]);
 
-  const lastTrailTime = useRef(0);
+  const lastPos = useRef({ x: -100, y: -100 });
   const particleId = useRef(0);
   const colorIdx = useRef(0);
 
@@ -56,37 +57,51 @@ export const useCustomCursor = () => {
       const { clientX, clientY } = e;
       setPosition({ x: clientX, y: clientY });
 
-      // Generate subtle trail of tiny paint particles
-      const now = Date.now();
-      if (now - lastTrailTime.current > 45) {
-        lastTrailTime.current = now;
+      // Calculate distance moved since last splash
+      const dx = clientX - lastPos.current.x;
+      const dy = clientY - lastPos.current.y;
+      const distance = Math.hypot(dx, dy);
 
-        const color = BRAND_PALETTE[colorIdx.current % BRAND_PALETTE.length];
+      // Create a wall paint splash ONLY after ~20px of movement
+      if (distance > 20) {
+        lastPos.current = { x: clientX, y: clientY };
+
+        const color = HAPPY_HEARTS_PALETTE[colorIdx.current % HAPPY_HEARTS_PALETTE.length];
         colorIdx.current++;
+        setCurrentColor(color);
 
-        // Small offset behind the brush tip
-        const offsetX = (Math.random() - 0.5) * 12;
-        const offsetY = (Math.random() - 0.5) * 12 + 6;
+        // Irregular wet wall paint droplet shapes
+        const shapes = [
+          '50%',
+          '40% 60% 70% 30% / 50% 40% 60% 50%',
+          '60% 40% 30% 70% / 40% 60% 40% 60%',
+          '35% 65% 55% 45% / 60% 40% 60% 40%',
+        ];
 
-        const newParticle: TrailParticle = {
+        const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+        const offsetX = (Math.random() - 0.5) * 10;
+        const offsetY = (Math.random() - 0.5) * 10 + 4;
+
+        const newSplash: WallPaintSplash = {
           id: particleId.current++,
           x: clientX + offsetX,
           y: clientY + offsetY,
-          size: Math.floor(Math.random() * 5) + 3, // 3px to 8px
+          size: Math.floor(Math.random() * 6) + 4, // 4px to 10px wet paint blob
           color,
           rotation: Math.floor(Math.random() * 360),
-          shape: Math.random() > 0.6 ? 'splash' : 'dot',
+          borderRadius: randomShape,
         };
 
-        setTrail((prev) => {
-          const updated = [...prev, newParticle];
-          // Limit active particles to 25 maximum for lightweight performance
-          return updated.length > 25 ? updated.slice(updated.length - 25) : updated;
+        setSplashes((prev) => {
+          const updated = [...prev, newSplash];
+          // Keep maximum 22 active paint splashes for 60fps lightweight performance
+          return updated.length > 22 ? updated.slice(updated.length - 22) : updated;
         });
 
+        // Splash disappears after 700ms (500–900ms range)
         setTimeout(() => {
-          setTrail((prev) => prev.filter((p) => p.id !== newParticle.id));
-        }, 600);
+          setSplashes((prev) => prev.filter((s) => s.id !== newSplash.id));
+        }, 700);
       }
     };
 
@@ -111,14 +126,14 @@ export const useCustomCursor = () => {
     const handleMouseDown = (e: MouseEvent) => {
       setIsMouseDown(true);
 
-      // Create a tiny paint splash at click location (5-8 particles)
-      const splashCount = Math.floor(Math.random() * 4) + 5;
+      // Create a wall-paint click splatter at click location (6-8 tiny droplets)
+      const count = Math.floor(Math.random() * 3) + 6;
       const newSplatters: ClickSplatter[] = [];
 
-      for (let i = 0; i < splashCount; i++) {
-        const angle = (i / splashCount) * Math.PI * 2 + Math.random() * 0.5;
-        const distance = Math.random() * 18 + 8;
-        const color = BRAND_PALETTE[(colorIdx.current + i) % BRAND_PALETTE.length];
+      for (let i = 0; i < count; i++) {
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+        const distance = Math.random() * 16 + 6;
+        const color = HAPPY_HEARTS_PALETTE[(colorIdx.current + i) % HAPPY_HEARTS_PALETTE.length];
 
         newSplatters.push({
           id: particleId.current++,
@@ -131,11 +146,11 @@ export const useCustomCursor = () => {
         });
       }
 
-      setSplatters((prev) => [...prev, ...newSplatters]);
+      setClickSplatters((prev) => [...prev, ...newSplatters]);
 
       setTimeout(() => {
-        setSplatters((prev) => prev.filter((s) => !newSplatters.some((ns) => ns.id === s.id)));
-      }, 450);
+        setClickSplatters((prev) => prev.filter((s) => !newSplatters.some((ns) => ns.id === s.id)));
+      }, 400);
     };
 
     const handleMouseUp = () => {
@@ -155,5 +170,5 @@ export const useCustomCursor = () => {
     };
   }, []);
 
-  return { position, isHovering, isMouseDown, isEnabled, trail, splatters };
+  return { position, isHovering, isMouseDown, isEnabled, currentColor, splashes, clickSplatters };
 };

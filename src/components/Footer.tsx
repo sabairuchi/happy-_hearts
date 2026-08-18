@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Globe, MessageCircle, Mail, MapPin, Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from './Button';
 import styles from './Footer.module.css';
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [emailInput, setEmailInput] = useState('');
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = (e: FormEvent) => {
     e.preventDefault();
     if (emailInput.trim()) {
       setSubscribed(true);

@@ -1,18 +1,19 @@
+import type { ReactNode, ButtonHTMLAttributes } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Button.module.css';
 
 type NativeButtonProps = Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  ButtonHTMLAttributes<HTMLButtonElement>,
   'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart' | 'onAnimationEnd'
 >;
 
 interface ButtonProps extends NativeButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'accent';
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   fullWidth?: boolean;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 }
 
 export const Button = ({

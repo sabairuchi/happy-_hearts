@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from './Header';
 import { Footer } from './Footer';
 
 interface PageWrapperProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const pageVariants = {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
@@ -42,14 +42,14 @@ export default function Gallery() {
 
   const selectedPhoto = selectedPhotoIndex !== null ? filteredPhotos[selectedPhotoIndex] : null;
 
-  const handleNext = (e?: React.MouseEvent) => {
+  const handleNext = (e?: MouseEvent) => {
     e?.stopPropagation();
     if (selectedPhotoIndex !== null) {
       setSelectedPhotoIndex((selectedPhotoIndex + 1) % filteredPhotos.length);
     }
   };
 
-  const handlePrev = (e?: React.MouseEvent) => {
+  const handlePrev = (e?: MouseEvent) => {
     e?.stopPropagation();
     if (selectedPhotoIndex !== null) {
       setSelectedPhotoIndex((selectedPhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length);

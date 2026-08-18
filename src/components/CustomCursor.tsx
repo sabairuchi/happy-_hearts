@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import { Paintbrush } from 'lucide-react';
 import { useCustomCursor } from '../hooks/useCustomCursor';
 import styles from './CustomCursor.module.css';

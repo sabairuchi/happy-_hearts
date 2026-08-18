@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, CheckCircle2, ChevronDown, Send } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
@@ -19,7 +19,7 @@ export default function Contact() {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (formData.parentName && formData.email) {
       setSubmitted(true);

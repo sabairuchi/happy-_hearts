@@ -189,8 +189,9 @@ export default function AdmissionApply() {
 
   return (
     <PageWrapper>
-      <div className="container">
-        <div className={styles.wizardContainer}>
+      <div className={styles.applyPageWrapper}>
+        <div className="container">
+          <div className={styles.wizardContainer}>
           {/* Corner Exit / Cut Sign Button */}
           <button 
             type="button"
@@ -476,9 +477,9 @@ export default function AdmissionApply() {
           {/* Step 5 */}
           {step === 5 && (
             <div>
-              <div className={styles.summarySection}>
+              <div className={styles.summarySection} style={{ backgroundColor: '#FFE5E5', border: '2.5px solid #FF6B6B' }}>
                 <div className={styles.summaryHeader}>
-                  <span style={{ fontWeight: 700 }}>Child Information</span>
+                  <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#FF5252' }}>Child Information</span>
                   <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(1)}>Edit</Button>
                 </div>
                 <p><strong>Name:</strong> {childFullName}</p>
@@ -487,9 +488,9 @@ export default function AdmissionApply() {
                 <p><strong>Address:</strong> {childAddress}</p>
               </div>
 
-              <div className={styles.summarySection}>
+              <div className={styles.summarySection} style={{ backgroundColor: '#EBF5FF', border: '2.5px solid #4D96FF' }}>
                 <div className={styles.summaryHeader}>
-                  <span style={{ fontWeight: 700 }}>Parent Details</span>
+                  <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#4D96FF' }}>Parent Details</span>
                   <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(2)}>Edit</Button>
                 </div>
                 <p><strong>Name:</strong> {parentName} ({parentRelationship})</p>
@@ -497,21 +498,21 @@ export default function AdmissionApply() {
                 <p><strong>Phone:</strong> {parentMobile}</p>
               </div>
 
-              <div className={styles.summarySection}>
+              <div className={styles.summarySection} style={{ backgroundColor: '#EAFAF1', border: '2.5px solid #6BCB77' }}>
                 <div className={styles.summaryHeader}>
-                  <span style={{ fontWeight: 700 }}>Emergency Contact</span>
+                  <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#2E7D32' }}>Emergency Contact</span>
                   <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(3)}>Edit</Button>
                 </div>
                 <p><strong>Contact:</strong> {emergencyName} ({emergencyRelationship}) - {emergencyPhone}</p>
               </div>
 
               <div style={{ marginTop: '1.5rem' }}>
-                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.95rem', fontWeight: 600 }}>
                   <input
                     type="checkbox"
                     checked={termsAccepted}
                     onChange={e => setTermsAccepted(e.target.checked)}
-                    style={{ width: '18px', height: '18px', marginTop: '2px' }}
+                    style={{ width: '20px', height: '20px', marginTop: '2px', accentColor: '#FF6B6B' }}
                   />
                   <span>
                     I confirm all submitted information and uploaded documents are accurate and complete to the best of my knowledge. I agree to Happy Hearts Preschool policies.
@@ -541,6 +542,7 @@ export default function AdmissionApply() {
           </div>
         </div>
       </div>
-    </PageWrapper>
+    </div>
+  </PageWrapper>
   );
 }

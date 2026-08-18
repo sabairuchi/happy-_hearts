@@ -1,11 +1,18 @@
+.applyPageWrapper {
+  padding: 40px 0 80px;
+  background: linear-gradient(180deg, #FFF9F0 0%, #FFF3E0 35%, #FFE5E5 70%, #EBF5FF 100%);
+  min-height: 80vh;
+  position: relative;
+}
+
 .wizardContainer {
-  max-width: 860px;
-  margin: 3rem auto;
-  background-color: #FFFBEB;
-  border: 2.5px solid #FFC107;
-  border-top: 6px solid #D97706;
+  max-width: 880px;
+  margin: 1.5rem auto 3rem;
+  background: linear-gradient(180deg, #FFFDF8 0%, #FFF3D6 100%);
+  border: 3px solid #FFB703;
+  border-top: 7px solid #FF6B6B;
   border-radius: var(--radius-lg);
-  box-shadow: 0 16px 40px rgba(30, 41, 59, 0.08);
+  box-shadow: 0 20px 50px rgba(255, 107, 107, 0.18);
   overflow: hidden;
   padding: 3rem 2.5rem;
   position: relative;
@@ -15,12 +22,12 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: rgba(255, 107, 90, 0.12);
-  color: #FF5240;
-  border: 2px solid rgba(255, 107, 90, 0.3);
+  background: rgba(255, 107, 107, 0.15);
+  color: #FF5252;
+  border: 2px solid rgba(255, 107, 107, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,11 +37,11 @@
 }
 
 .closeWizardBtn:hover {
-  background: #FF5240;
+  background: #FF5252;
   color: #FFFFFF;
-  border-color: #FF5240;
+  border-color: #FF5252;
   transform: scale(1.1) rotate(90deg);
-  box-shadow: 0 8px 18px rgba(255, 107, 90, 0.35);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.35);
 }
 
 .stepBar {
@@ -47,22 +54,22 @@
 .stepBar::before {
   content: '';
   position: absolute;
-  top: 20px;
+  top: 22px;
   left: 0;
   right: 0;
-  height: 4px;
-  background-color: rgba(30, 41, 59, 0.1);
+  height: 5px;
+  background-color: rgba(38, 50, 56, 0.12);
   z-index: 1;
 }
 
 .stepBarProgress {
   position: absolute;
-  top: 20px;
+  top: 22px;
   left: 0;
-  height: 4px;
-  background: linear-gradient(135deg, #FF6B5A 0%, #FF9800 100%);
+  height: 5px;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9800 100%);
   z-index: 2;
-  transition: width 0.3s ease;
+  transition: width 0.35s ease;
 }
 
 .stepItem {
@@ -72,47 +79,48 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  background-color: #FFFBEB;
+  background-color: #FFF6DF;
   padding: 0 10px;
+  border-radius: var(--radius-full);
 }
 
 .stepCircle {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background-color: #FFFFFF;
-  border: 2.5px solid rgba(30, 41, 59, 0.2);
+  border: 2.5px solid rgba(38, 50, 56, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--color-text-muted);
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
 .stepItem.active .stepCircle {
-  border-color: #FF5240;
-  background: linear-gradient(135deg, #FF6B5A 0%, #FF8A50 100%);
+  border-color: #FF5252;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
   color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(255, 107, 90, 0.35);
+  box-shadow: 0 6px 18px rgba(255, 107, 107, 0.38);
 }
 
 .stepItem.completed .stepCircle {
-  border-color: #059669;
-  background-color: #10B981;
+  border-color: #2E7D32;
+  background-color: #6BCB77;
   color: #FFFFFF;
 }
 
 .stepLabel {
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: var(--color-text-muted);
 }
 
 .stepItem.active .stepLabel {
-  color: #FF5240;
+  color: #FF5252;
 }
 
 .formGrid {
@@ -132,44 +140,46 @@
 }
 
 .formGroup label {
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 800;
   color: var(--color-text-main);
 }
 
 .formGroup input,
 .formGroup select,
 .formGroup textarea {
-  padding: 13px 16px;
+  padding: 14px 18px;
   border-radius: var(--radius-sm);
-  border: 2px solid rgba(30, 41, 59, 0.12);
+  border: 2px solid #FFD93D;
   font-family: var(--font-body);
   font-size: 1rem;
   background-color: #FFFFFF;
+  color: var(--color-text-main);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
 .formGroup input:focus,
 .formGroup select:focus,
 .formGroup textarea:focus {
   outline: none;
-  border-color: #FF6B5A;
-  box-shadow: 0 0 0 4px rgba(255, 107, 90, 0.15);
+  border-color: #FF6B6B;
+  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
 }
 
 .uploadBox {
-  border: 2.5px dashed rgba(255, 107, 90, 0.35);
+  border: 2.5px dashed #FF6B6B;
   border-radius: var(--radius-md);
-  padding: 1.5rem;
+  padding: 1.75rem;
   text-align: center;
-  background-color: #FFF0F0;
+  background-color: #FFE5E5;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .uploadBox:hover {
-  border-color: #FF5240;
-  background-color: #FFE5E5;
+  border-color: #FF5252;
+  background-color: #FFD6E0;
   transform: translateY(-2px);
 }
 
@@ -177,7 +187,8 @@
   max-height: 120px;
   border-radius: var(--radius-sm);
   margin-top: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  border: 3px solid #FFFFFF;
 }
 
 .actionsBar {
@@ -186,24 +197,24 @@
   align-items: center;
   margin-top: 2.5rem;
   padding-top: 1.75rem;
-  border-top: 2px dashed rgba(30, 41, 59, 0.12);
+  border-top: 2.5px dashed rgba(255, 107, 107, 0.25);
 }
 
 .summarySection {
-  background-color: #FFFFFF;
   border-radius: var(--radius-md);
   padding: 1.5rem;
   margin-bottom: 1.25rem;
-  border: 2px solid rgba(30, 41, 59, 0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.04);
 }
 
 .summaryHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1.5px solid rgba(30, 41, 59, 0.08);
+  border-bottom: 1.5px solid rgba(38, 50, 56, 0.1);
   padding-bottom: 10px;
   margin-bottom: 14px;
+  font-weight: 800;
 }
 
 @media (max-width: 600px) {

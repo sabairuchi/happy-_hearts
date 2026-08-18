@@ -1,7 +1,7 @@
 .heroSection {
   padding: 80px 0 60px;
   text-align: center;
-  background: linear-gradient(180deg, #FFFCF5 0%, #FFFBEB 100%);
+  background: linear-gradient(180deg, #FFF0D6 0%, #FFE6EC 50%, #E6F3FF 100%);
   position: relative;
   overflow: hidden;
 }

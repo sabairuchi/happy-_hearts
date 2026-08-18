@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Sparkles, Users, Heart, ArrowRight, Star, Clock, BookOpen, Smile, Award, CheckCircle2, Trees, Palette, Puzzle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { NumberCounter } from '../components/NumberCounter';
+import { FloatingDecorations } from '../components/FloatingDecorations';
+import { LearningJourney } from '../components/LearningJourney';
 import styles from './Home.module.css';
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -22,13 +24,15 @@ const WavyDivider = ({ fill }: { fill: string }) => (
 export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (window.innerWidth < 1024) return;
+    if (typeof window === 'undefined' || window.innerWidth < 1024) return;
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
-    const x = (clientX / innerWidth - 0.5) * 20;
-    const y = (clientY / innerHeight - 0.5) * 20;
+    const x = (clientX / innerWidth - 0.5) * 16;
+    const y = (clientY / innerHeight - 0.5) * 16;
     setMousePos({ x, y });
   };
 
@@ -67,11 +71,37 @@ export default function Home() {
     setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  // Autoplay testimonials with hover pause
+  useEffect(() => {
+    if (isTestimonialHovered) return;
+    const timer = setInterval(() => {
+      handleNextTestimonial();
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isTestimonialHovered]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) handleNextTestimonial();
+      else handlePrevTestimonial();
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <PageWrapper>
-      {/* IMMERSIVE HERO SECTION WITH PARALLAX */}
+      {/* IMMERSIVE HERO SECTION WITH PLAYFUL STAGGER & PARALLAX */}
       <section className={styles.hero} onMouseMove={handleMouseMove}>
-        {/* Floating playful stickers with subtle parallax */}
+        <FloatingDecorations variant="hero" />
+
+        {/* Floating playful stickers */}
         <motion.span 
           className="floating-sticker" 
           style={{ top: '10%', left: '3%' }}
@@ -105,13 +135,13 @@ export default function Home() {
           ⭐
         </motion.span>
 
-        <div className={`container ${styles.heroContainer}`}>
+        <div className={`container ${styles.heroContainer}`} style={{ position: 'relative', zIndex: 2 }}>
           <div className={styles.heroContent}>
             <motion.div 
               className="badge-pill badge-yellow"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
             >
               <Sparkles size={16} />
               <span>🌈 Admissions Open for 2026/2027 Academic Year</span>
@@ -119,27 +149,27 @@ export default function Home() {
 
             <motion.h1 
               className={styles.heroTitle}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.65, delay: 0.2 }}
             >
               WHERE LITTLE HEARTS <span className="text-gradient">GROW BIG 🎨</span>
             </motion.h1>
 
             <motion.p 
               className={styles.heroSubtitle}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.65, delay: 0.3 }}
             >
               A joyful preschool and crèche where children learn, explore, play and grow with confidence in a safe, loving environment.
             </motion.p>
 
             <motion.div 
               className={styles.heroButtons}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.65, delay: 0.4 }}
             >
               <Link to="/admission/apply">
                 <Button size="lg" variant="primary" icon={<ArrowRight size={20} />}>
@@ -158,7 +188,7 @@ export default function Home() {
               className={styles.heroTrustIndicators}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.65, delay: 0.5 }}
             >
               <span><CheckCircle2 size={18} color="#6BCB77" /> Safe & Caring Environment</span>
               <span><CheckCircle2 size={18} color="#6BCB77" /> Experienced Teachers</span>
@@ -168,9 +198,9 @@ export default function Home() {
 
           <motion.div 
             className={styles.heroVisual}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1, x: mousePos.x * 0.8, y: mousePos.y * 0.8 }}
-            transition={{ duration: 0.8, delay: 0.2, type: 'spring', damping: 20 }}
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, x: mousePos.x * 0.6, y: mousePos.y * 0.6 }}
+            transition={{ duration: 0.8, delay: 0.2, type: 'spring', damping: 22 }}
           >
             <div className={styles.heroImageFrame}>
               <img 
@@ -215,7 +245,7 @@ export default function Home() {
       {/* ANIMATED STATS BANNER */}
       <section className={styles.statsBanner}>
         <div className={`container ${styles.statsGrid}`}>
-          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 24 }} viewport={{ once: true }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #FF6B6B' }}>
               <span className={styles.statNumber} style={{ color: '#FF5252' }}>
                 <NumberCounter target={500} suffix="+" />
@@ -224,7 +254,7 @@ export default function Home() {
             <span className={styles.statLabel}>Happy Children 🎈</span>
           </motion.div>
 
-          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 24 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #FFC107' }}>
               <span className={styles.statNumber} style={{ color: '#D97706' }}>
                 <NumberCounter target={15} suffix="+" />
@@ -233,7 +263,7 @@ export default function Home() {
             <span className={styles.statLabel}>Experienced Educators 👩‍🏫</span>
           </motion.div>
 
-          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 24 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #4D96FF' }}>
               <span className={styles.statNumber} style={{ color: '#0284C7' }}>
                 <NumberCounter target={10} suffix="+" />
@@ -242,7 +272,7 @@ export default function Home() {
             <span className={styles.statLabel}>Years of Care ⭐</span>
           </motion.div>
 
-          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 24 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #6BCB77' }}>
               <span className={styles.statNumber} style={{ color: '#059669' }}>
                 <NumberCounter target={100} suffix="%" />
@@ -256,9 +286,10 @@ export default function Home() {
       <WavyDivider fill="#FFF3E0" />
 
       {/* WHY CHOOSE US ("Why Families Choose Happy Hearts") */}
-      <section className={styles.trustSection}>
-        <div className="container">
-          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
+      <section className={styles.trustSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="section" />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 24 }} viewport={{ once: true }}>
             <span className="badge-pill badge-yellow">⭐ Why Families Choose Happy Hearts</span>
             <h2 className={styles.sectionTitle}>Built Around Your Child's Happiness 🧸</h2>
             <p className={styles.sectionSubtitle}>Every detail of our environment is intentionally designed to foster emotional security, creative exploration, and joyful discovery.</p>
@@ -332,19 +363,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* VISUAL LEARNING JOURNEY PATH */}
+      <LearningJourney />
+
       <WavyDivider fill="#FFE5E5" />
 
       {/* CORE OFFERINGS / PROGRAMS */}
       <section className={styles.servicesSection}>
         <div className="container">
-          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
+          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 24 }} viewport={{ once: true }}>
             <span className="badge-pill badge-mint">🎓 Our Programs</span>
             <h2 className={styles.sectionTitle}>Tailored Programs for Every Stage 🧸</h2>
             <p className={styles.sectionSubtitle}>Nurturing programs carefully crafted for infant care through kindergarten readiness.</p>
           </motion.div>
 
           <div className={styles.servicesGrid}>
-            <Card hoverEffect={true} className={styles.serviceCard} style={{ backgroundColor: '#FFE5E5', border: '2.5px solid #FF6B6B', borderTop: '6px solid #FF6B6B' }}>
+            <Card hoverEffect={true} delay={0} className={styles.serviceCard} style={{ backgroundColor: '#FFE5E5', border: '2.5px solid #FF6B6B', borderTop: '6px solid #FF6B6B' }}>
               <div className={styles.serviceIconWrapper} style={{ backgroundColor: 'rgba(255, 107, 107, 0.18)', color: '#FF5252' }}>
                 <Sparkles size={34} fill="#FFCDD2" />
               </div>
@@ -360,7 +394,7 @@ export default function Home() {
               </Link>
             </Card>
 
-            <Card hoverEffect={true} className={styles.serviceCard} style={{ backgroundColor: '#EBF5FF', border: '2.5px solid #4D96FF', borderTop: '6px solid #4D96FF' }}>
+            <Card hoverEffect={true} delay={0.12} className={styles.serviceCard} style={{ backgroundColor: '#EBF5FF', border: '2.5px solid #4D96FF', borderTop: '6px solid #4D96FF' }}>
               <div className={styles.serviceIconWrapper} style={{ backgroundColor: 'rgba(77, 150, 255, 0.18)', color: '#4D96FF' }}>
                 <Clock size={34} fill="#BBDEFB" />
               </div>
@@ -381,43 +415,51 @@ export default function Home() {
 
       <WavyDivider fill="#EAFAF1" />
 
-      {/* PARENT TESTIMONIALS CAROUSEL */}
+      {/* PARENT TESTIMONIALS CAROUSEL (WITH PAUSE ON HOVER & TOUCH SWIPE) */}
       <section className={styles.testimonialsSection}>
         <div className="container">
-          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
+          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 24 }} viewport={{ once: true }}>
             <span className="badge-pill badge-yellow">⭐ Parent Testimonials</span>
             <h2 className={styles.sectionTitle}>Little Smiles. Big Parent Love. ❤️</h2>
           </motion.div>
 
-          <div style={{ maxWidth: '780px', margin: '0 auto', position: 'relative' }}>
-            <motion.div 
-              key={testimonialIndex}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
-            >
-              <Card
-                className={styles.testimonialCard}
-                style={{
-                  backgroundColor: testimonials[testimonialIndex].bg,
-                  border: `2.5px solid ${testimonials[testimonialIndex].border}`,
-                  borderTop: `6px solid ${testimonials[testimonialIndex].badgeColor}`,
-                  padding: '40px 32px'
-                }}
+          <div
+            style={{ maxWidth: '780px', margin: '0 auto', position: 'relative' }}
+            onMouseEnter={() => setIsTestimonialHovered(true)}
+            onMouseLeave={() => setIsTestimonialHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={testimonialIndex}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -24 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
               >
-                <div className={styles.starsRow}>
-                  {[...Array(5)].map((_, idx) => (
-                    <Star key={idx} size={22} fill="#FFD93D" color="#FFD93D" />
-                  ))}
-                </div>
-                <p className={styles.quoteText} style={{ fontSize: '1.15rem' }}>"{testimonials[testimonialIndex].quote}"</p>
-                <div className={styles.authorMeta}>
-                  <strong style={{ fontSize: '1.15rem' }}>{testimonials[testimonialIndex].author}</strong>
-                  <span style={{ fontSize: '0.95rem' }}>{testimonials[testimonialIndex].child}</span>
-                </div>
-              </Card>
-            </motion.div>
+                <Card
+                  className={styles.testimonialCard}
+                  style={{
+                    backgroundColor: testimonials[testimonialIndex].bg,
+                    border: `2.5px solid ${testimonials[testimonialIndex].border}`,
+                    borderTop: `6px solid ${testimonials[testimonialIndex].badgeColor}`,
+                    padding: '40px 32px'
+                  }}
+                >
+                  <div className={styles.starsRow}>
+                    {[...Array(5)].map((_, idx) => (
+                      <Star key={idx} size={22} fill="#FFD93D" color="#FFD93D" />
+                    ))}
+                  </div>
+                  <p className={styles.quoteText} style={{ fontSize: '1.15rem' }}>"{testimonials[testimonialIndex].quote}"</p>
+                  <div className={styles.authorMeta}>
+                    <strong style={{ fontSize: '1.15rem' }}>{testimonials[testimonialIndex].author}</strong>
+                    <span style={{ fontSize: '0.95rem' }}>{testimonials[testimonialIndex].child}</span>
+                  </div>
+                </Card>
+              </motion.div>
+            </AnimatePresence>
 
             {/* Carousel Navigation */}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', marginTop: '24px' }}>
@@ -425,8 +467,8 @@ export default function Home() {
                 type="button"
                 onClick={handlePrevTestimonial}
                 style={{
-                  width: '42px',
-                  height: '42px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '50%',
                   backgroundColor: '#FFFFFF',
                   border: '2px solid #FF6B6B',
@@ -435,7 +477,8 @@ export default function Home() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                  boxShadow: '0 4px 14px rgba(255, 107, 107, 0.2)',
+                  transition: 'transform 0.2s ease'
                 }}
                 aria-label="Previous testimonial"
               >
@@ -448,12 +491,12 @@ export default function Home() {
                     key={idx}
                     onClick={() => setTestimonialIndex(idx)}
                     style={{
-                      width: idx === testimonialIndex ? '24px' : '10px',
+                      width: idx === testimonialIndex ? '26px' : '10px',
                       height: '10px',
                       borderRadius: 'var(--radius-full)',
                       backgroundColor: idx === testimonialIndex ? '#FF6B6B' : 'rgba(38, 50, 56, 0.2)',
                       cursor: 'pointer',
-                      transition: 'all 0.3s ease'
+                      transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
                     }}
                   />
                 ))}
@@ -463,8 +506,8 @@ export default function Home() {
                 type="button"
                 onClick={handleNextTestimonial}
                 style={{
-                  width: '42px',
-                  height: '42px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '50%',
                   backgroundColor: '#FFFFFF',
                   border: '2px solid #FF6B6B',
@@ -473,7 +516,8 @@ export default function Home() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                  boxShadow: '0 4px 14px rgba(255, 107, 107, 0.2)',
+                  transition: 'transform 0.2s ease'
                 }}
                 aria-label="Next testimonial"
               >
@@ -484,10 +528,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ADMISSION CTA SECTION */}
-      <section className={styles.ctaSection}>
-        <div className="container">
-          <motion.div className={styles.ctaBox} whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.95 }} viewport={{ once: true }}>
+      {/* ADMISSION CTA SECTION WITH FLOATING PARTICLES */}
+      <section className={styles.ctaSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="section" />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div className={styles.ctaBox} whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.94 }} viewport={{ once: true }}>
             <h2>Ready to Begin Your Child's Happy Journey? 🚀</h2>
             <p>Give your little one a joyful place to learn, play, discover and grow with confidence.</p>
             <div className={styles.ctaButtons}>

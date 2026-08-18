@@ -4,6 +4,7 @@ import { Heart, Star, Shield, Smile, Blocks, Trees, Utensils, CloudMoon, ArrowRi
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
+import { FloatingDecorations } from '../components/FloatingDecorations';
 import styles from './About.module.css';
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -21,19 +22,20 @@ export default function About() {
   return (
     <PageWrapper>
       {/* HERO SECTION */}
-      <section className={styles.hero}>
+      <section className={styles.hero} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="hero" />
         {/* Floating playful stickers */}
         <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
         <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
         <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
         <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
 
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <motion.div 
             className={styles.heroContent}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.65 }}
           >
             <span className="badge-pill badge-yellow">✨ About Happy Hearts</span>
             <h1>Nurturing Minds, <span className="text-gradient">Inspiring Futures</span> 🎨</h1>
@@ -47,7 +49,13 @@ export default function About() {
       {/* PHILOSOPHY SECTION */}
       <section className={styles.philosophySection}>
         <div className={`container ${styles.splitLayout}`}>
-          <div className={styles.visualColumn}>
+          <motion.div
+            className={styles.visualColumn}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <div className={styles.imageFrame}>
               <img 
                 src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=900&auto=format&fit=crop" 
@@ -58,8 +66,14 @@ export default function About() {
                 }}
               />
             </div>
-          </div>
-          <div className={styles.textColumn}>
+          </motion.div>
+          <motion.div
+            className={styles.textColumn}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <span className="badge-pill badge-purple">🌱 Educational Approach</span>
             <h2>Our Core Educational Philosophy</h2>
             <div className={styles.leadText}>
@@ -86,25 +100,33 @@ export default function About() {
                 <span>Inclusive & Warm Community</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <WavyDivider fill="#FFE6EC" />
 
       {/* CORE VALUES SECTION */}
-      <section className={styles.valuesSection}>
-        <div className="container">
-          <div className={styles.valuesHeader}>
+      <section className={styles.valuesSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="section" />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div
+            className={styles.valuesHeader}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <span className="badge-pill badge-yellow">⭐ Guiding Principles</span>
             <h2>Our Core Values 🌈</h2>
             <p>The pillars that guide every interaction, lesson plan, and smile at Happy Hearts.</p>
-          </div>
+          </motion.div>
 
           <div className={styles.valuesGrid}>
             <Card
               className={styles.valueCard}
               hoverEffect={true}
+              delay={0}
               style={{
                 backgroundColor: '#FFE5E5',
                 border: '2.5px solid #FF6B6B',
@@ -121,6 +143,7 @@ export default function About() {
             <Card
               className={styles.valueCard}
               hoverEffect={true}
+              delay={0.08}
               style={{
                 backgroundColor: '#FFF3E0',
                 border: '2.5px solid #FFD93D',
@@ -137,6 +160,7 @@ export default function About() {
             <Card
               className={styles.valueCard}
               hoverEffect={true}
+              delay={0.16}
               style={{
                 backgroundColor: '#EBF5FF',
                 border: '2.5px solid #4D96FF',
@@ -153,6 +177,7 @@ export default function About() {
             <Card
               className={styles.valueCard}
               hoverEffect={true}
+              delay={0.24}
               style={{
                 backgroundColor: '#EAFAF1',
                 border: '2.5px solid #6BCB77',
@@ -174,11 +199,17 @@ export default function About() {
       {/* AMENITIES SECTION */}
       <section className={styles.facilitiesSection}>
         <div className="container">
-          <div className={styles.valuesHeader}>
+          <motion.div
+            className={styles.valuesHeader}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <span className="badge-pill badge-sky">🏛️ World-Class Environment</span>
             <h2>Designed for Little Explorers 🧸</h2>
             <p>Take a glance at our purpose-built amenities designed for comfort, play, and safety.</p>
-          </div>
+          </motion.div>
 
           <div className={styles.facilitiesGrid}>
             {[
@@ -225,6 +256,7 @@ export default function About() {
             ].map((facility, idx) => (
               <Card
                 key={idx}
+                delay={idx * 0.1}
                 className={styles.facilityCard}
                 style={{
                   backgroundColor: facility.bg,
@@ -255,9 +287,16 @@ export default function About() {
       </section>
 
       {/* CTA CALLOUT BAND */}
-      <section className={styles.ctaSection}>
-        <div className="container">
-          <div className={styles.ctaContent}>
+      <section className={styles.ctaSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="section" />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div
+            className={styles.ctaContent}
+            initial={{ opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2>Experience the Happy Hearts Difference 🚀</h2>
             <p>We invite you to tour our campus, meet our warm educators, and see our philosophy in action.</p>
             <div className={styles.ctaButtons}>
@@ -268,7 +307,7 @@ export default function About() {
                 <Button variant="primary" size="lg" style={{ border: '2px solid #FFFFFF' }}>Meet Our Teachers</Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </PageWrapper>

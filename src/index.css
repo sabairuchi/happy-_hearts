@@ -176,15 +176,36 @@ button {
   border-color: rgba(132, 94, 194, 0.35);
 }
 
-/* Floating Animation Keyframes */
+/* Playful Floating & Micro-interaction Keyframes */
 @keyframes floatSlow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-14px) rotate(4deg); }
+  0%, 100% { transform: translate3d(0, 0px, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -14px, 0) rotate(4deg); }
 }
 
 @keyframes floatReverse {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(12px) rotate(-4deg); }
+  0%, 100% { transform: translate3d(0, 0px, 0) rotate(0deg); }
+  50% { transform: translate3d(0, 12px, 0) rotate(-4deg); }
+}
+
+@keyframes floatHorizontal {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(24px, -8px, 0) rotate(3deg); }
+}
+
+@keyframes bouncePlayful {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -16px, 0) scale(1.05); }
+  75% { transform: translate3d(0, -4px, 0) scale(0.98); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .floating-sticker {
@@ -210,5 +231,20 @@ button {
   position: relative;
   display: block;
   width: 100%;
-  height: 40px;
+  height: 44px;
 }
+
+/* Accessibility & Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .floating-sticker, [class*="floating"] {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+

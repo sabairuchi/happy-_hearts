@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail, Clock, CheckCircle2, ChevronDown, Send } from 'luc
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
+import { FloatingDecorations } from '../components/FloatingDecorations';
 import styles from './Contact.module.css';
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -59,18 +60,19 @@ export default function Contact() {
   return (
     <PageWrapper>
       {/* HERO SECTION */}
-      <section className={styles.hero}>
+      <section className={styles.hero} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="hero" />
         <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
         <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
         <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
         <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
 
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <motion.div 
             className={styles.heroContent}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.65 }}
           >
             <span className="badge-pill badge-yellow">💌 Get in Touch</span>
             <h1>Contact <span className="text-gradient">Happy Hearts</span> 🎨</h1>

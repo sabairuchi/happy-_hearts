@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
-import { Award, Heart, ShieldCheck, BookOpen, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
+import { FloatingDecorations } from '../components/FloatingDecorations';
 import { Link } from 'react-router-dom';
 import styles from './Teachers.module.css';
 
@@ -68,18 +69,19 @@ export default function Teachers() {
   return (
     <PageWrapper>
       {/* HERO SECTION */}
-      <section className={styles.hero}>
+      <section className={styles.hero} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="hero" />
         <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
         <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
         <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
         <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
 
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <motion.div 
             className={styles.heroContent}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.65 }}
           >
             <span className="badge-pill badge-yellow">👩‍🏫 Our Dedicated Educators</span>
             <h1>Meet Our <span className="text-gradient">Loving Teachers</span> 🎨</h1>
@@ -90,31 +92,34 @@ export default function Teachers() {
 
       <WavyDivider fill="#FFFBEB" />
 
-      {/* TEACHERS GRID (Alternating Background 1: Soft Yellow Tint) */}
-      <section className={styles.teachersSection}>
-        <div className={`container ${styles.grid}`}>
+      {/* TEACHERS GRID */}
+      <section className={styles.teachersSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="section" />
+        <div className={`container ${styles.grid}`} style={{ position: 'relative', zIndex: 2 }}>
           {teachers.map((teacher, index) => (
             <Card 
               key={index} 
               hoverEffect={true} 
               delay={index * 0.1} 
-              className={styles.teacherCard} 
+              className={styles.teacherCard}
               style={{
                 backgroundColor: teacher.bg,
                 border: `2.5px solid ${teacher.border}`,
                 borderTop: `6px solid ${teacher.badgeColor}`
               }}
             >
-              <div className={styles.imageWrapper}>
+              <div className={styles.imageFrame}>
                 <img src={teacher.image} alt={teacher.name} className={styles.teacherImg} />
-                <span className={styles.expBadge}>{teacher.experience}</span>
-              </div>
-              <div className={styles.info}>
-                <h3>{teacher.name}</h3>
-                <span className={styles.role} style={{ color: teacher.badgeColor }}>{teacher.role}</span>
-                <span className={styles.qualification}>
-                  <Award size={16} color={teacher.badgeColor} /> {teacher.qualification}
+                <span className={styles.expBadge} style={{ backgroundColor: teacher.badgeColor }}>
+                  {teacher.experience}
                 </span>
+              </div>
+              <div className={styles.cardContent}>
+                <h3>{teacher.name}</h3>
+                <span className={styles.roleTitle} style={{ color: teacher.badgeColor }}>
+                  {teacher.role}
+                </span>
+                <p className={styles.qual}>{teacher.qualification}</p>
                 <p className={styles.bio}>{teacher.bio}</p>
               </div>
             </Card>
@@ -122,55 +127,29 @@ export default function Teachers() {
         </div>
       </section>
 
-      <WavyDivider fill="#F0F9FF" />
+      <WavyDivider fill="#ECFDF5" />
 
-      {/* STAFF STANDARDS SECTION (Alternating Background 2: Soft Sky Blue Tint) */}
-      <section className={styles.standardsSection}>
-        <div className="container">
-          <div className={styles.standardsBox}>
-            <Card className={styles.standardCard} style={{ backgroundColor: '#FFF0F0', border: '2.5px solid #FF6B5A' }}>
-              <div className={styles.standardIconWrapper} style={{ backgroundColor: 'rgba(255, 107, 90, 0.18)' }}>
-                <ShieldCheck size={32} color="#FF5240" fill="#FFD0CB" />
-              </div>
-              <div>
-                <h4>100% Background Verified</h4>
-                <p>Thorough background checks and police verification for every staff member.</p>
-              </div>
-            </Card>
-
-            <Card className={styles.standardCard} style={{ backgroundColor: '#F0F9FF', border: '2.5px solid #0284C7' }}>
-              <div className={styles.standardIconWrapper} style={{ backgroundColor: 'rgba(2, 132, 199, 0.18)' }}>
-                <Heart size={32} color="#0284C7" fill="#BAE6FD" />
-              </div>
-              <div>
-                <h4>Pediatric First Aid Certified</h4>
-                <p>All educators hold up-to-date pediatric CPR & medical emergency certificates.</p>
-              </div>
-            </Card>
-
-            <Card className={styles.standardCard} style={{ backgroundColor: '#ECFDF5', border: '2.5px solid #10B981' }}>
-              <div className={styles.standardIconWrapper} style={{ backgroundColor: 'rgba(16, 185, 129, 0.18)' }}>
-                <BookOpen size={32} color="#059669" fill="#A7F3D0" />
-              </div>
-              <div>
-                <h4>Continuous Training</h4>
-                <p>Annual training workshops in early childhood psychology and inclusive education.</p>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CALL TO ACTION */}
-      <section className={styles.joinSection}>
-        <div className="container">
-          <div className={styles.joinBox}>
-            <h2>Are You a Passionate Educator? 🚀</h2>
-            <p>We are always seeking compassionate teachers and daycare specialists to join our growing family.</p>
-            <Link to="/contact">
-              <Button variant="secondary" size="lg" icon={<ArrowRight size={20} />}>Enquire About Careers</Button>
-            </Link>
-          </div>
+      {/* CALLOUT BAND */}
+      <section className={styles.ctaSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="section" />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div
+            className={styles.ctaContent}
+            initial={{ opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2>Want to Join Our Educator Family? 💖</h2>
+            <p>We are always looking for passionate early childhood educators who love inspiring young hearts.</p>
+            <div className={styles.ctaButtons}>
+              <Link to="/contact">
+                <Button size="lg" variant="primary" icon={<ArrowRight size={20} />} style={{ border: '2px solid #FFFFFF' }}>
+                  Get in Touch With Us
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </PageWrapper>

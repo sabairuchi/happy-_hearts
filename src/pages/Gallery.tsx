@@ -4,6 +4,7 @@ import { X, ChevronLeft, ChevronRight, Maximize2, ArrowRight, Sparkles } from 'l
 import { Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
+import { FloatingDecorations } from '../components/FloatingDecorations';
 import styles from './Gallery.module.css';
 
 type Category = 'All' | 'Classroom' | 'Activities' | 'Events' | 'Playtime';
@@ -119,12 +120,12 @@ export default function Gallery() {
     },
     { 
       id: 10, 
-      category: 'Playtime', 
-      color: '#6BCB77', 
-      img: '/images/sandbox-play.jpg', 
-      title: 'Sensory Sandbox & Splash Play 🏖️', 
-      desc: 'Tactile sand sculpting, sieve pouring, and water float experiments promoting early scientific curiosity and sensory fun.',
-      alt: 'Preschool toddlers playing in a red sensory water and sand basin with scoops, buckets, and water wheels'
+      category: 'Classroom', 
+      color: '#845EC2', 
+      img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop', 
+      title: 'Phonics & Pre-Writing Alphabet Station 🔤', 
+      desc: 'Hands-on sandpaper letter tracing, phonics vocalization, and early pre-writing fine motor skill stations.',
+      alt: 'Preschool child engaged in phonics alphabet letter tracing at a classroom desk'
     },
     { 
       id: 11, 
@@ -152,29 +153,28 @@ export default function Gallery() {
 
   const selectedPhoto = selectedPhotoIndex !== null ? filteredPhotos[selectedPhotoIndex] : null;
 
-  const handleNext = (e?: MouseEvent) => {
-    e?.stopPropagation();
+  const handleNext = (e: MouseEvent) => {
+    e.stopPropagation();
     if (selectedPhotoIndex !== null) {
       setSelectedPhotoIndex((selectedPhotoIndex + 1) % filteredPhotos.length);
     }
   };
 
-  const handlePrev = (e?: MouseEvent) => {
-    e?.stopPropagation();
+  const handlePrev = (e: MouseEvent) => {
+    e.stopPropagation();
     if (selectedPhotoIndex !== null) {
       setSelectedPhotoIndex((selectedPhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length);
     }
   };
 
-  // Keyboard navigation
+  // Keyboard Navigation for Lightbox Modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedPhotoIndex === null) return;
       if (e.key === 'Escape') setSelectedPhotoIndex(null);
-      if (e.key === 'ArrowRight') handleNext();
-      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') setSelectedPhotoIndex((selectedPhotoIndex + 1) % filteredPhotos.length);
+      if (e.key === 'ArrowLeft') setSelectedPhotoIndex((selectedPhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length);
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedPhotoIndex, filteredPhotos.length]);
@@ -182,18 +182,19 @@ export default function Gallery() {
   return (
     <PageWrapper>
       {/* HERO SECTION */}
-      <section className={styles.hero}>
+      <section className={styles.hero} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="hero" />
         <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
         <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
         <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
         <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
 
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <motion.div 
             className={styles.heroContent}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.65 }}
           >
             <span className="badge-pill badge-sky">
               <Sparkles size={16} /> 📸 Life at Happy Hearts
@@ -233,10 +234,10 @@ export default function Gallery() {
                 <motion.div
                   key={photo.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.35, delay: idx * 0.05 }}
                   className={styles.photoItem}
                   onClick={() => setSelectedPhotoIndex(idx)}
                   style={{ borderColor: photo.color, borderTop: `6px solid ${photo.color}` }}
@@ -272,59 +273,54 @@ export default function Gallery() {
       </section>
 
       {/* BRAND CALLOUT BOX */}
-      <section className={styles.brandSection}>
-        <div className="container">
-          <div className={styles.brandBox}>
+      <section className={styles.brandSection} style={{ position: 'relative' }}>
+        <FloatingDecorations variant="section" />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <motion.div 
+            className={styles.brandBox}
+            initial={{ opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2>Experience Happy Hearts in Person! 🚀</h2>
             <p>Schedule a campus tour to see our joyful classrooms, spacious green play areas, and loving teachers firsthand.</p>
             <Link to="/contact">
-              <Button size="lg" variant="secondary" icon={<ArrowRight size={20} />}>Book a Tour Today</Button>
+              <Button size="lg" variant="secondary" icon={<ArrowRight size={20} />}>
+                Book a School Tour
+              </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Lightbox Modal */}
+      {/* LIGHTBOX MODAL */}
       <AnimatePresence>
         {selectedPhoto && (
-          <motion.div
-            className={styles.lightbox}
+          <motion.div 
+            className={styles.lightboxOverlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedPhotoIndex(null)}
           >
-            <button 
-              className={styles.closeBtn}
-              onClick={() => setSelectedPhotoIndex(null)}
-              aria-label="Close modal"
-            >
-              <X size={28} />
-            </button>
+            <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
+              <button 
+                className={styles.closeBtn} 
+                onClick={() => setSelectedPhotoIndex(null)}
+                aria-label="Close Lightbox"
+              >
+                <X size={26} />
+              </button>
 
-            <button 
-              className={`${styles.navBtn} ${styles.prevBtn}`}
-              onClick={handlePrev}
-              aria-label="Previous photo"
-            >
-              <ChevronLeft size={32} />
-            </button>
+              <button 
+                className={`${styles.navBtn} ${styles.prevBtn}`} 
+                onClick={handlePrev}
+                aria-label="Previous Photo"
+              >
+                <ChevronLeft size={32} />
+              </button>
 
-            <button 
-              className={`${styles.navBtn} ${styles.nextBtn}`}
-              onClick={handleNext}
-              aria-label="Next photo"
-            >
-              <ChevronRight size={32} />
-            </button>
-
-            <motion.div
-              className={styles.lightboxContent}
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-            >
               <img 
                 src={selectedPhoto.img} 
                 alt={selectedPhoto.alt} 
@@ -333,14 +329,26 @@ export default function Gallery() {
                   e.currentTarget.src = '/images/music-class.jpg';
                 }}
               />
+
               <div className={styles.lightboxMeta}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>{selectedPhoto.title}</h3>
-                  <span className={styles.lightboxBadge} style={{ backgroundColor: selectedPhoto.color }}>{selectedPhoto.category}</span>
-                </div>
-                <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: 'var(--color-text-main)' }}>{selectedPhoto.desc}</p>
+                <span className={styles.lightboxCategory} style={{ backgroundColor: selectedPhoto.color }}>
+                  {selectedPhoto.category}
+                </span>
+                <h3>{selectedPhoto.title}</h3>
+                <p>{selectedPhoto.desc}</p>
+                <span className={styles.counterText}>
+                  Photo {selectedPhotoIndex !== null ? selectedPhotoIndex + 1 : 1} of {filteredPhotos.length}
+                </span>
               </div>
-            </motion.div>
+
+              <button 
+                className={`${styles.navBtn} ${styles.nextBtn}`} 
+                onClick={handleNext}
+                aria-label="Next Photo"
+              >
+                <ChevronRight size={32} />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

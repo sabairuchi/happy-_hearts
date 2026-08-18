@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CheckCircle2, FileText, Calendar, ArrowRight, Sparkles } from 'lucide-react';
+import { CheckCircle2, FileText, Calendar, ArrowRight, Sparkles, Tag } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
@@ -27,7 +27,10 @@ export default function Admission() {
       alt: 'Daycare caregiver nurturing toddlers during nap and play routine',
       bg: '#FFF0F0',
       border: '#FF6B5A',
-      badgeColor: '#FF5240'
+      badgeColor: '#FF5240',
+      btnBg: 'linear-gradient(135deg, #FF5252 0%, #FF7043 100%)',
+      btnShadow: '0 8px 20px rgba(255, 82, 82, 0.35)',
+      features: ['👶 1:3 Infant Nurse Ratio', '🍎 Organic Meal & Snack', '⏰ Flexible Day Care Hours']
     },
     {
       name: 'Playgroup Sunshine',
@@ -38,7 +41,10 @@ export default function Admission() {
       alt: 'Playgroup toddlers finger painting and learning together at a classroom table',
       bg: '#FFFBEB',
       border: '#FFC107',
-      badgeColor: '#D97706'
+      badgeColor: '#D97706',
+      btnBg: 'linear-gradient(135deg, #FFC107 0%, #FF9800 100%)',
+      btnShadow: '0 8px 20px rgba(255, 160, 0, 0.35)',
+      features: ['🎨 Finger Painting & Crafts', '🎵 Nursery Rhyme Music', '🧩 Tactile Toy Building']
     },
     {
       name: 'Nursery Explorers',
@@ -49,7 +55,10 @@ export default function Admission() {
       alt: 'Nursery children listening to teacher picture book storytelling in library circle',
       bg: '#ECFDF5',
       border: '#10B981',
-      badgeColor: '#059669'
+      badgeColor: '#059669',
+      btnBg: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+      btnShadow: '0 8px 20px rgba(16, 185, 129, 0.35)',
+      features: ['📚 Story Circle & Phonics', '🌱 Nature & STEM Curiosity', '🧸 Group Play & Empathy']
     },
     {
       name: 'Kindergarten Stars',
@@ -60,7 +69,10 @@ export default function Admission() {
       alt: 'Kindergarten children building Montessori puzzles and STEM blocks',
       bg: '#F0F9FF',
       border: '#0284C7',
-      badgeColor: '#0284C7'
+      badgeColor: '#0284C7',
+      btnBg: 'linear-gradient(135deg, #0284C7 0%, #03A9F4 100%)',
+      btnShadow: '0 8px 20px rgba(2, 132, 199, 0.35)',
+      features: ['✏️ Early Writing & Math', '🔬 Interactive Science Kits', '🏆 Kindergarten Readiness']
     }
   ];
 
@@ -107,7 +119,7 @@ export default function Admission() {
 
       <WavyDivider fill="#FFFBEB" />
 
-      {/* PROGRAMS & FEES (Alternating Background 1: Soft Yellow Tint) */}
+      {/* PROGRAMS & FEES */}
       <section className={styles.section} style={{ background: 'linear-gradient(180deg, #FFFBEB 0%, #F0F9FF 100%)' }}>
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -126,27 +138,46 @@ export default function Admission() {
                   borderTop: `6px solid ${p.badgeColor}`
                 }}
               >
-                <img 
-                  src={p.image} 
-                  alt={p.alt} 
-                  className={styles.programImg}
-                  onError={(e) => {
-                    e.currentTarget.src = '/images/story-circle.jpg';
-                  }}
-                />
-                <span className={styles.programBadge} style={{ backgroundColor: 'rgba(255,255,255,0.9)', color: p.badgeColor }}>
-                  {p.age}
-                </span>
-                <h3 className={styles.programName}>{p.name}</h3>
-                <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', marginBottom: '1.25rem', lineHeight: '1.6' }}>
-                  {p.desc}
-                </p>
-                <div className={styles.feeTag}>{p.fee}</div>
-                <Link to="/admission/apply">
-                  <Button fullWidth variant="accent" size="sm">
-                    Select Program & Apply
-                  </Button>
-                </Link>
+                <div className={styles.imgHeader}>
+                  <img 
+                    src={p.image} 
+                    alt={p.alt} 
+                    className={styles.programImg}
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/story-circle.jpg';
+                    }}
+                  />
+                  <span className={styles.programBadge} style={{ backgroundColor: p.badgeColor, color: '#FFFFFF' }}>
+                    {p.age}
+                  </span>
+                </div>
+
+                <div className={styles.programContent}>
+                  <h3 className={styles.programName}>{p.name}</h3>
+                  <p className={styles.programDesc}>{p.desc}</p>
+                  
+                  <div className={styles.featuresList}>
+                    {p.features.map((feat, fIdx) => (
+                      <span key={fIdx} className={styles.featureItem}>
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className={styles.feeTag}>
+                    <Tag size={18} color={p.badgeColor} />
+                    <span>{p.fee}</span>
+                  </div>
+
+                  <Link 
+                    to="/admission/apply" 
+                    className={styles.applyBtn} 
+                    style={{ background: p.btnBg, boxShadow: p.btnShadow }}
+                  >
+                    <span>Apply for {p.name.split(' ')[0]}</span>
+                    <ArrowRight size={18} />
+                  </Link>
+                </div>
               </Card>
             ))}
           </div>
@@ -155,7 +186,7 @@ export default function Admission() {
 
       <WavyDivider fill="#FFF1F2" />
 
-      {/* PROCESS & DOCUMENTS (Alternating Background 2: Soft Coral Pink Tint) */}
+      {/* PROCESS & DOCUMENTS */}
       <section className={styles.section} style={{ background: 'linear-gradient(180deg, #FFF1F2 0%, #ECFDF5 100%)' }}>
         <div className="container">
           <div className={styles.gridTwo}>
@@ -218,7 +249,7 @@ export default function Admission() {
 
       <WavyDivider fill="#F0F9FF" />
 
-      {/* 4 STEP PROCESS (Alternating Background 3: Soft Sky Blue Tint) */}
+      {/* 4 STEP PROCESS */}
       <section className={styles.section} style={{ background: 'linear-gradient(180deg, #F0F9FF 0%, #FFFCF5 100%)' }}>
         <div className="container">
           <div className={styles.sectionHeader}>

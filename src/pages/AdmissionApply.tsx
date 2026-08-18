@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
-import { Check, ArrowRight, ArrowLeft, Upload, Edit3, CheckCircle } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Check, ArrowRight, ArrowLeft, Upload, Edit3, CheckCircle, X } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { useData } from '../context/DataContext';
@@ -8,6 +8,7 @@ import type { DocumentFile } from '../types';
 import styles from './AdmissionApply.module.css';
 
 export default function AdmissionApply() {
+  const navigate = useNavigate();
   const { submitAdmission } = useData();
 
   const [step, setStep] = useState(1);
@@ -190,6 +191,17 @@ export default function AdmissionApply() {
     <PageWrapper>
       <div className="container">
         <div className={styles.wizardContainer}>
+          {/* Corner Exit / Cut Sign Button */}
+          <button 
+            type="button"
+            className={styles.closeWizardBtn} 
+            onClick={() => navigate('/admission')}
+            title="Exit Admission Application"
+            aria-label="Exit Admission Application"
+          >
+            <X size={22} />
+          </button>
+
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, textAlign: 'center', marginBottom: '0.5rem' }}>
             Digital Admission Application
           </h2>

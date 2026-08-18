@@ -200,362 +200,361 @@ export default function AdmissionApply() {
 
         <div className="container">
           <div className={styles.wizardContainer}>
-          {/* Corner Exit / Cut Sign Button */}
-          <button 
-            type="button"
-            className={styles.closeWizardBtn} 
-            onClick={() => navigate('/admission')}
-            title="Exit Admission Application"
-            aria-label="Exit Admission Application"
-          >
-            <X size={22} />
-          </button>
+            {/* Corner Exit / Cut Sign Button */}
+            <button
+              type="button"
+              className={styles.closeWizardBtn}
+              onClick={() => navigate('/admission')}
+              title="Exit Admission Application"
+              aria-label="Exit Admission Application"
+            >
+              <X size={22} />
+            </button>
 
-          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-            <span className="badge-pill badge-yellow" style={{ marginBottom: '8px', display: 'inline-flex' }}>
-              ✨ Happy Hearts Admission Application 2026/2027
-            </span>
-            <h2 style={{ fontSize: '2rem', fontWeight: 800, margin: '6px 0' }}>
-              Digital Admission Application <span className="text-gradient">🎨</span>
-            </h2>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', fontWeight: 600 }}>
-              Step {step} of 5 — <strong style={{ color: '#FF5252' }}>{step === 1 ? 'Child Information' : step === 2 ? 'Parent & Guardian Details' : step === 3 ? 'Emergency Contact' : step === 4 ? 'Document Upload' : 'Review & Submit'}</strong>
-            </p>
-          </div>
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <span className="badge-pill badge-yellow" style={{ marginBottom: '8px', display: 'inline-flex' }}>
+                ✨ Happy Hearts Admission Application 2026/2027
+              </span>
+              <h2 style={{ fontSize: '2rem', fontWeight: 800, margin: '6px 0' }}>
+                Digital Admission Application <span className="text-gradient">🎨</span>
+              </h2>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', fontWeight: 600 }}>
+                Step {step} of 5 — <strong style={{ color: '#FF5252' }}>{step === 1 ? 'Child Information' : step === 2 ? 'Parent & Guardian Details' : step === 3 ? 'Emergency Contact' : step === 4 ? 'Document Upload' : 'Review & Submit'}</strong>
+              </p>
+            </div>
 
-          {/* Stepper Header */}
-          <div className={styles.stepBar}>
-            <div
-              className={styles.stepBarProgress}
-              style={{ width: `${((step - 1) / 4) * 100}%` }}
-            />
-            {[1, 2, 3, 4, 5].map((s) => (
+            {/* Stepper Header */}
+            <div className={styles.stepBar}>
               <div
-                key={s}
-                className={`${styles.stepItem} ${step === s ? styles.active : ''} ${
-                  step > s ? styles.completed : ''
-                }`}
-              >
-                <div className={styles.stepCircle}>
-                  {step > s ? <Check size={18} /> : s}
-                </div>
-                <span className={styles.stepLabel}>
-                  {s === 1 ? 'Child' : s === 2 ? 'Parent' : s === 3 ? 'Emergency' : s === 4 ? 'Docs' : 'Review'}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Step 1 */}
-          {step === 1 && (
-            <div className={styles.formGrid}>
-              <div className={styles.formGroup}>
-                <label>Child's Full Name *</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Lily Watson"
-                  value={childFullName}
-                  onChange={e => setChildFullName(e.target.value)}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Date of Birth *</label>
-                <input
-                  type="date"
-                  value={childDob}
-                  onChange={e => setChildDob(e.target.value)}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Gender *</label>
-                <select
-                  value={childGender}
-                  onChange={e => setChildGender(e.target.value as any)}
+                className={styles.stepBarProgress}
+                style={{ width: `${((step - 1) / 4) * 100}%` }}
+              />
+              {[1, 2, 3, 4, 5].map((s) => (
+                <div
+                  key={s}
+                  className={`${styles.stepItem} ${step === s ? styles.active : ''} ${step > s ? styles.completed : ''
+                    }`}
                 >
-                  <option value="Boy">Boy</option>
-                  <option value="Girl">Girl</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Applying For Program *</label>
-                <select
-                  value={applyingForProgram}
-                  onChange={e => setApplyingForProgram(e.target.value)}
-                >
-                  <option value="Toddler Crèche & Daycare">Toddler Crèche & Daycare</option>
-                  <option value="Playgroup">Playgroup Sunshine (1.5 - 2.5 yrs)</option>
-                  <option value="Nursery">Nursery Explorers (2.5 - 3.5 yrs)</option>
-                  <option value="Kindergarten">Kindergarten Stars (3.5 - 5 yrs)</option>
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Previous School / Daycare (If any)</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Sunshine Toddlers or Home"
-                  value={previousSchool}
-                  onChange={e => setPreviousSchool(e.target.value)}
-                />
-              </div>
-
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <label>Child's Residential Address *</label>
-                <textarea
-                  rows={2}
-                  placeholder="Street address, City, Postal Code"
-                  value={childAddress}
-                  onChange={e => setChildAddress(e.target.value)}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Step 2 */}
-          {step === 2 && (
-            <div className={styles.formGrid}>
-              <div className={styles.formGroup}>
-                <label>Parent / Guardian Name *</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Emily Watson"
-                  value={parentName}
-                  onChange={e => setParentName(e.target.value)}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Relationship to Child *</label>
-                <select
-                  value={parentRelationship}
-                  onChange={e => setParentRelationship(e.target.value)}
-                >
-                  <option value="Mother">Mother</option>
-                  <option value="Father">Father</option>
-                  <option value="Guardian">Legal Guardian</option>
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Email Address *</label>
-                <input
-                  type="email"
-                  placeholder="parent@example.com"
-                  value={parentEmail}
-                  onChange={e => setParentEmail(e.target.value)}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Mobile Number *</label>
-                <input
-                  type="tel"
-                  placeholder="+1 (555) 000-0000"
-                  value={parentMobile}
-                  onChange={e => setParentMobile(e.target.value)}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Alternate Phone Number</label>
-                <input
-                  type="tel"
-                  placeholder="+1 (555) 000-0000"
-                  value={parentAltPhone}
-                  onChange={e => setParentAltPhone(e.target.value)}
-                />
-              </div>
-
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <label>Parent Address (If different from child)</label>
-                <textarea
-                  rows={2}
-                  placeholder="Same as child address or enter details"
-                  value={parentAddress}
-                  onChange={e => setParentAddress(e.target.value)}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Step 3 */}
-          {step === 3 && (
-            <div className={styles.formGrid}>
-              <div className={styles.formGroup}>
-                <label>Emergency Contact Name *</label>
-                <input
-                  type="text"
-                  placeholder="e.g. David Watson"
-                  value={emergencyName}
-                  onChange={e => setEmergencyName(e.target.value)}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Relationship *</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Father / Uncle / Grandmother"
-                  value={emergencyRelationship}
-                  onChange={e => setEmergencyRelationship(e.target.value)}
-                />
-              </div>
-
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <label>Emergency Phone Number *</label>
-                <input
-                  type="tel"
-                  placeholder="+1 (555) 000-0000"
-                  value={emergencyPhone}
-                  onChange={e => setEmergencyPhone(e.target.value)}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Step 4 */}
-          {step === 4 && (
-            <div className={styles.formGrid}>
-              <div className={styles.formGroup}>
-                <label>Child Photograph (PNG/JPG)</label>
-                <label className={styles.uploadBox}>
-                  <Upload size={24} color="#FF6B6B" style={{ margin: '0 auto 8px auto' }} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
-                    {photo ? photo.name : 'Click to Upload Child Photo'}
+                  <div className={styles.stepCircle}>
+                    {step > s ? <Check size={18} /> : s}
+                  </div>
+                  <span className={styles.stepLabel}>
+                    {s === 1 ? 'Child' : s === 2 ? 'Parent' : s === 3 ? 'Emergency' : s === 4 ? 'Docs' : 'Review'}
                   </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    onChange={e => handleFileUpload(e, setPhoto)}
-                  />
-                </label>
-                {photo && <img src={photo.dataUrl} alt="Child preview" className={styles.previewThumb} />}
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Birth Certificate (PDF/Image)</label>
-                <label className={styles.uploadBox}>
-                  <Upload size={24} color="#118AB2" style={{ margin: '0 auto 8px auto' }} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
-                    {birthCert ? birthCert.name : 'Click to Upload Birth Cert'}
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*,application/pdf"
-                    style={{ display: 'none' }}
-                    onChange={e => handleFileUpload(e, setBirthCert)}
-                  />
-                </label>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Address Proof</label>
-                <label className={styles.uploadBox}>
-                  <Upload size={24} color="#06D6A0" style={{ margin: '0 auto 8px auto' }} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
-                    {addressProof ? addressProof.name : 'Click to Upload Address Proof'}
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*,application/pdf"
-                    style={{ display: 'none' }}
-                    onChange={e => handleFileUpload(e, setAddressProof)}
-                  />
-                </label>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Parent / Guardian ID Proof</label>
-                <label className={styles.uploadBox}>
-                  <Upload size={24} color="#9B5DE5" style={{ margin: '0 auto 8px auto' }} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
-                    {parentIdProof ? parentIdProof.name : 'Click to Upload Parent ID'}
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*,application/pdf"
-                    style={{ display: 'none' }}
-                    onChange={e => handleFileUpload(e, setParentIdProof)}
-                  />
-                </label>
-              </div>
-            </div>
-          )}
-
-          {/* Step 5 */}
-          {step === 5 && (
-            <div>
-              <div className={styles.summarySection} style={{ backgroundColor: '#FFE5E5', border: '2.5px solid #FF6B6B' }}>
-                <div className={styles.summaryHeader}>
-                  <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#FF5252' }}>Child Information</span>
-                  <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(1)}>Edit</Button>
                 </div>
-                <p><strong>Name:</strong> {childFullName}</p>
-                <p><strong>DOB:</strong> {childDob} ({childGender})</p>
-                <p><strong>Program:</strong> {applyingForProgram}</p>
-                <p><strong>Address:</strong> {childAddress}</p>
-              </div>
-
-              <div className={styles.summarySection} style={{ backgroundColor: '#EBF5FF', border: '2.5px solid #4D96FF' }}>
-                <div className={styles.summaryHeader}>
-                  <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#4D96FF' }}>Parent Details</span>
-                  <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(2)}>Edit</Button>
-                </div>
-                <p><strong>Name:</strong> {parentName} ({parentRelationship})</p>
-                <p><strong>Email:</strong> {parentEmail}</p>
-                <p><strong>Phone:</strong> {parentMobile}</p>
-              </div>
-
-              <div className={styles.summarySection} style={{ backgroundColor: '#EAFAF1', border: '2.5px solid #6BCB77' }}>
-                <div className={styles.summaryHeader}>
-                  <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#2E7D32' }}>Emergency Contact</span>
-                  <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(3)}>Edit</Button>
-                </div>
-                <p><strong>Contact:</strong> {emergencyName} ({emergencyRelationship}) - {emergencyPhone}</p>
-              </div>
-
-              <div style={{ marginTop: '1.5rem' }}>
-                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.95rem', fontWeight: 600 }}>
-                  <input
-                    type="checkbox"
-                    checked={termsAccepted}
-                    onChange={e => setTermsAccepted(e.target.checked)}
-                    style={{ width: '20px', height: '20px', marginTop: '2px', accentColor: '#FF6B6B' }}
-                  />
-                  <span>
-                    I confirm all submitted information and uploaded documents are accurate and complete to the best of my knowledge. I agree to Happy Hearts Preschool policies.
-                  </span>
-                </label>
-              </div>
+              ))}
             </div>
-          )}
 
-          {/* Actions */}
-          <div className={styles.actionsBar}>
-            {step > 1 ? (
-              <Button variant="outline" icon={<ArrowLeft size={16} />} onClick={handlePrev}>
-                Previous Step
-              </Button>
-            ) : <div />}
+            {/* Step 1 */}
+            {step === 1 && (
+              <div className={styles.formGrid}>
+                <div className={styles.formGroup}>
+                  <label>Child's Full Name *</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Lily Watson"
+                    value={childFullName}
+                    onChange={e => setChildFullName(e.target.value)}
+                  />
+                </div>
 
-            {step < 5 ? (
-              <Button variant="primary" icon={<ArrowRight size={16} />} onClick={handleNext}>
-                Next Step
-              </Button>
-            ) : (
-              <Button variant="primary" icon={<CheckCircle size={16} />} onClick={handleSubmit}>
-                Submit Application
-              </Button>
+                <div className={styles.formGroup}>
+                  <label>Date of Birth *</label>
+                  <input
+                    type="date"
+                    value={childDob}
+                    onChange={e => setChildDob(e.target.value)}
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Gender *</label>
+                  <select
+                    value={childGender}
+                    onChange={e => setChildGender(e.target.value as any)}
+                  >
+                    <option value="Boy">Boy</option>
+                    <option value="Girl">Girl</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Applying For Program *</label>
+                  <select
+                    value={applyingForProgram}
+                    onChange={e => setApplyingForProgram(e.target.value)}
+                  >
+                    <option value="Toddler Crèche & Daycare">Toddler Crèche & Daycare</option>
+                    <option value="Playgroup">Playgroup Sunshine (1.5 - 2.5 yrs)</option>
+                    <option value="Nursery">Nursery Explorers (2.5 - 3.5 yrs)</option>
+                    <option value="Kindergarten">Kindergarten Stars (3.5 - 5 yrs)</option>
+                  </select>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Previous School / Daycare (If any)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Sunshine Toddlers or Home"
+                    value={previousSchool}
+                    onChange={e => setPreviousSchool(e.target.value)}
+                  />
+                </div>
+
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label>Child's Residential Address *</label>
+                  <textarea
+                    rows={2}
+                    placeholder="Street address, City, Postal Code"
+                    value={childAddress}
+                    onChange={e => setChildAddress(e.target.value)}
+                  />
+                </div>
+              </div>
             )}
+
+            {/* Step 2 */}
+            {step === 2 && (
+              <div className={styles.formGrid}>
+                <div className={styles.formGroup}>
+                  <label>Parent / Guardian Name *</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Emily Watson"
+                    value={parentName}
+                    onChange={e => setParentName(e.target.value)}
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Relationship to Child *</label>
+                  <select
+                    value={parentRelationship}
+                    onChange={e => setParentRelationship(e.target.value)}
+                  >
+                    <option value="Mother">Mother</option>
+                    <option value="Father">Father</option>
+                    <option value="Guardian">Legal Guardian</option>
+                  </select>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Email Address *</label>
+                  <input
+                    type="email"
+                    placeholder="parent@example.com"
+                    value={parentEmail}
+                    onChange={e => setParentEmail(e.target.value)}
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Mobile Number *</label>
+                  <input
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    value={parentMobile}
+                    onChange={e => setParentMobile(e.target.value)}
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Alternate Phone Number</label>
+                  <input
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    value={parentAltPhone}
+                    onChange={e => setParentAltPhone(e.target.value)}
+                  />
+                </div>
+
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label>Parent Address (If different from child)</label>
+                  <textarea
+                    rows={2}
+                    placeholder="Same as child address or enter details"
+                    value={parentAddress}
+                    onChange={e => setParentAddress(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Step 3 */}
+            {step === 3 && (
+              <div className={styles.formGrid}>
+                <div className={styles.formGroup}>
+                  <label>Emergency Contact Name *</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. David Watson"
+                    value={emergencyName}
+                    onChange={e => setEmergencyName(e.target.value)}
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Relationship *</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Father / Uncle / Grandmother"
+                    value={emergencyRelationship}
+                    onChange={e => setEmergencyRelationship(e.target.value)}
+                  />
+                </div>
+
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label>Emergency Phone Number *</label>
+                  <input
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    value={emergencyPhone}
+                    onChange={e => setEmergencyPhone(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Step 4 */}
+            {step === 4 && (
+              <div className={styles.formGrid}>
+                <div className={styles.formGroup}>
+                  <label>Child Photograph (PNG/JPG)</label>
+                  <label className={styles.uploadBox}>
+                    <Upload size={24} color="#FF6B6B" style={{ margin: '0 auto 8px auto' }} />
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
+                      {photo ? photo.name : 'Click to Upload Child Photo'}
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                      onChange={e => handleFileUpload(e, setPhoto)}
+                    />
+                  </label>
+                  {photo && <img src={photo.dataUrl} alt="Child preview" className={styles.previewThumb} />}
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Birth Certificate (PDF/Image)</label>
+                  <label className={styles.uploadBox}>
+                    <Upload size={24} color="#118AB2" style={{ margin: '0 auto 8px auto' }} />
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
+                      {birthCert ? birthCert.name : 'Click to Upload Birth Cert'}
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*,application/pdf"
+                      style={{ display: 'none' }}
+                      onChange={e => handleFileUpload(e, setBirthCert)}
+                    />
+                  </label>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Address Proof</label>
+                  <label className={styles.uploadBox}>
+                    <Upload size={24} color="#06D6A0" style={{ margin: '0 auto 8px auto' }} />
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
+                      {addressProof ? addressProof.name : 'Click to Upload Address Proof'}
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*,application/pdf"
+                      style={{ display: 'none' }}
+                      onChange={e => handleFileUpload(e, setAddressProof)}
+                    />
+                  </label>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Parent / Guardian ID Proof</label>
+                  <label className={styles.uploadBox}>
+                    <Upload size={24} color="#9B5DE5" style={{ margin: '0 auto 8px auto' }} />
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>
+                      {parentIdProof ? parentIdProof.name : 'Click to Upload Parent ID'}
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*,application/pdf"
+                      style={{ display: 'none' }}
+                      onChange={e => handleFileUpload(e, setParentIdProof)}
+                    />
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {/* Step 5 */}
+            {step === 5 && (
+              <div>
+                <div className={styles.summarySection} style={{ backgroundColor: '#FFE5E5', border: '2.5px solid #FF6B6B' }}>
+                  <div className={styles.summaryHeader}>
+                    <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#FF5252' }}>Child Information</span>
+                    <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(1)}>Edit</Button>
+                  </div>
+                  <p><strong>Name:</strong> {childFullName}</p>
+                  <p><strong>DOB:</strong> {childDob} ({childGender})</p>
+                  <p><strong>Program:</strong> {applyingForProgram}</p>
+                  <p><strong>Address:</strong> {childAddress}</p>
+                </div>
+
+                <div className={styles.summarySection} style={{ backgroundColor: '#EBF5FF', border: '2.5px solid #4D96FF' }}>
+                  <div className={styles.summaryHeader}>
+                    <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#4D96FF' }}>Parent Details</span>
+                    <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(2)}>Edit</Button>
+                  </div>
+                  <p><strong>Name:</strong> {parentName} ({parentRelationship})</p>
+                  <p><strong>Email:</strong> {parentEmail}</p>
+                  <p><strong>Phone:</strong> {parentMobile}</p>
+                </div>
+
+                <div className={styles.summarySection} style={{ backgroundColor: '#EAFAF1', border: '2.5px solid #6BCB77' }}>
+                  <div className={styles.summaryHeader}>
+                    <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#2E7D32' }}>Emergency Contact</span>
+                    <Button variant="text" size="sm" icon={<Edit3 size={14} />} onClick={() => setStep(3)}>Edit</Button>
+                  </div>
+                  <p><strong>Contact:</strong> {emergencyName} ({emergencyRelationship}) - {emergencyPhone}</p>
+                </div>
+
+                <div style={{ marginTop: '1.5rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.95rem', fontWeight: 600 }}>
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={e => setTermsAccepted(e.target.checked)}
+                      style={{ width: '20px', height: '20px', marginTop: '2px', accentColor: '#FF6B6B' }}
+                    />
+                    <span>
+                      I confirm all submitted information and uploaded documents are accurate and complete to the best of my knowledge. I agree to Happy Hearts Preschool policies.
+                    </span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {/* Actions */}
+            <div className={styles.actionsBar}>
+              {step > 1 ? (
+                <Button variant="outline" icon={<ArrowLeft size={16} />} onClick={handlePrev}>
+                  Previous Step
+                </Button>
+              ) : <div />}
+
+              {step < 5 ? (
+                <Button variant="primary" icon={<ArrowRight size={16} />} onClick={handleNext}>
+                  Next Step
+                </Button>
+              ) : (
+                <Button variant="primary" icon={<CheckCircle size={16} />} onClick={handleSubmit}>
+                  Submit Application
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </PageWrapper>
+    </PageWrapper>
   );
 }

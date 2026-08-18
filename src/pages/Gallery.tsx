@@ -121,10 +121,10 @@ export default function Gallery() {
       id: 10, 
       category: 'Playtime', 
       color: '#6BCB77', 
-      img: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/sandbox-play.jpg', 
       title: 'Sensory Sandbox & Splash Play 🏖️', 
       desc: 'Tactile sand sculpting, sieve pouring, and water float experiments promoting early scientific curiosity and sensory fun.',
-      alt: 'Preschool children playing in a sensory sandbox with buckets, scoops, and sand toys'
+      alt: 'Preschool toddlers playing in a red sensory water and sand basin with scoops, buckets, and water wheels'
     },
     { 
       id: 11, 

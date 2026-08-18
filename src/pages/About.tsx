@@ -1,16 +1,33 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Heart, Star, Shield, Smile, CheckCircle } from 'lucide-react';
+import { Heart, Star, Shield, Smile, Blocks, Trees, Utensils, CloudMoon, ArrowRight } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import styles from './About.module.css';
 
+const WavyDivider = ({ fill }: { fill: string }) => (
+  <div className="section-divider-wave">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        fill={fill}
+      />
+    </svg>
+  </div>
+);
+
 export default function About() {
   return (
     <PageWrapper>
-      {/* Hero Section */}
+      {/* HERO SECTION */}
       <section className={styles.hero}>
+        {/* Floating playful stickers */}
+        <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
+        <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
+        <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
+        <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
+
         <div className="container">
           <motion.div 
             className={styles.heroContent}
@@ -18,14 +35,16 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="badge-pill">About Happy Hearts</span>
-            <h1>Nurturing Minds, Inspiring Futures</h1>
+            <span className="badge-pill">✨ About Happy Hearts</span>
+            <h1>Nurturing Minds, <span className="text-gradient">Inspiring Futures</span> 🎨</h1>
             <p>Dedicated to providing a loving, creative, and safe foundation for early childhood development since our founding.</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Philosophy Section */}
+      <WavyDivider fill="#FFFBEB" />
+
+      {/* PHILOSOPHY SECTION (Alternating Background 1: Soft Yellow Tint) */}
       <section className={styles.philosophySection}>
         <div className={`container ${styles.splitLayout}`}>
           <div className={styles.visualColumn}>
@@ -38,7 +57,7 @@ export default function About() {
             </div>
           </div>
           <div className={styles.textColumn}>
-            <span className="badge-pill">Educational Approach</span>
+            <span className="badge-pill badge-purple">🌱 Educational Approach</span>
             <h2>Our Core Educational Philosophy</h2>
             <p className={styles.leadText}>
               We believe every child is uniquely gifted, inherently curious, and deserving of a nurturing environment where learning feels like play.
@@ -53,36 +72,78 @@ export default function About() {
         </div>
       </section>
 
-      {/* Core Values Section */}
+      <WavyDivider fill="#FFF1F2" />
+
+      {/* CORE VALUES SECTION (Alternating Background 2: Soft Coral Pink Tint) */}
       <section className={styles.valuesSection}>
         <div className="container">
           <div className={styles.valuesHeader}>
-            <span className="badge-pill">Guiding Principles</span>
-            <h2>Our Core Values</h2>
+            <span className="badge-pill badge-yellow">⭐ Guiding Principles</span>
+            <h2>Our Core Values 🌈</h2>
             <p>The pillars that guide every interaction, lesson plan, and smile at Happy Hearts.</p>
           </div>
 
           <div className={styles.valuesGrid}>
-            <Card className={styles.valueCard} hoverEffect={true} accentColor="var(--color-accent-coral)">
-              <div className={`${styles.iconWrapper} ${styles.iconCoral}`}><Heart size={32} /></div>
+            <Card
+              className={styles.valueCard}
+              hoverEffect={true}
+              style={{
+                backgroundColor: '#FFF0F0',
+                border: '2.5px solid #FF6B5A',
+                borderTop: '6px solid #FF5240'
+              }}
+            >
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 107, 90, 0.16)' }}>
+                <Heart size={36} color="#FF5240" fill="#FFD0CB" />
+              </div>
               <h3>Love & Empathy</h3>
               <p>We treat every child with the utmost care, creating a second home where they feel emotionally safe and cherished.</p>
             </Card>
 
-            <Card className={styles.valueCard} hoverEffect={true} accentColor="var(--color-accent-yellow)">
-              <div className={`${styles.iconWrapper} ${styles.iconYellow}`}><Star size={32} /></div>
+            <Card
+              className={styles.valueCard}
+              hoverEffect={true}
+              style={{
+                backgroundColor: '#FFFBEB',
+                border: '2.5px solid #FFC107',
+                borderTop: '6px solid #D97706'
+              }}
+            >
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 193, 7, 0.22)' }}>
+                <Star size={36} color="#D97706" fill="#FDE68A" />
+              </div>
               <h3>Creative Expression</h3>
               <p>We encourage hands-on discovery through painting, music, drama, and storytelling to unlock creative potential.</p>
             </Card>
 
-            <Card className={styles.valueCard} hoverEffect={true} accentColor="var(--color-accent-sky)">
-              <div className={`${styles.iconWrapper} ${styles.iconBlue}`}><Shield size={32} /></div>
+            <Card
+              className={styles.valueCard}
+              hoverEffect={true}
+              style={{
+                backgroundColor: '#F0F9FF',
+                border: '2.5px solid #0284C7',
+                borderTop: '6px solid #0284C7'
+              }}
+            >
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(2, 132, 199, 0.18)' }}>
+                <Shield size={36} color="#0284C7" fill="#BAE6FD" />
+              </div>
               <h3>Safety & Health First</h3>
               <p>Uncompromising standards in hygiene, secure access control, and certified pediatric first aid trained staff.</p>
             </Card>
 
-            <Card className={styles.valueCard} hoverEffect={true} accentColor="var(--color-accent-mint)">
-              <div className={`${styles.iconWrapper} ${styles.iconGreen}`}><Smile size={32} /></div>
+            <Card
+              className={styles.valueCard}
+              hoverEffect={true}
+              style={{
+                backgroundColor: '#ECFDF5',
+                border: '2.5px solid #10B981',
+                borderTop: '6px solid #059669'
+              }}
+            >
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(16, 185, 129, 0.18)' }}>
+                <Smile size={36} color="#059669" fill="#A7F3D0" />
+              </div>
               <h3>Joyful Learning</h3>
               <p>We craft interactive learning experiences that spark laughter, curiosity, and a lifelong passion for knowledge.</p>
             </Card>
@@ -90,46 +151,85 @@ export default function About() {
         </div>
       </section>
 
-      {/* Facilities Showcase */}
+      <WavyDivider fill="#F0F9FF" />
+
+      {/* AMENITIES SECTION (Alternating Background 3: Soft Sky Blue Tint) */}
       <section className={styles.facilitiesSection}>
         <div className="container">
           <div className={styles.valuesHeader}>
-            <span className="badge-pill">World-Class Environment</span>
-            <h2>Designed for Little Explorers</h2>
+            <span className="badge-pill badge-sky">🏛️ World-Class Environment</span>
+            <h2>Designed for Little Explorers 🧸</h2>
             <p>Take a glance at our purpose-built amenities designed for comfort, play, and safety.</p>
           </div>
 
           <div className={styles.facilitiesGrid}>
             {[
-              { title: 'Interactive Learning Zones', desc: 'Equipped with Montessori toys, reading nooks, and STEM discovery kits.' },
-              { title: 'Outdoor Green Playground', desc: 'Soft-impact flooring, sensory garden, and child-safe climbing structures.' },
-              { title: 'Nutritious Meal Service', desc: 'Freshly prepared organic meals and snacks planned by pediatric nutritionists.' },
-              { title: 'Rest & Quiet Rooms', desc: 'Sanitized, peaceful sleeping quarters for infants and crèche toddlers.' }
+              {
+                icon: <Blocks size={30} color="#FF5240" fill="#FFD0CB" />,
+                title: 'Interactive Learning Zones',
+                desc: 'Equipped with Montessori toys, reading nooks, and STEM discovery kits.',
+                bg: '#FFF0F0',
+                border: '#FF6B5A',
+                iconBg: 'rgba(255, 107, 90, 0.18)'
+              },
+              {
+                icon: <Trees size={30} color="#059669" fill="#A7F3D0" />,
+                title: 'Outdoor Green Playground',
+                desc: 'Soft-impact flooring, sensory garden, and child-safe climbing structures.',
+                bg: '#ECFDF5',
+                border: '#10B981',
+                iconBg: 'rgba(16, 185, 129, 0.18)'
+              },
+              {
+                icon: <Utensils size={30} color="#D97706" fill="#FDE68A" />,
+                title: 'Nutritious Meal Service',
+                desc: 'Freshly prepared organic meals and snacks planned by pediatric nutritionists.',
+                bg: '#FFFBEB',
+                border: '#FFC107',
+                iconBg: 'rgba(255, 193, 7, 0.22)'
+              },
+              {
+                icon: <CloudMoon size={30} color="#0284C7" fill="#BAE6FD" />,
+                title: 'Rest & Quiet Rooms',
+                desc: 'Sanitized, peaceful sleeping quarters for infants and crèche toddlers.',
+                bg: '#F0F9FF',
+                border: '#0284C7',
+                iconBg: 'rgba(2, 132, 199, 0.18)'
+              }
             ].map((facility, idx) => (
-              <div key={idx} className={styles.facilityCard}>
-                <CheckCircle size={24} className={styles.facilityIcon} />
+              <Card
+                key={idx}
+                className={styles.facilityCard}
+                style={{
+                  backgroundColor: facility.bg,
+                  border: `2.5px solid ${facility.border}`
+                }}
+              >
+                <div className={styles.facilityIconWrapper} style={{ backgroundColor: facility.iconBg }}>
+                  {facility.icon}
+                </div>
                 <div>
                   <h4>{facility.title}</h4>
                   <p>{facility.desc}</p>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA CALLOUT BAND */}
       <section className={styles.ctaSection}>
         <div className="container">
           <div className={styles.ctaContent}>
-            <h2>Experience the Happy Hearts Difference</h2>
+            <h2>Experience the Happy Hearts Difference 🚀</h2>
             <p>We invite you to tour our campus, meet our warm educators, and see our philosophy in action.</p>
             <div className={styles.ctaButtons}>
               <Link to="/contact">
-                <Button size="lg" variant="primary">Book a Campus Tour</Button>
+                <Button size="lg" variant="secondary" icon={<ArrowRight size={20} />}>Book a Campus Tour</Button>
               </Link>
               <Link to="/teachers">
-                <Button variant="outline" size="lg">Meet Our Teachers</Button>
+                <Button variant="primary" size="lg" style={{ border: '2px solid #FFFFFF' }}>Meet Our Teachers</Button>
               </Link>
             </div>
           </div>

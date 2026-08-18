@@ -1,50 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap');
 
 :root {
-  /* Warm cream primary background base */
-  --color-bg-primary: #FFFCF5;
-  --color-bg-secondary: #FFFBEB; /* Soft sunny yellow section tint */
-  --color-bg-blue-tint: #F0F9FF; /* Soft sky blue section tint */
-  --color-bg-pink-tint: #FFF1F2; /* Soft coral pink section tint */
-  --color-bg-mint-tint: #ECFDF5; /* Soft grass green section tint */
+  /* Controlled Color System (Playgro India Inspired, uniquely Happy Hearts) */
+  --color-bg-primary: #FFF9F0;   /* Soft Cream base */
+  --color-bg-secondary: #FFF3E0; /* Soft sunny cream section tint */
+  --color-bg-pink-tint: #FFE5E5; /* Soft pink child-focused tint */
+  --color-bg-blue-tint: #EBF5FF; /* Soft sky blue section tint */
+  --color-bg-mint-tint: #EAFAF1; /* Soft fresh mint section tint */
+  --color-bg-purple-tint: #F3E8FF; /* Soft playful purple tint */
   --color-bg-white: #FFFFFF;
-  --color-bg-glass: rgba(255, 252, 245, 0.92);
+  --color-bg-glass: rgba(255, 249, 240, 0.94);
   
-  /* Saturated Candy Palette */
-  --color-accent-coral: #FF6B5A;
-  --color-accent-coral-hover: #FF5240;
-  --color-accent-yellow: #FFC107;
-  --color-accent-yellow-hover: #FFA000;
-  --color-accent-mint: #10B981;
-  --color-accent-mint-hover: #059669;
-  --color-accent-sky: #0284C7;
-  --color-accent-sky-hover: #0369A1;
-  --color-accent-purple: #8B5CF6;
-  --color-accent-pink: #EC4899;
+  /* Primary & Secondary Brand Colors */
+  --color-accent-coral: #FF6B6B;      /* Primary Happy Heart Coral */
+  --color-accent-coral-hover: #FF5252;
+  --color-accent-yellow: #FFD93D;     /* Sunshine Yellow */
+  --color-accent-yellow-hover: #FFC107;
+  --color-accent-mint: #6BCB77;       /* Fresh Mint */
+  --color-accent-mint-hover: #4CAF50;
+  --color-accent-sky: #4D96FF;        /* Sky Blue */
+  --color-accent-sky-hover: #2979FF;
+  --color-accent-purple: #845EC2;     /* Playful Purple */
+  --color-accent-pink: #FFE5E5;
 
   /* Legacy compatibility map */
-  --color-accent-blue: var(--color-accent-mint);
+  --color-accent-blue: var(--color-accent-sky);
   
-  /* Accessible Contrast Dark Navy/Charcoal Text */
-  --color-text-main: #1E293B;
-  --color-text-muted: #475569;
+  /* Accessible Contrast Deep Navy & Secondary Text */
+  --color-text-main: #263238;     /* Primary Deep Navy Text */
+  --color-text-muted: #667085;    /* Secondary Supporting Text */
   --color-text-light: #FFFFFF;
   
   /* Typography */
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   
-  /* Modern Candy Gradients (Max 2 colors) */
-  --gradient-warm: linear-gradient(135deg, #FF6B5A 0%, #FF9800 100%);
-  --gradient-button: linear-gradient(135deg, #FF6B5A 0%, #FF8A50 100%);
-  --gradient-sky: linear-gradient(135deg, #0284C7 0%, #10B981 100%);
-  --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #FFFCF5 100%);
+  /* Modern Candy Gradients */
+  --gradient-warm: linear-gradient(135deg, #FF6B6B 0%, #FF9800 100%);
+  --gradient-button: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  --gradient-sky: linear-gradient(135deg, #4D96FF 0%, #6BCB77 100%);
+  --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #FFF9F0 100%);
 
   /* Shadows */
-  --shadow-sm: 0 4px 14px rgba(30, 41, 59, 0.05);
-  --shadow-md: 0 10px 28px rgba(30, 41, 59, 0.08);
-  --shadow-lg: 0 20px 40px rgba(255, 107, 90, 0.16);
-  --shadow-button: 0 10px 24px rgba(255, 107, 90, 0.35);
+  --shadow-sm: 0 4px 14px rgba(38, 50, 56, 0.05);
+  --shadow-md: 0 10px 28px rgba(38, 50, 56, 0.08);
+  --shadow-lg: 0 20px 40px rgba(255, 107, 107, 0.18);
+  --shadow-button: 0 10px 24px rgba(255, 107, 107, 0.35);
 
   /* Spacing */
   --spacing-section: 5.5rem;
@@ -94,7 +95,7 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E2D9CD;
+  background: #EADBC8;
   border-radius: var(--radius-full);
 }
 
@@ -137,7 +138,7 @@ button {
 
 /* Confident 2-color headline gradient */
 .text-gradient {
-  background: linear-gradient(135deg, #FF6B5A 0%, #FF9800 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9800 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -149,37 +150,37 @@ button {
   gap: 8px;
   padding: 8px 18px;
   border-radius: var(--radius-full);
-  background-color: rgba(255, 107, 90, 0.12);
-  color: #D93829; /* Contrast ratio > 4.5:1 on cream */
+  background-color: rgba(255, 107, 107, 0.12);
+  color: #D32F2F; /* Contrast ratio > 4.5:1 on soft cream */
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 0.92rem;
-  border: 1.5px solid rgba(255, 107, 90, 0.25);
-  box-shadow: 0 4px 12px rgba(255, 107, 90, 0.1);
+  border: 1.5px solid rgba(255, 107, 107, 0.25);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.1);
 }
 
 .badge-mint {
-  background-color: rgba(16, 185, 129, 0.12);
-  color: #047857; /* Contrast ratio > 4.5:1 */
-  border-color: rgba(16, 185, 129, 0.3);
+  background-color: rgba(107, 203, 119, 0.18);
+  color: #2E7D32; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(107, 203, 119, 0.35);
 }
 
 .badge-yellow {
-  background-color: rgba(255, 193, 7, 0.2);
-  color: #B45309; /* Contrast ratio > 4.5:1 */
-  border-color: rgba(255, 193, 7, 0.4);
+  background-color: rgba(255, 217, 61, 0.25);
+  color: #B78103; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(255, 217, 61, 0.45);
 }
 
 .badge-sky {
-  background-color: rgba(2, 132, 199, 0.12);
-  color: #0369A1; /* Contrast ratio > 4.5:1 */
-  border-color: rgba(2, 132, 199, 0.3);
+  background-color: rgba(77, 150, 255, 0.15);
+  color: #1565C0; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(77, 150, 255, 0.35);
 }
 
 .badge-purple {
-  background-color: rgba(139, 92, 246, 0.12);
-  color: #6D28D9; /* Contrast ratio > 4.5:1 */
-  border-color: rgba(139, 92, 246, 0.3);
+  background-color: rgba(132, 94, 194, 0.15);
+  color: #6A1B9A; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(132, 94, 194, 0.35);
 }
 
 /* Floating Animation Keyframes */

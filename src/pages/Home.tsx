@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Sparkles, Users, Heart, ArrowRight, Star, Clock, BookOpen, Smile, Award } from 'lucide-react';
+import { ShieldCheck, Sparkles, Users, Heart, ArrowRight, Star, Clock, BookOpen, Smile, Award, CheckCircle2, Trees, Palette, Puzzle } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
@@ -20,7 +20,7 @@ const WavyDivider = ({ fill }: { fill: string }) => (
 export default function Home() {
   return (
     <PageWrapper>
-      {/* HERO SECTION */}
+      {/* IMMERSIVE HERO SECTION */}
       <section className={styles.hero}>
         {/* Floating playful stickers */}
         <span className="floating-sticker" style={{ top: '10%', left: '3%', animationDelay: '0s' }}>🎈</span>
@@ -33,7 +33,7 @@ export default function Home() {
         <div className={`container ${styles.heroContainer}`}>
           <div className={styles.heroContent}>
             <motion.div 
-              className="badge-pill"
+              className="badge-pill badge-yellow"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -48,7 +48,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Where Little Hearts <span className="text-gradient">Learn & Grow</span> Together 🎨
+              WHERE LITTLE HEARTS <span className="text-gradient">GROW BIG 🎨</span>
             </motion.h1>
 
             <motion.p 
@@ -57,7 +57,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              A loving, safe, and vibrant sanctuary for early childhood development. Providing premium preschool education, creative play, and attentive crèche care.
+              A joyful preschool and crèche where children learn, explore, play and grow with confidence in a safe, loving environment.
             </motion.p>
 
             <motion.div 
@@ -66,30 +66,28 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <Link to="/contact">
+              <Link to="/admission/apply">
                 <Button size="lg" variant="primary" icon={<ArrowRight size={20} />}>
-                  Book a School Tour
+                  Apply for Admission
                 </Button>
               </Link>
               <Link to="/about">
                 <Button variant="outline" size="lg">
-                  Explore Our School
+                  Explore Our World
                 </Button>
               </Link>
             </motion.div>
 
+            {/* Trust Indicators */}
             <motion.div 
-              className={styles.trustBadges}
+              className={styles.heroTrustIndicators}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div className={styles.starsGroup}>
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={18} fill="#FFC107" color="#FFC107" />
-                ))}
-                <span><strong>4.9/5</strong> Parent Satisfaction Rating ❤️</span>
-              </div>
+              <span><CheckCircle2 size={18} color="#6BCB77" /> Safe & Caring Environment</span>
+              <span><CheckCircle2 size={18} color="#6BCB77" /> Experienced Teachers</span>
+              <span><CheckCircle2 size={18} color="#6BCB77" /> Play-Based Learning</span>
             </motion.div>
           </div>
 
@@ -114,7 +112,7 @@ export default function Home() {
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             >
               <div className={styles.floatIconWrapper}>
-                <Award color="#FF6B5A" size={24} />
+                <Award color="#FF6B6B" size={24} />
               </div>
               <div>
                 <strong>Certified Staff 🏆</strong>
@@ -127,8 +125,8 @@ export default function Home() {
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
             >
-              <div className={styles.floatIconWrapper} style={{ backgroundColor: '#ECFDF5' }}>
-                <ShieldCheck color="#10B981" size={24} />
+              <div className={styles.floatIconWrapper} style={{ backgroundColor: '#EAFAF1' }}>
+                <ShieldCheck color="#6BCB77" size={24} />
               </div>
               <div>
                 <strong>Safe & Secure 🛡️</strong>
@@ -139,45 +137,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS BANNER */}
+      {/* COLORFUL STATS BANNER */}
       <section className={styles.statsBanner}>
         <div className={`container ${styles.statsGrid}`}>
           <div className={styles.statItem}>
-            <span className={styles.statNumber}>100%</span>
-            <span className={styles.statLabel}>Child Safety Record</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(255, 107, 107, 0.2)' }}>
+              <span className={styles.statNumber} style={{ color: '#FF6B6B' }}>500+</span>
+            </div>
+            <span className={styles.statLabel}>Happy Children</span>
           </div>
           <div className={styles.statItem}>
-            <span className={styles.statNumber}>15+</span>
-            <span className={styles.statLabel}>Qualified Educators</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(255, 217, 61, 0.25)' }}>
+              <span className={styles.statNumber} style={{ color: '#B78103' }}>15+</span>
+            </div>
+            <span className={styles.statLabel}>Experienced Educators</span>
           </div>
           <div className={styles.statItem}>
-            <span className={styles.statNumber}>1:5</span>
-            <span className={styles.statLabel}>Teacher to Child Ratio</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(77, 150, 255, 0.2)' }}>
+              <span className={styles.statNumber} style={{ color: '#4D96FF' }}>10+</span>
+            </div>
+            <span className={styles.statLabel}>Years of Care</span>
           </div>
           <div className={styles.statItem}>
-            <span className={styles.statNumber}>500+</span>
-            <span className={styles.statLabel}>Happy Alumni</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(107, 203, 119, 0.25)' }}>
+              <span className={styles.statNumber} style={{ color: '#6BCB77' }}>100%</span>
+            </div>
+            <span className={styles.statLabel}>Love & Dedication</span>
           </div>
         </div>
       </section>
 
-      <WavyDivider fill="#FFFBEB" />
+      <WavyDivider fill="#FFF3E0" />
 
-      {/* TRUST PILLARS SECTION (Alternating Background 1: Soft Yellow Tint) */}
+      {/* WHY CHOOSE US ("Why Families Choose Happy Hearts") */}
       <section className={styles.trustSection}>
         <div className="container">
           <div className={styles.sectionHeaderCentered}>
-            <span className="badge-pill badge-yellow">⭐ Why Parents Choose Us</span>
-            <h2 className={styles.sectionTitle}>Built Around Your Child's Well-being 🧸</h2>
-            <p className={styles.sectionSubtitle}>Every detail of our environment is intentionally designed to foster emotional security and joyful discovery.</p>
+            <span className="badge-pill badge-yellow">⭐ Why Families Choose Happy Hearts</span>
+            <h2 className={styles.sectionTitle}>Built Around Your Child's Happiness 🧸</h2>
+            <p className={styles.sectionSubtitle}>Every detail of our environment is intentionally designed to foster emotional security, creative exploration, and joyful discovery.</p>
           </div>
 
           <div className={styles.trustGrid}>
             {[
-              { icon: <ShieldCheck size={34} color="#FF5240" fill="#FFE2E0" />, title: 'Safe & Hygienic', desc: 'Sanitized facilities with round-the-clock security and health protocols.', bg: '#FFF0F0', border: '#FF6B5A' },
-              { icon: <Sparkles size={34} color="#D97706" fill="#FDE68A" />, title: 'Playful Curriculum', desc: 'Early learning blending Montessori and play-based exploratory activities.', bg: '#FFFBEB', border: '#FFC107' },
-              { icon: <Users size={34} color="#0284C7" fill="#BAE6FD" />, title: 'Loving Educators', desc: 'Warm, certified early childhood experts who give individualized care.', bg: '#F0F9FF', border: '#0284C7' },
-              { icon: <Heart size={34} color="#059669" fill="#A7F3D0" />, title: 'Child-Centered', desc: 'Empowering children to build confidence, empathy, and social skills.', bg: '#ECFDF5', border: '#10B981' }
+              { icon: <Heart size={34} color="#FF5252" fill="#FFE5E5" />, title: 'Loving & Caring Environment', desc: 'A second home where children feel cherished, emotionally safe, and confident.', bg: '#FFE5E5', border: '#FF6B6B' },
+              { icon: <Palette size={34} color="#B78103" fill="#FFF2B2" />, title: 'Creative Learning', desc: 'Unlocking imagination through painting, music, drama, and interactive sensory arts.', bg: '#FFF3E0', border: '#FFD93D' },
+              { icon: <ShieldCheck size={34} color="#1565C0" fill="#D6E4FF" />, title: 'Safe & Secure Spaces', desc: 'Sanitized facilities, CCTV monitoring, and certified pediatric first aid trained staff.', bg: '#EBF5FF', border: '#4D96FF' },
+              { icon: <Trees size={34} color="#2E7D32" fill="#C8E6C9" />, title: 'Holistic Development', desc: 'Empowering children to build social cooperation, physical stamina, and curiosity.', bg: '#EAFAF1', border: '#6BCB77' },
+              { icon: <Users size={34} color="#6A1B9A" fill="#E1BEE7" />, title: 'Caring Educators', desc: 'Certified early childhood specialists with years of pediatric expertise and warmth.', bg: '#F3E8FF', border: '#845EC2' },
+              { icon: <Smile size={34} color="#FF5252" fill="#FFE5E5" />, title: 'Parent Partnership', desc: 'Open daily updates, photo sharing, and collaborative progress tracking.', bg: '#FFE5E5', border: '#FF6B6B' }
             ].map((item, index) => (
               <Card key={index} delay={index * 0.1} className={styles.trustCard} style={{ backgroundColor: item.bg, border: `2.5px solid ${item.border}` }}>
                 <div className={styles.trustIcon}>{item.icon}</div>
@@ -189,31 +197,48 @@ export default function Home() {
         </div>
       </section>
 
-      <WavyDivider fill="#F0F9FF" />
+      <WavyDivider fill="#EBF5FF" />
 
-      {/* ABOUT PREVIEW SECTION (Alternating Background 2: Soft Sky Blue Tint) */}
+      {/* LEARNING APPROACH ("Learning Through Play") */}
       <section className={styles.aboutPreview}>
         <div className={`container ${styles.splitLayout}`}>
           <div className={styles.splitVisual}>
             <div className={styles.organicShape}>
               <img 
                 src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop" 
-                alt="Teacher interacting with children" 
+                alt="Children engaging in play-based learning" 
                 className={styles.organicImg} 
               />
             </div>
           </div>
           <div className={styles.splitContent}>
-            <span className="badge-pill badge-purple">✨ Our Philosophy</span>
-            <h2 className={styles.sectionTitle}>A Foundation for Lifelong Curiosity 🎨</h2>
+            <span className="badge-pill badge-purple">✨ Learning Approach</span>
+            <h2 className={styles.sectionTitle}>Learning Through Play 🎨</h2>
             <p className={styles.sectionDesc}>
-              At Happy Hearts, early childhood is celebrated as a magical window of discovery. Our child-led curriculum nurtures emotional resilience, intellectual curiosity, and creative expression.
+              At Happy Hearts, early childhood is celebrated as a magical window of discovery. Our child-led curriculum combines Montessori principles with exploratory play to build 4 foundational pillars:
             </p>
-            <ul className={styles.featureList}>
-              <li><Heart size={22} className={styles.featureIcon} color="#FF6B5A" fill="#FFD0CB" /> Individualized care plans tailored to each child's pace</li>
-              <li><BookOpen size={22} className={styles.featureIcon} color="#0284C7" fill="#BAE6FD" /> Interactive storytelling, music & sensory activities</li>
-              <li><Smile size={22} className={styles.featureIcon} color="#10B981" fill="#A7F3D0" /> Warm, supportive community fostering lifelong friendships</li>
-            </ul>
+            <div className={styles.learningPillarsGrid}>
+              <div className={styles.pillarCard} style={{ backgroundColor: '#FFE5E5', borderColor: '#FF6B6B' }}>
+                <Puzzle size={24} color="#FF6B6B" />
+                <strong>PLAY</strong>
+                <span>Hands-on sensory games</span>
+              </div>
+              <div className={styles.pillarCard} style={{ backgroundColor: '#EBF5FF', borderColor: '#4D96FF' }}>
+                <BookOpen size={24} color="#4D96FF" />
+                <strong>EXPLORE</strong>
+                <span>Nature & STEM curiosity</span>
+              </div>
+              <div className={styles.pillarCard} style={{ backgroundColor: '#FFF3E0', borderColor: '#FFD93D' }}>
+                <Palette size={24} color="#B78103" />
+                <strong>CREATE</strong>
+                <span>Art, music & storytelling</span>
+              </div>
+              <div className={styles.pillarCard} style={{ backgroundColor: '#EAFAF1', borderColor: '#6BCB77' }}>
+                <Smile size={24} color="#6BCB77" />
+                <strong>GROW</strong>
+                <span>Social confidence & empathy</span>
+              </div>
+            </div>
             <Link to="/about">
               <Button variant="accent">Explore Our Philosophy &rarr;</Button>
             </Link>
@@ -221,21 +246,21 @@ export default function Home() {
         </div>
       </section>
 
-      <WavyDivider fill="#FFF1F2" />
+      <WavyDivider fill="#FFE5E5" />
 
-      {/* CORE OFFERINGS SECTION (Alternating Background 3: Soft Coral Pink Tint) */}
+      {/* CORE OFFERINGS / PROGRAMS */}
       <section className={styles.servicesSection}>
         <div className="container">
           <div className={styles.sectionHeaderCentered}>
             <span className="badge-pill badge-mint">🎓 Our Programs</span>
             <h2 className={styles.sectionTitle}>Tailored Programs for Every Stage 🧸</h2>
-            <p className={styles.sectionSubtitle}>Nurturing programs carefully crafted for infant care through preschool readiness.</p>
+            <p className={styles.sectionSubtitle}>Nurturing programs carefully crafted for infant care through kindergarten readiness.</p>
           </div>
 
           <div className={styles.servicesGrid}>
-            <Card hoverEffect={true} className={styles.serviceCard} style={{ backgroundColor: '#FFF0F0', border: '2.5px solid #FF6B5A', borderTop: '6px solid #FF6B5A' }}>
-              <div className={styles.serviceIconWrapper} style={{ backgroundColor: 'rgba(255, 107, 90, 0.18)', color: '#FF5240' }}>
-                <Sparkles size={34} fill="#FFD0CB" />
+            <Card hoverEffect={true} className={styles.serviceCard} style={{ backgroundColor: '#FFE5E5', border: '2.5px solid #FF6B6B', borderTop: '6px solid #FF6B6B' }}>
+              <div className={styles.serviceIconWrapper} style={{ backgroundColor: 'rgba(255, 107, 107, 0.18)', color: '#FF5252' }}>
+                <Sparkles size={34} fill="#FFCDD2" />
               </div>
               <h3>Preschool Program (Ages 3 - 5 Yrs)</h3>
               <p>A dynamic, hands-on learning environment focused on literacy foundation, basic math concepts, art, social cooperation, and kindergarten readiness.</p>
@@ -244,14 +269,14 @@ export default function Home() {
                 <li>• 📚 Phonics & early reading readiness</li>
                 <li>• 🏃 Outdoor exploration & sports</li>
               </ul>
-              <Link to="/contact" className={styles.serviceLink}>
-                Enquire for Preschool &rarr;
+              <Link to="/admission/apply" className={styles.serviceLink}>
+                Explore Program & Apply &rarr;
               </Link>
             </Card>
 
-            <Card hoverEffect={true} className={styles.serviceCard} style={{ backgroundColor: '#F0F9FF', border: '2.5px solid #0284C7', borderTop: '6px solid #0284C7' }}>
-              <div className={styles.serviceIconWrapper} style={{ backgroundColor: 'rgba(2, 132, 199, 0.18)', color: '#0284C7' }}>
-                <Clock size={34} fill="#BAE6FD" />
+            <Card hoverEffect={true} className={styles.serviceCard} style={{ backgroundColor: '#EBF5FF', border: '2.5px solid #4D96FF', borderTop: '6px solid #4D96FF' }}>
+              <div className={styles.serviceIconWrapper} style={{ backgroundColor: 'rgba(77, 150, 255, 0.18)', color: '#4D96FF' }}>
+                <Clock size={34} fill="#BBDEFB" />
               </div>
               <h3>Crèche & Daycare (Ages 6 Mos - 3 Yrs)</h3>
               <p>A tranquil, clean, and highly comfortable sanctuary where toddlers receive attentive nurture, structured nap times, and sensory development.</p>
@@ -260,22 +285,22 @@ export default function Home() {
                 <li>• 🍎 Organic meal & nutrition options</li>
                 <li>• ⏰ Flexible morning & full-day care</li>
               </ul>
-              <Link to="/contact" className={styles.serviceLink} style={{ color: '#0284C7' }}>
-                Enquire for Crèche &rarr;
+              <Link to="/admission/apply" className={styles.serviceLink} style={{ color: '#4D96FF' }}>
+                Explore Program & Apply &rarr;
               </Link>
             </Card>
           </div>
         </div>
       </section>
 
-      <WavyDivider fill="#ECFDF5" />
+      <WavyDivider fill="#EAFAF1" />
 
-      {/* PARENT TESTIMONIALS (Alternating Background 4: Soft Grass Green Tint) */}
+      {/* PARENT TESTIMONIALS ("Little Smiles. Big Parent Love.") */}
       <section className={styles.testimonialsSection}>
         <div className="container">
           <div className={styles.sectionHeaderCentered}>
             <span className="badge-pill badge-yellow">⭐ Parent Testimonials</span>
-            <h2 className={styles.sectionTitle}>Loved by Happy Families ❤️</h2>
+            <h2 className={styles.sectionTitle}>Little Smiles. Big Parent Love. ❤️</h2>
           </div>
 
           <div className={styles.testimonialsGrid}>
@@ -284,31 +309,31 @@ export default function Home() {
                 quote: "Happy Hearts transformed our daughter's confidence! The teachers treat every child with so much tenderness and warmth.",
                 author: "Amanda & Marcus Vance",
                 child: "Parents of Lily (Age 4)",
-                bg: '#FFF0F0',
-                border: '#FF6B5A',
-                badgeColor: '#FF6B5A'
+                bg: '#FFE5E5',
+                border: '#FF6B6B',
+                badgeColor: '#FF6B6B'
               },
               {
                 quote: "Leaving my 1-year-old at crèche was stressful until I saw how attentive David and Sarah were. I go to work with complete peace of mind.",
                 author: "Priya Sharma",
                 child: "Mother of Kabir (Age 1.5)",
-                bg: '#FFFBEB',
-                border: '#FFC107',
-                badgeColor: '#D97706'
+                bg: '#FFF3E0',
+                border: '#FFD93D',
+                badgeColor: '#B78103'
               },
               {
                 quote: "The play-based learning approach is amazing. My son comes home every day excited to talk about his art and science projects!",
                 author: "David Miller",
                 child: "Father of Noah (Age 3)",
-                bg: '#ECFDF5',
-                border: '#10B981',
-                badgeColor: '#059669'
+                bg: '#EAFAF1',
+                border: '#6BCB77',
+                badgeColor: '#2E7D32'
               }
             ].map((t, i) => (
               <Card key={i} delay={i * 0.1} className={styles.testimonialCard} style={{ backgroundColor: t.bg, border: `2.5px solid ${t.border}`, borderTop: `6px solid ${t.badgeColor}` }}>
                 <div className={styles.starsRow}>
                   {[...Array(5)].map((_, idx) => (
-                    <Star key={idx} size={18} fill="#FFC107" color="#FFC107" />
+                    <Star key={idx} size={18} fill="#FFD93D" color="#FFD93D" />
                   ))}
                 </div>
                 <p className={styles.quoteText}>"{t.quote}"</p>
@@ -322,18 +347,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
+      {/* ADMISSION CTA SECTION */}
       <section className={styles.ctaSection}>
         <div className="container">
           <div className={styles.ctaBox}>
-            <h2>Ready to Begin Your Child's Happy Learning Journey? 🚀</h2>
-            <p>Schedule a personal tour to meet our passionate educators and experience our vibrant classrooms firsthand.</p>
+            <h2>Ready to Begin Your Child's Happy Journey? 🚀</h2>
+            <p>Give your little one a joyful place to learn, play, discover and grow with confidence.</p>
             <div className={styles.ctaButtons}>
               <Link to="/contact">
                 <Button size="lg" variant="secondary">Book a School Visit</Button>
               </Link>
               <Link to="/admission/apply">
-                <Button size="lg" variant="primary" style={{ border: '2px solid #FFFFFF' }}>Apply for Admission</Button>
+                <Button size="lg" variant="primary" style={{ border: '2px solid #FFFFFF' }}>Start Admission</Button>
               </Link>
             </div>
           </div>
@@ -342,4 +367,3 @@ export default function Home() {
     </PageWrapper>
   );
 }
-

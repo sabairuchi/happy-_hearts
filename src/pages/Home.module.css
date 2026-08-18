@@ -1,55 +1,72 @@
 .hero {
-  padding: 50px 0 90px;
-  min-height: calc(100vh - 80px);
-  display: flex;
-  align-items: center;
+  padding: 80px 0 60px;
+  background: linear-gradient(180deg, #FFF9F0 0%, #FFF3E0 100%);
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at 10% 20%, rgba(255, 209, 102, 0.15) 0%, transparent 40%),
-              radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.12) 0%, transparent 45%);
 }
 
 .heroContainer {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
 }
 
 @media (min-width: 1024px) {
   .heroContainer {
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 .heroContent {
-  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .heroTitle {
-  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-size: clamp(2.5rem, 5vw, 3.6rem);
+  font-weight: 900;
+  margin: 16px 0;
   line-height: 1.1;
-  margin: 20px 0;
-  letter-spacing: -0.03em;
+  color: var(--color-text-main);
 }
 
 .heroSubtitle {
   font-size: 1.2rem;
   color: var(--color-text-muted);
-  margin-bottom: 36px;
+  margin-bottom: 28px;
   line-height: 1.6;
+  font-weight: 500;
 }
 
 .heroButtons {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
+}
+
+.heroTrustIndicators {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-top: 10px;
+}
+
+.heroTrustIndicators span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .trustBadges {
-  padding-top: 20px;
-  border-top: 1px solid rgba(45, 49, 66, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .starsGroup {
@@ -57,24 +74,22 @@
   align-items: center;
   gap: 6px;
   font-size: 0.95rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-main);
 }
 
 .heroVisual {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
 }
 
 .heroImageFrame {
   width: 100%;
-  aspect-ratio: 1;
-  border-radius: var(--radius-lg) 120px var(--radius-lg) var(--radius-lg);
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
   border: 8px solid var(--color-bg-white);
-  background-color: var(--color-bg-secondary);
+  transform: rotate(1deg);
 }
 
 .heroImg {
@@ -85,61 +100,54 @@
 
 .floatingCard {
   position: absolute;
-  background-color: var(--color-bg-white);
-  padding: 14px 20px;
+  background: var(--color-bg-white);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   gap: 14px;
-  z-index: 10;
-  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 14px 30px rgba(38, 50, 56, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  z-index: 3;
+}
+
+.floatTopRight {
+  top: -20px;
+  right: -10px;
+}
+
+.floatBottomLeft {
+  bottom: -20px;
+  left: -10px;
+}
+
+.floatIconWrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: rgba(255, 107, 107, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .floatingCard strong {
   display: block;
   font-size: 0.95rem;
   color: var(--color-text-main);
-  line-height: 1.2;
+  font-weight: 800;
 }
 
 .floatingCard span {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--color-text-muted);
 }
 
-.floatIconWrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: #FFF0F0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.floatTopRight {
-  top: 8%;
-  right: -5%;
-}
-
-.floatBottomLeft {
-  bottom: 8%;
-  left: -5%;
-}
-
-@media (max-width: 640px) {
-  .floatTopRight, .floatBottomLeft {
-    position: static;
-    margin-top: 16px;
-  }
-}
-
-/* Stats Banner */
+/* STATS BANNER */
 .statsBanner {
-  background: var(--gradient-warm);
-  padding: 36px 0;
-  color: white;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9800 50%, #845EC2 100%);
+  padding: 40px 0;
+  color: #FFFFFF;
 }
 
 .statsGrid {
@@ -149,7 +157,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .statsGrid {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -159,32 +167,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
+}
+
+.statIconBadge {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .statNumber {
   font-family: var(--font-heading);
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-size: 2.2rem;
+  font-weight: 900;
   line-height: 1;
-  margin-bottom: 6px;
 }
 
 .statLabel {
-  font-size: 0.95rem;
-  opacity: 0.95;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
 }
 
-/* Section Shared */
+/* SECTION SHARED */
 .sectionHeaderCentered {
   text-align: center;
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto 50px;
 }
 
 .sectionTitle {
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   margin: 12px 0;
+  font-weight: 800;
 }
 
 .sectionSubtitle {
@@ -192,10 +212,10 @@
   color: var(--color-text-muted);
 }
 
-/* Trust Section */
+/* TRUST SECTION */
 .trustSection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #FFFCF7 0%, #FFF5EB 100%);
+  background: linear-gradient(180deg, #FFF3E0 0%, #EBF5FF 100%);
 }
 
 .trustGrid {
@@ -212,50 +232,52 @@
 
 @media (min-width: 1024px) {
   .trustGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .trustCard {
   text-align: center;
-  padding: 36px 24px;
+  padding: 36px 26px;
   border-radius: var(--radius-md);
-  box-shadow: 0 10px 24px rgba(45, 49, 66, 0.06);
+  box-shadow: 0 10px 24px rgba(38, 50, 56, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .trustCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 18px 36px rgba(45, 49, 66, 0.12);
+  box-shadow: 0 18px 36px rgba(255, 107, 107, 0.16);
 }
 
 .trustIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 68px;
-  height: 68px;
-  background-color: var(--color-bg-white);
+  width: 72px;
+  height: 72px;
+  background-color: #FFFFFF;
   border-radius: 50%;
   margin-bottom: 20px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
 .trustTitle {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   margin-bottom: 10px;
+  font-weight: 800;
 }
 
 .trustDesc {
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   line-height: 1.6;
+  font-weight: 500;
 }
 
-/* About Preview */
+/* ABOUT PREVIEW / LEARNING APPROACH */
 .aboutPreview {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #FFF5EB 0%, #FFF0F5 100%);
+  background: linear-gradient(180deg, #EBF5FF 0%, #FFE5E5 100%);
 }
 
 .splitLayout {
@@ -290,31 +312,37 @@
   object-fit: cover;
 }
 
-.featureList {
-  margin: 28px 0 36px;
+.learningPillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 24px 0 32px;
+}
+
+.pillarCard {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 4px;
 }
 
-.featureList li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 600;
-  color: var(--color-text-main);
+.pillarCard strong {
   font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-text-main);
 }
 
-.featureIcon {
-  color: var(--color-accent-coral);
-  flex-shrink: 0;
+.pillarCard span {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
 }
 
-/* Services */
+/* SERVICES / PROGRAMS */
 .servicesSection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #FFF0F5 0%, #F0FAF7 100%);
+  background: linear-gradient(180deg, #FFE5E5 0%, #EAFAF1 100%);
 }
 
 .servicesGrid {
@@ -334,7 +362,7 @@
   flex-direction: column;
   border-radius: var(--radius-md);
   padding: 36px 30px;
-  box-shadow: 0 12px 30px rgba(45, 49, 66, 0.08);
+  box-shadow: 0 12px 30px rgba(38, 50, 56, 0.08);
 }
 
 .serviceIconWrapper {
@@ -351,6 +379,7 @@
 .serviceCard h3 {
   font-size: 1.6rem;
   margin-bottom: 14px;
+  font-weight: 800;
 }
 
 .serviceCard p {
@@ -373,7 +402,7 @@
   margin-top: auto;
   font-weight: 800;
   font-family: var(--font-heading);
-  color: var(--color-accent-coral);
+  color: #FF5252;
   transition: transform 0.2s;
 }
 
@@ -381,10 +410,10 @@
   transform: translateX(6px);
 }
 
-/* Testimonials */
+/* TESTIMONIALS */
 .testimonialsSection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #F0FAF7 0%, #FFF9F0 50%, #FFF0F5 100%);
+  background: linear-gradient(180deg, #EAFAF1 0%, #FFF3E0 50%, #FFE5E5 100%);
   position: relative;
 }
 
@@ -406,13 +435,13 @@
   justify-content: space-between;
   border-radius: var(--radius-md);
   padding: 32px 26px;
-  box-shadow: 0 12px 28px rgba(45, 49, 66, 0.07);
+  box-shadow: 0 12px 28px rgba(38, 50, 56, 0.07);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .testimonialCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.15);
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.16);
 }
 
 .starsRow {
@@ -443,25 +472,27 @@
   font-weight: 600;
 }
 
-/* CTA */
+/* CTA SECTION */
 .ctaSection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #FFF0F5 0%, #FFFCF7 100%);
+  background: linear-gradient(180deg, #FFE5E5 0%, #FFF9F0 100%);
 }
 
 .ctaBox {
-  background: linear-gradient(135deg, #FF6B6B 0%, #FFD166 60%, #9B5DE5 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9800 60%, #845EC2 100%);
   border-radius: var(--radius-lg);
-  padding: 60px 32px;
+  padding: 64px 36px;
   text-align: center;
-  color: var(--color-bg-white);
+  color: #FFFFFF;
   box-shadow: 0 20px 45px rgba(255, 107, 107, 0.3);
   position: relative;
   overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .ctaBox h2 {
-  color: var(--color-bg-white);
+  color: #FFFFFF;
   font-size: clamp(2rem, 4vw, 2.75rem);
   margin-bottom: 16px;
   font-weight: 800;
@@ -469,7 +500,7 @@
 
 .ctaBox p {
   font-size: 1.15rem;
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto 36px;
   opacity: 0.98;
   font-weight: 500;

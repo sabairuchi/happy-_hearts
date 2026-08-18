@@ -141,28 +141,31 @@ export default function Home() {
       <section className={styles.statsBanner}>
         <div className={`container ${styles.statsGrid}`}>
           <div className={styles.statItem}>
-            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(255, 107, 107, 0.2)' }}>
-              <span className={styles.statNumber} style={{ color: '#FF6B6B' }}>500+</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #FF6B6B' }}>
+              <span className={styles.statNumber} style={{ color: '#FF5252' }}>500+</span>
             </div>
-            <span className={styles.statLabel}>Happy Children</span>
+            <span className={styles.statLabel}>Happy Children 🎈</span>
           </div>
+
           <div className={styles.statItem}>
-            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(255, 217, 61, 0.25)' }}>
-              <span className={styles.statNumber} style={{ color: '#B78103' }}>15+</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #FFC107' }}>
+              <span className={styles.statNumber} style={{ color: '#D97706' }}>15+</span>
             </div>
-            <span className={styles.statLabel}>Experienced Educators</span>
+            <span className={styles.statLabel}>Experienced Educators 👩‍🏫</span>
           </div>
+
           <div className={styles.statItem}>
-            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(77, 150, 255, 0.2)' }}>
-              <span className={styles.statNumber} style={{ color: '#4D96FF' }}>10+</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #4D96FF' }}>
+              <span className={styles.statNumber} style={{ color: '#0284C7' }}>10+</span>
             </div>
-            <span className={styles.statLabel}>Years of Care</span>
+            <span className={styles.statLabel}>Years of Care ⭐</span>
           </div>
+
           <div className={styles.statItem}>
-            <div className={styles.statIconBadge} style={{ backgroundColor: 'rgba(107, 203, 119, 0.25)' }}>
-              <span className={styles.statNumber} style={{ color: '#6BCB77' }}>100%</span>
+            <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #6BCB77' }}>
+              <span className={styles.statNumber} style={{ color: '#059669' }}>100%</span>
             </div>
-            <span className={styles.statLabel}>Love & Dedication</span>
+            <span className={styles.statLabel}>Love & Dedication ❤️</span>
           </div>
         </div>
       </section>

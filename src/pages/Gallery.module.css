@@ -1,6 +1,6 @@
 .hero {
   padding: 80px 0 60px;
-  background: linear-gradient(180deg, #FFF0D6 0%, #E6F7ED 50%, #E6F3FF 100%);
+  background: linear-gradient(180deg, #FFF0D6 0%, #FFE6EC 50%, #E6F3FF 100%);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -51,16 +51,16 @@
 }
 
 .filterBtn:hover {
-  border-color: #FF6B5A;
-  color: #FF5240;
+  border-color: #FF6B6B;
+  color: #FF5252;
   transform: translateY(-2px);
 }
 
 .filterBtn.active {
-  background: linear-gradient(135deg, #FF6B5A 0%, #FF8A50 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8A50 100%);
   color: #FFFFFF;
-  border-color: #FF6B5A;
-  box-shadow: 0 8px 20px rgba(255, 107, 90, 0.35);
+  border-color: #FF6B6B;
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.35);
 }
 
 .grid {
@@ -85,33 +85,58 @@
   position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
-  aspect-ratio: 4/3;
   box-shadow: 0 10px 24px rgba(30, 41, 59, 0.08);
-  border: 5px solid #FFFFFF;
+  border: 3px solid #FFFFFF;
+  background-color: #FFFFFF;
   cursor: pointer;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .photoItem:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 36px rgba(255, 107, 90, 0.2);
+  box-shadow: 0 18px 36px rgba(255, 107, 107, 0.2);
 }
 
 .galleryImg {
   width: 100%;
-  height: 100%;
+  height: 220px;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
 .photoItem:hover .galleryImg {
-  transform: scale(1.08);
+  transform: scale(1.06);
+}
+
+.cardHeaderBar {
+  padding: 16px 18px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.cardHeaderTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  line-height: 1.3;
+}
+
+.cardHeaderDesc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin-bottom: 6px;
 }
 
 .photoOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(30, 41, 59, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(30, 41, 59, 0.92) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
@@ -129,7 +154,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(4px);
   padding: 8px;
   border-radius: 50%;
@@ -143,12 +168,19 @@
   margin-bottom: 4px;
 }
 
+.photoOverlayDesc {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  opacity: 0.95;
+}
+
 .photoCatBadge {
   font-size: 0.8rem;
   font-weight: 700;
-  background: #FF6B5A;
+  background: #FF6B6B;
   color: #FFFFFF;
-  padding: 3px 10px;
+  padding: 3px 12px;
   border-radius: var(--radius-full);
   align-self: flex-start;
 }
@@ -160,12 +192,12 @@
 }
 
 .brandBox {
-  background: linear-gradient(135deg, #FF6B5A 0%, #FF9800 60%, #8B5CF6 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9800 60%, #845EC2 100%);
   border-radius: var(--radius-lg);
   padding: 60px 36px;
   text-align: center;
   color: #FFFFFF;
-  box-shadow: 0 20px 45px rgba(255, 107, 90, 0.3);
+  box-shadow: 0 20px 45px rgba(255, 107, 107, 0.3);
   max-width: 840px;
   margin: 0 auto;
 }
@@ -259,7 +291,7 @@
 
 .lightboxImg {
   width: 100%;
-  max-height: 70vh;
+  max-height: 60vh;
   object-fit: cover;
 }
 
@@ -280,7 +312,7 @@
 
 .lightboxBadge {
   display: inline-block;
-  background: #FF6B5A;
+  background: #FF6B6B;
   color: #FFFFFF;
   padding: 4px 14px;
   border-radius: var(--radius-full);

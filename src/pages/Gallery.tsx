@@ -1,6 +1,6 @@
 import { useState, useEffect, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Maximize2, ArrowRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Maximize2, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
@@ -14,7 +14,7 @@ interface Photo {
   color: string;
   img: string;
   title: string;
-  desc?: string;
+  desc: string;
 }
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -35,18 +35,102 @@ export default function Gallery() {
   const categories: Category[] = ['All', 'Classroom', 'Activities', 'Events', 'Playtime'];
 
   const photos: Photo[] = [
-    { id: 1, category: 'Classroom', color: '#FF6B5A', img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=700&auto=format&fit=crop', title: 'Cozy Reading Corner', desc: 'Children enjoying storytelling hour' },
-    { id: 2, category: 'Activities', color: '#FFC107', img: 'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=700&auto=format&fit=crop', title: 'Finger Painting Studio', desc: 'Creative expression with non-toxic paints' },
-    { id: 3, category: 'Playtime', color: '#FF5240', img: 'https://images.unsplash.com/photo-1472162072942-cd5147eb3902?q=80&w=700&auto=format&fit=crop', title: 'Block Architecture', desc: 'Building spatial skills through wooden blocks' },
-    { id: 4, category: 'Events', color: '#0284C7', img: 'https://images.unsplash.com/photo-1544733422-251e532ca221?q=80&w=700&auto=format&fit=crop', title: 'Annual Sports Day', desc: 'Joyful obstacle races & medal ceremonies' },
-    { id: 5, category: 'Classroom', color: '#10B981', img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=700&auto=format&fit=crop', title: 'Montessori Puzzle Time', desc: 'Developing fine motor coordination' },
-    { id: 6, category: 'Activities', color: '#8B5CF6', img: 'https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=700&auto=format&fit=crop', title: 'Music & Percussion Class', desc: 'Singing songs and learning rhythms' },
-    { id: 7, category: 'Playtime', color: '#FF6B5A', img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=700&auto=format&fit=crop', title: 'Outdoor Playground Fun', desc: 'Fresh air, slides, and group games' },
-    { id: 8, category: 'Events', color: '#FFC107', img: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=700&auto=format&fit=crop', title: 'Birthday Celebrations', desc: 'Blowing candles with preschool classmates' },
-    { id: 9, category: 'Activities', color: '#0284C7', img: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=700&auto=format&fit=crop', title: 'Group STEM Discovery', desc: 'Exploring plant growth and water play' },
-    { id: 10, category: 'Playtime', color: '#10B981', img: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=700&auto=format&fit=crop', title: 'Little Best Friends', desc: 'Creating lifelong social memories' },
-    { id: 11, category: 'Events', color: '#FF6B5A', img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=700&auto=format&fit=crop', title: 'Nature Field Trip', desc: 'Discovering butterflies and flowers' },
-    { id: 12, category: 'Classroom', color: '#8B5CF6', img: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=700&auto=format&fit=crop', title: 'Bright Learning Spaces', desc: 'Thoughtfully curated classroom corners' },
+    { 
+      id: 1, 
+      category: 'Activities', 
+      color: '#FF6B6B', 
+      img: 'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=900&auto=format&fit=crop', 
+      title: 'Creative Finger Painting & Sensory Studio 🎨', 
+      desc: 'Toddlers exploring primary color mixing, tactile canvas creation, and fine motor finger expression with certified non-toxic washable paints.' 
+    },
+    { 
+      id: 2, 
+      category: 'Playtime', 
+      color: '#FFD93D', 
+      img: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=900&auto=format&fit=crop', 
+      title: 'Tactile Wooden Block & Train Track Play 🧱', 
+      desc: 'Developing early spatial awareness, cause-and-effect reasoning, and cooperative tower building with natural wooden Montessori toys.' 
+    },
+    { 
+      id: 3, 
+      category: 'Playtime', 
+      color: '#6BCB77', 
+      img: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=900&auto=format&fit=crop', 
+      title: 'Outdoor Playground & Green Nature Walk 🌿', 
+      desc: 'Toddlers enjoying fresh air, soft-impact climbing mounds, sensory garden exploration, and gross motor physical development.' 
+    },
+    { 
+      id: 4, 
+      category: 'Classroom', 
+      color: '#4D96FF', 
+      img: 'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=900&auto=format&fit=crop', 
+      title: 'Interactive Story Circle & Rhyme Time 📚', 
+      desc: 'Teacher-led picture book storytelling, vocal expression, and early vocabulary building in our comfortable cushioned library corner.' 
+    },
+    { 
+      id: 5, 
+      category: 'Classroom', 
+      color: '#845EC2', 
+      img: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=900&auto=format&fit=crop', 
+      title: 'Infant & Toddler Care Sanctuary 🧸', 
+      desc: 'Tranquil, clean, and sanitised sleeping quarters with dedicated 1:3 nurse supervision for infant crèche and daycare toddlers.' 
+    },
+    { 
+      id: 6, 
+      category: 'Activities', 
+      color: '#6BCB77', 
+      img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=900&auto=format&fit=crop', 
+      title: 'Montessori Shape Matching & Puzzles 🧩', 
+      desc: 'Fostering cognitive problem solving, hand-eye precision, and geometric pattern recognition with child-safe Montessori puzzle kits.' 
+    },
+    { 
+      id: 7, 
+      category: 'Events', 
+      color: '#FF6B6B', 
+      img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=900&auto=format&fit=crop', 
+      title: 'Preschool Birthday Celebrations 🎂', 
+      desc: 'Celebrating milestone birthdays with organic fruit treats, festive party hats, group songs, and warm hugs from classmates.' 
+    },
+    { 
+      id: 8, 
+      category: 'Events', 
+      color: '#FFD93D', 
+      img: 'https://images.unsplash.com/photo-1544733422-251e532ca221?q=80&w=900&auto=format&fit=crop', 
+      title: 'Annual Junior Sports & Obstacle Day 🏆', 
+      desc: 'Encouraging team cooperation, active balance, physical stamina, and sportsmanship through gentle toddler obstacle courses.' 
+    },
+    { 
+      id: 9, 
+      category: 'Activities', 
+      color: '#4D96FF', 
+      img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=900&auto=format&fit=crop', 
+      title: 'Rhyme & Percussion Music Class 🎵', 
+      desc: 'Singing nursery rhymes, shaking wooden maracas, and developing rhythmic auditory processing with specialized music educators.' 
+    },
+    { 
+      id: 10, 
+      category: 'Playtime', 
+      color: '#6BCB77', 
+      img: 'https://images.unsplash.com/photo-1595454038955-4dfe8de81be8?q=80&w=900&auto=format&fit=crop', 
+      title: 'Sensory Sandbox & Splash Play 🏖️', 
+      desc: 'Tactile sand sculpting, sieve pouring, and water float experiments promoting early scientific curiosity and sensory fun.' 
+    },
+    { 
+      id: 11, 
+      category: 'Classroom', 
+      color: '#FF6B6B', 
+      img: 'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=900&auto=format&fit=crop', 
+      title: 'Nutritious Organic Snack & Table Etiquette 🍎', 
+      desc: 'Freshly sliced fruit bowls, organic milk, and social mealtime etiquette guided by attentive classroom teachers.' 
+    },
+    { 
+      id: 12, 
+      category: 'Playtime', 
+      color: '#845EC2', 
+      img: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=900&auto=format&fit=crop', 
+      title: 'Empathy & Peer Friendship Building 🧸', 
+      desc: 'Building emotional intelligence, turn-taking cooperation, and genuine lifelong peer friendships in a loving community.' 
+    }
   ];
 
   const filteredPhotos = activeCategory === 'All' 
@@ -98,16 +182,18 @@ export default function Gallery() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="badge-pill badge-sky">📸 Life at Happy Hearts</span>
-            <h1>Vibrant <span className="text-gradient">Photo Gallery</span> 🎨</h1>
-            <p>Step inside our vibrant world of laughter, creative discovery, and daily adventures.</p>
+            <span className="badge-pill badge-sky">
+              <Sparkles size={16} /> 📸 Life at Happy Hearts
+            </span>
+            <h1>Vibrant <span className="text-gradient">Toddler Photo Gallery</span> 🎨</h1>
+            <p>Explore real moments of laughter, sensory play, creative art, and daily toddler adventures at Happy Hearts Preschool & Crèche.</p>
           </motion.div>
         </div>
       </section>
 
       <WavyDivider fill="#FFFBEB" />
 
-      {/* GALLERY SECTION (Alternating Background 1: Soft Yellow Tint) */}
+      {/* GALLERY SECTION */}
       <section className={styles.gallerySection}>
         <div className="container">
           
@@ -140,12 +226,21 @@ export default function Gallery() {
                   transition={{ duration: 0.3 }}
                   className={styles.photoItem}
                   onClick={() => setSelectedPhotoIndex(idx)}
-                  style={{ borderColor: photo.color }}
+                  style={{ borderColor: photo.color, borderTop: `6px solid ${photo.color}` }}
                 >
                   <img src={photo.img} alt={photo.title} className={styles.galleryImg} />
+                  
+                  {/* Always-Visible Card Title Bar */}
+                  <div className={styles.cardHeaderBar} style={{ borderTop: `2px solid ${photo.color}` }}>
+                    <h4 className={styles.cardHeaderTitle}>{photo.title}</h4>
+                    <p className={styles.cardHeaderDesc}>{photo.desc}</p>
+                    <span className={styles.photoCatBadge} style={{ backgroundColor: photo.color }}>{photo.category}</span>
+                  </div>
+
                   <div className={styles.photoOverlay}>
                     <span className={styles.zoomIcon}><Maximize2 size={22} /></span>
                     <span className={styles.photoTitle}>{photo.title}</span>
+                    <p className={styles.photoOverlayDesc}>{photo.desc}</p>
                     <span className={styles.photoCatBadge} style={{ backgroundColor: photo.color }}>{photo.category}</span>
                   </div>
                 </motion.div>
@@ -211,9 +306,11 @@ export default function Gallery() {
             >
               <img src={selectedPhoto.img} alt={selectedPhoto.title} className={styles.lightboxImg} />
               <div className={styles.lightboxMeta}>
-                <h3>{selectedPhoto.title}</h3>
-                {selectedPhoto.desc && <p>{selectedPhoto.desc}</p>}
-                <span className={styles.lightboxBadge} style={{ backgroundColor: selectedPhoto.color }}>{selectedPhoto.category}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>{selectedPhoto.title}</h3>
+                  <span className={styles.lightboxBadge} style={{ backgroundColor: selectedPhoto.color }}>{selectedPhoto.category}</span>
+                </div>
+                <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: 'var(--color-text-main)' }}>{selectedPhoto.desc}</p>
               </div>
             </motion.div>
           </motion.div>

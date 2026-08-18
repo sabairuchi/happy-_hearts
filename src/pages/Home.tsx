@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Sparkles, Users, Heart, ArrowRight, Star, Clock, BookOpen, Smile, Award, CheckCircle2, Trees, Palette, Puzzle } from 'lucide-react';
+import { ShieldCheck, Sparkles, Users, Heart, ArrowRight, Star, Clock, BookOpen, Smile, Award, CheckCircle2, Trees, Palette, Puzzle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
+import { NumberCounter } from '../components/NumberCounter';
 import styles from './Home.module.css';
 
 const WavyDivider = ({ fill }: { fill: string }) => (
@@ -18,17 +20,90 @@ const WavyDivider = ({ fill }: { fill: string }) => (
 );
 
 export default function Home() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (window.innerWidth < 1024) return;
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const x = (clientX / innerWidth - 0.5) * 20;
+    const y = (clientY / innerHeight - 0.5) * 20;
+    setMousePos({ x, y });
+  };
+
+  const testimonials = [
+    {
+      quote: "Happy Hearts transformed our daughter's confidence! The teachers treat every child with so much tenderness and warmth.",
+      author: "Amanda & Marcus Vance",
+      child: "Parents of Lily (Age 4)",
+      bg: '#FFE5E5',
+      border: '#FF6B6B',
+      badgeColor: '#FF6B6B'
+    },
+    {
+      quote: "Leaving my 1-year-old at crèche was stressful until I saw how attentive David and Sarah were. I go to work with complete peace of mind.",
+      author: "Priya Sharma",
+      child: "Mother of Kabir (Age 1.5)",
+      bg: '#FFF3E0',
+      border: '#FFD93D',
+      badgeColor: '#B78103'
+    },
+    {
+      quote: "The play-based learning approach is amazing. My son comes home every day excited to talk about his art and science projects!",
+      author: "David Miller",
+      child: "Father of Noah (Age 3)",
+      bg: '#EAFAF1',
+      border: '#6BCB77',
+      badgeColor: '#2E7D32'
+    }
+  ];
+
+  const handleNextTestimonial = () => {
+    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const handlePrevTestimonial = () => {
+    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
   return (
     <PageWrapper>
-      {/* IMMERSIVE HERO SECTION */}
-      <section className={styles.hero}>
-        {/* Floating playful stickers */}
-        <span className="floating-sticker" style={{ top: '10%', left: '3%', animationDelay: '0s' }}>🎈</span>
-        <span className="floating-sticker" style={{ top: '18%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
-        <span className="floating-sticker" style={{ bottom: '18%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
-        <span className="floating-sticker" style={{ bottom: '12%', right: '10%', animationDelay: '0.8s' }}>⭐</span>
-        <span className="floating-sticker" style={{ top: '55%', left: '2%', animationDelay: '3.1s' }}>🖍️</span>
-        <span className="floating-sticker" style={{ top: '48%', right: '3%', animationDelay: '1.9s' }}>🧱</span>
+      {/* IMMERSIVE HERO SECTION WITH PARALLAX */}
+      <section className={styles.hero} onMouseMove={handleMouseMove}>
+        {/* Floating playful stickers with subtle parallax */}
+        <motion.span 
+          className="floating-sticker" 
+          style={{ top: '10%', left: '3%' }}
+          animate={{ x: mousePos.x * 0.5, y: mousePos.y * 0.5 }}
+          transition={{ type: 'spring', damping: 15 }}
+        >
+          🎈
+        </motion.span>
+        <motion.span 
+          className="floating-sticker" 
+          style={{ top: '18%', right: '5%' }}
+          animate={{ x: -mousePos.x * 0.6, y: -mousePos.y * 0.6 }}
+          transition={{ type: 'spring', damping: 15 }}
+        >
+          🎨
+        </motion.span>
+        <motion.span 
+          className="floating-sticker" 
+          style={{ bottom: '18%', left: '6%' }}
+          animate={{ x: mousePos.x * 0.4, y: -mousePos.y * 0.4 }}
+          transition={{ type: 'spring', damping: 15 }}
+        >
+          🧸
+        </motion.span>
+        <motion.span 
+          className="floating-sticker" 
+          style={{ bottom: '12%', right: '10%' }}
+          animate={{ x: -mousePos.x * 0.5, y: mousePos.y * 0.5 }}
+          transition={{ type: 'spring', damping: 15 }}
+        >
+          ⭐
+        </motion.span>
 
         <div className={`container ${styles.heroContainer}`}>
           <div className={styles.heroContent}>
@@ -94,8 +169,8 @@ export default function Home() {
           <motion.div 
             className={styles.heroVisual}
             initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            animate={{ opacity: 1, scale: 1, x: mousePos.x * 0.8, y: mousePos.y * 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2, type: 'spring', damping: 20 }}
           >
             <div className={styles.heroImageFrame}>
               <img 
@@ -137,36 +212,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COLORFUL STATS BANNER */}
+      {/* ANIMATED STATS BANNER */}
       <section className={styles.statsBanner}>
         <div className={`container ${styles.statsGrid}`}>
-          <div className={styles.statItem}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #FF6B6B' }}>
-              <span className={styles.statNumber} style={{ color: '#FF5252' }}>500+</span>
+              <span className={styles.statNumber} style={{ color: '#FF5252' }}>
+                <NumberCounter target={500} suffix="+" />
+              </span>
             </div>
             <span className={styles.statLabel}>Happy Children 🎈</span>
-          </div>
+          </motion.div>
 
-          <div className={styles.statItem}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #FFC107' }}>
-              <span className={styles.statNumber} style={{ color: '#D97706' }}>15+</span>
+              <span className={styles.statNumber} style={{ color: '#D97706' }}>
+                <NumberCounter target={15} suffix="+" />
+              </span>
             </div>
             <span className={styles.statLabel}>Experienced Educators 👩‍🏫</span>
-          </div>
+          </motion.div>
 
-          <div className={styles.statItem}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #4D96FF' }}>
-              <span className={styles.statNumber} style={{ color: '#0284C7' }}>10+</span>
+              <span className={styles.statNumber} style={{ color: '#0284C7' }}>
+                <NumberCounter target={10} suffix="+" />
+              </span>
             </div>
             <span className={styles.statLabel}>Years of Care ⭐</span>
-          </div>
+          </motion.div>
 
-          <div className={styles.statItem}>
+          <motion.div className={styles.statItem} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
             <div className={styles.statIconBadge} style={{ backgroundColor: '#FFFFFF', border: '4px solid #6BCB77' }}>
-              <span className={styles.statNumber} style={{ color: '#059669' }}>100%</span>
+              <span className={styles.statNumber} style={{ color: '#059669' }}>
+                <NumberCounter target={100} suffix="%" />
+              </span>
             </div>
             <span className={styles.statLabel}>Love & Dedication ❤️</span>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -175,11 +258,11 @@ export default function Home() {
       {/* WHY CHOOSE US ("Why Families Choose Happy Hearts") */}
       <section className={styles.trustSection}>
         <div className="container">
-          <div className={styles.sectionHeaderCentered}>
+          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
             <span className="badge-pill badge-yellow">⭐ Why Families Choose Happy Hearts</span>
             <h2 className={styles.sectionTitle}>Built Around Your Child's Happiness 🧸</h2>
             <p className={styles.sectionSubtitle}>Every detail of our environment is intentionally designed to foster emotional security, creative exploration, and joyful discovery.</p>
-          </div>
+          </motion.div>
 
           <div className={styles.trustGrid}>
             {[
@@ -190,7 +273,7 @@ export default function Home() {
               { icon: <Users size={34} color="#6A1B9A" fill="#E1BEE7" />, title: 'Caring Educators', desc: 'Certified early childhood specialists with years of pediatric expertise and warmth.', bg: '#F3E8FF', border: '#845EC2' },
               { icon: <Smile size={34} color="#FF5252" fill="#FFE5E5" />, title: 'Parent Partnership', desc: 'Open daily updates, photo sharing, and collaborative progress tracking.', bg: '#FFE5E5', border: '#FF6B6B' }
             ].map((item, index) => (
-              <Card key={index} delay={index * 0.1} className={styles.trustCard} style={{ backgroundColor: item.bg, border: `2.5px solid ${item.border}` }}>
+              <Card key={index} delay={index * 0.08} className={styles.trustCard} style={{ backgroundColor: item.bg, border: `2.5px solid ${item.border}` }}>
                 <div className={styles.trustIcon}>{item.icon}</div>
                 <h3 className={styles.trustTitle}>{item.title}</h3>
                 <p className={styles.trustDesc}>{item.desc}</p>
@@ -205,7 +288,7 @@ export default function Home() {
       {/* LEARNING APPROACH ("Learning Through Play") */}
       <section className={styles.aboutPreview}>
         <div className={`container ${styles.splitLayout}`}>
-          <div className={styles.splitVisual}>
+          <motion.div className={styles.splitVisual} whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -30 }} viewport={{ once: true }}>
             <div className={styles.organicShape}>
               <img 
                 src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop" 
@@ -213,8 +296,8 @@ export default function Home() {
                 className={styles.organicImg} 
               />
             </div>
-          </div>
-          <div className={styles.splitContent}>
+          </motion.div>
+          <motion.div className={styles.splitContent} whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: 30 }} viewport={{ once: true }}>
             <span className="badge-pill badge-purple">✨ Learning Approach</span>
             <h2 className={styles.sectionTitle}>Learning Through Play 🎨</h2>
             <p className={styles.sectionDesc}>
@@ -243,9 +326,9 @@ export default function Home() {
               </div>
             </div>
             <Link to="/about">
-              <Button variant="accent">Explore Our Philosophy &rarr;</Button>
+              <Button variant="accent">Explore Our Philosophy →</Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -254,11 +337,11 @@ export default function Home() {
       {/* CORE OFFERINGS / PROGRAMS */}
       <section className={styles.servicesSection}>
         <div className="container">
-          <div className={styles.sectionHeaderCentered}>
+          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
             <span className="badge-pill badge-mint">🎓 Our Programs</span>
             <h2 className={styles.sectionTitle}>Tailored Programs for Every Stage 🧸</h2>
             <p className={styles.sectionSubtitle}>Nurturing programs carefully crafted for infant care through kindergarten readiness.</p>
-          </div>
+          </motion.div>
 
           <div className={styles.servicesGrid}>
             <Card hoverEffect={true} className={styles.serviceCard} style={{ backgroundColor: '#FFE5E5', border: '2.5px solid #FF6B6B', borderTop: '6px solid #FF6B6B' }}>
@@ -273,7 +356,7 @@ export default function Home() {
                 <li>• 🏃 Outdoor exploration & sports</li>
               </ul>
               <Link to="/admission/apply" className={styles.serviceLink}>
-                Explore Program & Apply &rarr;
+                Explore Program & Apply →
               </Link>
             </Card>
 
@@ -289,7 +372,7 @@ export default function Home() {
                 <li>• ⏰ Flexible morning & full-day care</li>
               </ul>
               <Link to="/admission/apply" className={styles.serviceLink} style={{ color: '#4D96FF' }}>
-                Explore Program & Apply &rarr;
+                Explore Program & Apply →
               </Link>
             </Card>
           </div>
@@ -298,54 +381,105 @@ export default function Home() {
 
       <WavyDivider fill="#EAFAF1" />
 
-      {/* PARENT TESTIMONIALS ("Little Smiles. Big Parent Love.") */}
+      {/* PARENT TESTIMONIALS CAROUSEL */}
       <section className={styles.testimonialsSection}>
         <div className="container">
-          <div className={styles.sectionHeaderCentered}>
+          <motion.div className={styles.sectionHeaderCentered} whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true }}>
             <span className="badge-pill badge-yellow">⭐ Parent Testimonials</span>
             <h2 className={styles.sectionTitle}>Little Smiles. Big Parent Love. ❤️</h2>
-          </div>
+          </motion.div>
 
-          <div className={styles.testimonialsGrid}>
-            {[
-              {
-                quote: "Happy Hearts transformed our daughter's confidence! The teachers treat every child with so much tenderness and warmth.",
-                author: "Amanda & Marcus Vance",
-                child: "Parents of Lily (Age 4)",
-                bg: '#FFE5E5',
-                border: '#FF6B6B',
-                badgeColor: '#FF6B6B'
-              },
-              {
-                quote: "Leaving my 1-year-old at crèche was stressful until I saw how attentive David and Sarah were. I go to work with complete peace of mind.",
-                author: "Priya Sharma",
-                child: "Mother of Kabir (Age 1.5)",
-                bg: '#FFF3E0',
-                border: '#FFD93D',
-                badgeColor: '#B78103'
-              },
-              {
-                quote: "The play-based learning approach is amazing. My son comes home every day excited to talk about his art and science projects!",
-                author: "David Miller",
-                child: "Father of Noah (Age 3)",
-                bg: '#EAFAF1',
-                border: '#6BCB77',
-                badgeColor: '#2E7D32'
-              }
-            ].map((t, i) => (
-              <Card key={i} delay={i * 0.1} className={styles.testimonialCard} style={{ backgroundColor: t.bg, border: `2.5px solid ${t.border}`, borderTop: `6px solid ${t.badgeColor}` }}>
+          <div style={{ maxWidth: '780px', margin: '0 auto', position: 'relative' }}>
+            <motion.div 
+              key={testimonialIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Card
+                className={styles.testimonialCard}
+                style={{
+                  backgroundColor: testimonials[testimonialIndex].bg,
+                  border: `2.5px solid ${testimonials[testimonialIndex].border}`,
+                  borderTop: `6px solid ${testimonials[testimonialIndex].badgeColor}`,
+                  padding: '40px 32px'
+                }}
+              >
                 <div className={styles.starsRow}>
                   {[...Array(5)].map((_, idx) => (
-                    <Star key={idx} size={18} fill="#FFD93D" color="#FFD93D" />
+                    <Star key={idx} size={22} fill="#FFD93D" color="#FFD93D" />
                   ))}
                 </div>
-                <p className={styles.quoteText}>"{t.quote}"</p>
+                <p className={styles.quoteText} style={{ fontSize: '1.15rem' }}>"{testimonials[testimonialIndex].quote}"</p>
                 <div className={styles.authorMeta}>
-                  <strong>{t.author}</strong>
-                  <span>{t.child}</span>
+                  <strong style={{ fontSize: '1.15rem' }}>{testimonials[testimonialIndex].author}</strong>
+                  <span style={{ fontSize: '0.95rem' }}>{testimonials[testimonialIndex].child}</span>
                 </div>
               </Card>
-            ))}
+            </motion.div>
+
+            {/* Carousel Navigation */}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', marginTop: '24px' }}>
+              <button
+                type="button"
+                onClick={handlePrevTestimonial}
+                style={{
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  backgroundColor: '#FFFFFF',
+                  border: '2px solid #FF6B6B',
+                  color: '#FF5252',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                }}
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={22} />
+              </button>
+
+              <div style={{ display: 'flex', gap: '8px' }}>
+                {testimonials.map((_, idx) => (
+                  <span
+                    key={idx}
+                    onClick={() => setTestimonialIndex(idx)}
+                    style={{
+                      width: idx === testimonialIndex ? '24px' : '10px',
+                      height: '10px',
+                      borderRadius: 'var(--radius-full)',
+                      backgroundColor: idx === testimonialIndex ? '#FF6B6B' : 'rgba(38, 50, 56, 0.2)',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleNextTestimonial}
+                style={{
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  backgroundColor: '#FFFFFF',
+                  border: '2px solid #FF6B6B',
+                  color: '#FF5252',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                }}
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -353,7 +487,7 @@ export default function Home() {
       {/* ADMISSION CTA SECTION */}
       <section className={styles.ctaSection}>
         <div className="container">
-          <div className={styles.ctaBox}>
+          <motion.div className={styles.ctaBox} whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.95 }} viewport={{ once: true }}>
             <h2>Ready to Begin Your Child's Happy Journey? 🚀</h2>
             <p>Give your little one a joyful place to learn, play, discover and grow with confidence.</p>
             <div className={styles.ctaButtons}>
@@ -364,7 +498,7 @@ export default function Home() {
                 <Button size="lg" variant="primary" style={{ border: '2px solid #FFFFFF' }}>Start Admission</Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </PageWrapper>

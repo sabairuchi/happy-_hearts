@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, User, ChevronDown } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { Button } from './Button';
 import { useAuth } from '../context/AuthContext';
 import styles from './Header.module.css';
@@ -11,6 +12,13 @@ export const Header = () => {
   const [portalDropdownOpen, setPortalDropdownOpen] = useState(false);
   const { user } = useAuth();
   const location = useLocation();
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +52,20 @@ export const Header = () => {
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
+      {/* Top Scroll Progress Indicator */}
+      <motion.div
+        style={{
+          scaleX,
+          transformOrigin: '0%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '4px',
+          background: 'linear-gradient(90deg, #FF6B6B 0%, #FF9800 50%, #845EC2 100%)',
+          zIndex: 2000
+        }}
+      />
       <div className={`container ${styles.container}`}>
         <Link to="/" className={`${styles.logo} interactive`}>
           <img

@@ -67,10 +67,10 @@ export default function Gallery() {
       id: 4, 
       category: 'Classroom', 
       color: '#4D96FF', 
-      img: 'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/story-circle.jpg', 
       title: 'Interactive Story Circle & Rhyme Time 📚', 
       desc: 'Teacher-led picture book storytelling, vocal expression, and early vocabulary building in our comfortable cushioned library corner.',
-      alt: 'Preschool teacher sitting with young children in a circle reading a colorful picture book'
+      alt: 'Preschool teacher sitting with young children in a fairy-lit story circle reading an illustrated picture book'
     },
     { 
       id: 5, 

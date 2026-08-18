@@ -45,7 +45,7 @@ export default function Admission() {
       age: '2.5 - 3.5 Years',
       desc: 'Early literacy, numbers, creative arts, and foundational independence.',
       fee: '$280/mo tuition',
-      image: 'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=600&auto=format&fit=crop',
+      image: '/images/story-circle.jpg',
       alt: 'Nursery children listening to teacher picture book storytelling in library circle',
       bg: '#ECFDF5',
       border: '#10B981',

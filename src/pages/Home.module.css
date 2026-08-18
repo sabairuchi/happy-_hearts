@@ -195,7 +195,7 @@
 /* Trust Section */
 .trustSection {
   padding: var(--spacing-section) 0;
-  background-color: var(--color-bg-white);
+  background: linear-gradient(180deg, #FFFCF7 0%, #FFF5EB 100%);
 }
 
 .trustGrid {
@@ -219,7 +219,14 @@
 .trustCard {
   text-align: center;
   padding: 36px 24px;
-  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 24px rgba(45, 49, 66, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trustCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 36px rgba(45, 49, 66, 0.12);
 }
 
 .trustIcon {
@@ -231,7 +238,7 @@
   background-color: var(--color-bg-white);
   border-radius: 50%;
   margin-bottom: 20px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
 .trustTitle {
@@ -248,7 +255,7 @@
 /* About Preview */
 .aboutPreview {
   padding: var(--spacing-section) 0;
-  background-color: var(--color-bg-primary);
+  background: linear-gradient(180deg, #FFF5EB 0%, #FFF0F5 100%);
 }
 
 .splitLayout {
@@ -273,8 +280,8 @@
   aspect-ratio: 4/3;
   border-radius: 40% 60% 70% 30% / 50% 40% 60% 50%;
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 6px solid var(--color-bg-white);
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+  border: 8px solid var(--color-bg-white);
 }
 
 .organicImg {
@@ -294,7 +301,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-text-main);
   font-size: 1.05rem;
 }
@@ -307,7 +314,7 @@
 /* Services */
 .servicesSection {
   padding: var(--spacing-section) 0;
-  background-color: var(--color-bg-secondary);
+  background: linear-gradient(180deg, #FFF0F5 0%, #F0FAF7 100%);
 }
 
 .servicesGrid {
@@ -325,22 +332,24 @@
 .serviceCard {
   display: flex;
   flex-direction: column;
-  border-top-width: 5px;
-  border-top-style: solid;
+  border-radius: var(--radius-md);
+  padding: 36px 30px;
+  box-shadow: 0 12px 30px rgba(45, 49, 66, 0.08);
 }
 
 .serviceIconWrapper {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--radius-sm);
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
 }
 
 .serviceCard h3 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 14px;
 }
 
@@ -354,28 +363,29 @@
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  font-weight: 500;
+  gap: 10px;
+  color: var(--color-text-main);
+  font-size: 0.98rem;
+  font-weight: 600;
 }
 
 .serviceLink {
   margin-top: auto;
-  font-weight: 700;
+  font-weight: 800;
   font-family: var(--font-heading);
   color: var(--color-accent-coral);
   transition: transform 0.2s;
 }
 
 .serviceLink:hover {
-  transform: translateX(4px);
+  transform: translateX(6px);
 }
 
 /* Testimonials */
 .testimonialsSection {
   padding: var(--spacing-section) 0;
-  background-color: var(--color-bg-white);
+  background: linear-gradient(180deg, #F0FAF7 0%, #FFF9F0 50%, #FFF0F5 100%);
+  position: relative;
 }
 
 .testimonialsGrid {
@@ -391,10 +401,18 @@
 }
 
 .testimonialCard {
-  background-color: var(--color-bg-primary);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: var(--radius-md);
+  padding: 32px 26px;
+  box-shadow: 0 12px 28px rgba(45, 49, 66, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonialCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.15);
 }
 
 .starsRow {
@@ -406,46 +424,55 @@
 .quoteText {
   font-style: italic;
   color: var(--color-text-main);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 24px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .authorMeta strong {
   display: block;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--color-text-main);
+  font-weight: 800;
 }
 
 .authorMeta span {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--color-text-muted);
+  font-weight: 600;
 }
 
 /* CTA */
 .ctaSection {
   padding: var(--spacing-section) 0;
+  background: linear-gradient(180deg, #FFF0F5 0%, #FFFCF7 100%);
 }
 
 .ctaBox {
-  background: var(--gradient-warm);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFD166 60%, #9B5DE5 100%);
   border-radius: var(--radius-lg);
   padding: 60px 32px;
   text-align: center;
   color: var(--color-bg-white);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 45px rgba(255, 107, 107, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .ctaBox h2 {
   color: var(--color-bg-white);
   font-size: clamp(2rem, 4vw, 2.75rem);
   margin-bottom: 16px;
+  font-weight: 800;
 }
 
 .ctaBox p {
   font-size: 1.15rem;
   max-width: 600px;
   margin: 0 auto 36px;
-  opacity: 0.95;
+  opacity: 0.98;
+  font-weight: 500;
 }
 
 .ctaButtons {

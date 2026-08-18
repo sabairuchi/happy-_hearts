@@ -1,0 +1,185 @@
+.wizardContainer {
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  padding: 2.5rem;
+}
+
+.stepBar {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.stepBar::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: rgba(45, 49, 66, 0.08);
+  z-index: 1;
+}
+
+.stepBarProgress {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  height: 3px;
+  background: var(--gradient-warm);
+  z-index: 2;
+  transition: width 0.3s ease;
+}
+
+.stepItem {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-bg-white);
+  padding: 0 8px;
+}
+
+.stepCircle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--color-bg-primary);
+  border: 2px solid rgba(45, 49, 66, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  transition: all 0.3s ease;
+}
+
+.stepItem.active .stepCircle {
+  border-color: var(--color-accent-coral);
+  background-color: var(--color-accent-coral);
+  color: #FFF;
+}
+
+.stepItem.completed .stepCircle {
+  border-color: #06D6A0;
+  background-color: #06D6A0;
+  color: #FFF;
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.stepItem.active .stepLabel {
+  color: var(--color-accent-coral);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(45, 49, 66, 0.12);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background-color: var(--color-bg-primary);
+  transition: border-color 0.2s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-coral);
+  background-color: #FFF;
+}
+
+.uploadBox {
+  border: 2px dashed rgba(45, 49, 66, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  background-color: var(--color-bg-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.uploadBox:hover {
+  border-color: var(--color-accent-coral);
+  background-color: rgba(255, 107, 107, 0.04);
+}
+
+.previewThumb {
+  max-height: 100px;
+  border-radius: var(--radius-sm);
+  margin-top: 8px;
+}
+
+.actionsBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(45, 49, 66, 0.08);
+}
+
+.summarySection {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.summaryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(45, 49, 66, 0.08);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+  .wizardContainer {
+    padding: 1.25rem;
+  }
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .stepLabel {
+    display: none;
+  }
+}

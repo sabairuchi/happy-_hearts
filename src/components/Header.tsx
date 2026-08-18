@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Phone } from 'lucide-react';
+import { Menu, X, User, ChevronDown } from 'lucide-react';
 import { Button } from './Button';
+import { useAuth } from '../context/AuthContext';
 import styles from './Header.module.css';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [portalDropdownOpen, setPortalDropdownOpen] = useState(false);
+  const { user } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
@@ -20,27 +23,34 @@ export const Header = () => {
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    setPortalDropdownOpen(false);
   }, [location.pathname]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
+    { name: 'Admission', path: '/admission' },
     { name: 'Our Teachers', path: '/teachers' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Contact', path: '/contact' }
   ];
 
+  const getDashboardPath = () => {
+    if (!user) return '/login';
+    if (user.role === 'ADMIN') return '/admin/dashboard';
+    if (user.role === 'TEACHER') return '/teacher/dashboard';
+    return '/parent/dashboard';
+  };
+
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.container}`}>
         <Link to="/" className={`${styles.logo} interactive`}>
-          <span className={styles.logoBadge}>
-            <Heart size={20} fill="#FF6B6B" color="#FF6B6B" />
-          </span>
-          <div className={styles.logoTextGroup}>
-            <span className={styles.logoTitle}>Happy Hearts</span>
-            <span className={styles.logoSub}>Preschool & Crèche</span>
-          </div>
+          <img
+            src="/Happyhearts_logo.png"
+            alt="Happy Hearts Preschool & Crèche"
+            style={{ height: '46px', objectFit: 'contain' }}
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -62,12 +72,109 @@ export const Header = () => {
         </nav>
 
         <div className={styles.ctaWrapper}>
-          <a href="tel:+1234567890" className={styles.phoneQuickLink}>
-            <Phone size={16} />
-            <span>+1 (234) 567-890</span>
-          </a>
-          <Link to="/contact">
-            <Button size="sm" variant="primary">Enrol Today</Button>
+
+          {/* Portal Dropdown Button */}
+          <div style={{ position: 'relative' }}>
+            {user ? (
+              <Link to={getDashboardPath()}>
+                <Button size="sm" variant="accent" icon={<User size={16} />}>
+                  {user.name.split(' ')[0]} ({user.role})
+                </Button>
+              </Link>
+            ) : (
+              <div>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  icon={<User size={16} />}
+                  onClick={() => setPortalDropdownOpen(!portalDropdownOpen)}
+                >
+                  Portal Access <ChevronDown size={14} style={{ marginLeft: '4px' }} />
+                </Button>
+
+                {portalDropdownOpen && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      right: 0,
+                      top: '44px',
+                      backgroundColor: 'var(--color-bg-white)',
+                      borderRadius: 'var(--radius-md)',
+                      boxShadow: 'var(--shadow-md)',
+                      border: '1px solid rgba(45, 49, 66, 0.08)',
+                      padding: '8px',
+                      width: '180px',
+                      zIndex: 1000,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px'
+                    }}
+                  >
+                    <Link
+                      to="/portal"
+                      style={{
+                        padding: '8px 12px',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.9rem',
+                        fontWeight: 700,
+                        color: 'var(--color-accent-coral)',
+                        textDecoration: 'none',
+                        borderBottom: '1px solid rgba(45,49,66,0.06)'
+                      }}
+                      onClick={() => setPortalDropdownOpen(false)}
+                    >
+                      🚪 Select Portal Role
+                    </Link>
+                    <Link
+                      to="/parent/login"
+                      style={{
+                        padding: '8px 12px',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        color: 'var(--color-text-main)',
+                        textDecoration: 'none'
+                      }}
+                      onClick={() => setPortalDropdownOpen(false)}
+                    >
+                      👨‍👩‍👧 Parent Login
+                    </Link>
+                    <Link
+                      to="/teacher/login"
+                      style={{
+                        padding: '8px 12px',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        color: 'var(--color-text-main)',
+                        textDecoration: 'none'
+                      }}
+                      onClick={() => setPortalDropdownOpen(false)}
+                    >
+                      👩‍🏫 Teacher Login
+                    </Link>
+                    <Link
+                      to="/admin/login"
+                      style={{
+                        padding: '8px 12px',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        color: 'var(--color-text-main)',
+                        textDecoration: 'none'
+                      }}
+                      onClick={() => setPortalDropdownOpen(false)}
+                    >
+                      🔑 Admin Login
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          <Link to="/admission/apply">
+            <Button size="sm" variant="primary">Apply Now</Button>
           </Link>
         </div>
 
@@ -96,9 +203,32 @@ export const Header = () => {
               </Link>
             </li>
           ))}
+
+          <li style={{ width: '100%', maxWidth: '320px', borderTop: '1px solid rgba(45,49,66,0.1)', paddingTop: '16px' }}>
+            {user ? (
+              <Link to={getDashboardPath()} style={{ width: '100%' }}>
+                <Button fullWidth size="lg" variant="accent">
+                  Go to {user.role} Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
+                <Link to="/login?role=PARENT" style={{ width: '100%' }}>
+                  <Button fullWidth variant="outline" size="md">Parent Portal Login</Button>
+                </Link>
+                <Link to="/login?role=TEACHER" style={{ width: '100%' }}>
+                  <Button fullWidth variant="outline" size="md">Teacher Portal Login</Button>
+                </Link>
+                <Link to="/login?role=ADMIN" style={{ width: '100%' }}>
+                  <Button fullWidth variant="text" size="sm">Admin Login</Button>
+                </Link>
+              </div>
+            )}
+          </li>
+
           <li className={styles.mobileNavCTA}>
-            <Link to="/contact" style={{ width: '100%' }}>
-              <Button fullWidth size="lg">Book a School Tour</Button>
+            <Link to="/admission/apply" style={{ width: '100%' }}>
+              <Button fullWidth size="lg">Apply for Admission</Button>
             </Link>
           </li>
         </ul>

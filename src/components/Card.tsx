@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Card.module.css';
 
@@ -8,6 +8,7 @@ interface CardProps {
   hoverEffect?: boolean;
   delay?: number;
   accentColor?: string;
+  style?: CSSProperties;
 }
 
 export const Card = ({
@@ -16,6 +17,7 @@ export const Card = ({
   hoverEffect = true,
   delay = 0,
   accentColor,
+  style = {},
 }: CardProps) => {
   return (
     <motion.div
@@ -26,6 +28,7 @@ export const Card = ({
       transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1] }}
       style={{
         borderTopColor: accentColor || undefined,
+        ...style
       }}
     >
       {children}

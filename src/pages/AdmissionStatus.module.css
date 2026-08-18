@@ -1,0 +1,112 @@
+.statusContainer {
+  max-width: 720px;
+  margin: 3rem auto;
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+}
+
+.searchBox {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 2.5rem;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(45, 49, 66, 0.15);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-accent-coral);
+}
+
+.statusCard {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px dashed rgba(45, 49, 66, 0.15);
+  padding-bottom: 1rem;
+}
+
+.statusBadge {
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badgeSubmitted { background-color: rgba(17, 138, 178, 0.12); color: #118AB2; }
+.badgeReview { background-color: rgba(255, 209, 102, 0.25); color: #B38600; }
+.badgeDocs { background-color: rgba(155, 93, 229, 0.15); color: #9B5DE5; }
+.badgeApproved { background-color: rgba(6, 214, 160, 0.15); color: #06D6A0; }
+.badgeAdmitted { background-color: rgba(6, 214, 160, 0.2); color: #059E75; }
+.badgeRejected { background-color: rgba(238, 82, 83, 0.15); color: #EE5253; }
+
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.timelineLine {
+  position: absolute;
+  top: 14px;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background-color: rgba(45, 49, 66, 0.1);
+  z-index: 1;
+}
+
+.timelineNode {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.nodeDot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #FFF;
+  border: 2px solid rgba(45, 49, 66, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.nodeDot.active {
+  border-color: var(--color-accent-coral);
+  background-color: var(--color-accent-coral);
+  color: #FFF;
+}
+
+.nodeLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}

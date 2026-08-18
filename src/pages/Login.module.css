@@ -1,0 +1,80 @@
+.loginContainer {
+  max-width: 440px;
+  margin: 3rem auto;
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+}
+
+.roleTabs {
+  display: flex;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: 2rem;
+}
+
+.tabBtn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabBtn.active {
+  background-color: var(--color-bg-white);
+  color: var(--color-accent-coral);
+  box-shadow: var(--shadow-sm);
+}
+
+.demoBanner {
+  background-color: rgba(255, 209, 102, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.formGroup input {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(45, 49, 66, 0.12);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background-color: var(--color-bg-primary);
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--color-accent-coral);
+  background-color: #FFF;
+}

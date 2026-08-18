@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Globe, MessageCircle, Mail, MapPin, Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Globe, MessageCircle, Mail, MapPin, Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from './Button';
 import styles from './Footer.module.css';
 
@@ -56,10 +56,11 @@ export const Footer = () => {
           {/* Brand Column */}
           <div className={styles.col}>
             <Link to="/" className={styles.logo}>
-              <span className={styles.logoIcon}>
-                <Heart size={22} fill="#FF6B6B" color="#FF6B6B" />
-              </span>
-              <span className={styles.logoText}>Happy Hearts</span>
+              <img
+                src="/Happyhearts_logo.png"
+                alt="Happy Hearts Preschool & Crèche"
+                style={{ height: '48px', objectFit: 'contain', backgroundColor: '#FFF', padding: '4px 10px', borderRadius: 'var(--radius-sm)' }}
+              />
             </Link>
             <p className={styles.description}>
               A happy place to learn, grow, and belong. Providing nurturing preschool and crèche services tailored for early childhood development.

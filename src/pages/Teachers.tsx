@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Heart, ShieldCheck, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';

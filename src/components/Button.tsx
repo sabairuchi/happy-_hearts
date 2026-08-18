@@ -1,8 +1,12 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Button.module.css';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type NativeButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart' | 'onAnimationEnd'
+>;
+
+interface ButtonProps extends NativeButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'accent';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
@@ -11,7 +15,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   variant = 'primary',
   size = 'md',
   children,
@@ -19,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   icon,
   ...props
-}) => {
+}: ButtonProps) => {
   return (
     <motion.button
       whileHover={{ scale: 1.03, y: -2 }}

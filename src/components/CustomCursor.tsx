@@ -1,9 +1,9 @@
-import React from 'react';
+import { CSSProperties } from 'react';
 import { Paintbrush } from 'lucide-react';
 import { useCustomCursor } from '../hooks/useCustomCursor';
 import styles from './CustomCursor.module.css';
 
-const CustomCursor: React.FC = () => {
+const CustomCursor = () => {
   const { position, isHovering, isTouchDevice, dots } = useCustomCursor();
 
   if (isTouchDevice) return null;
@@ -19,7 +19,7 @@ const CustomCursor: React.FC = () => {
             '--x': `${dot.x}px`,
             '--y': `${dot.y}px`,
             backgroundColor: dot.color
-          } as React.CSSProperties}
+          } as CSSProperties}
         />
       ))}
       

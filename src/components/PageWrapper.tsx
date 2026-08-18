@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from './Header';
@@ -14,16 +14,9 @@ const pageVariants = {
   out: { opacity: 0, y: -10 }
 };
 
-const pageTransition = {
-  type: 'tween',
-  ease: 'anticipate',
-  duration: 0.4
-};
-
-export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
+export const PageWrapper = ({ children }: PageWrapperProps) => {
   const location = useLocation();
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -38,7 +31,7 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
           animate="in"
           exit="out"
           variants={pageVariants}
-          transition={pageTransition}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
           style={{ minHeight: '100vh', paddingTop: '80px' }}
         >
           {children}

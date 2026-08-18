@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Card.module.css';
 
@@ -10,13 +9,13 @@ interface CardProps {
   accentColor?: string;
 }
 
-export const Card: React.FC<CardProps> = ({
+export const Card = ({
   children,
   className = '',
   hoverEffect = true,
   delay = 0,
   accentColor,
-}) => {
+}: CardProps) => {
   return (
     <motion.div
       className={`${styles.card} ${hoverEffect ? styles.hoverable : ''} ${className}`}

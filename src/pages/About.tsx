@@ -54,7 +54,7 @@ export default function About() {
                 alt="Preschool teacher and children engaging in interactive story circle learning in a bright Happy Hearts classroom" 
                 className={styles.aboutImg} 
                 onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';
+                  e.currentTarget.src = '/images/story-circle.jpg';
                 }}
               />
             </div>
@@ -196,8 +196,8 @@ export default function About() {
                 icon: <Trees size={28} color="#2E7D32" fill="#C8E6C9" />,
                 title: 'Outdoor Green Playground',
                 desc: 'Soft-impact flooring, sensory garden, and child-safe climbing structures.',
-                image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600&auto=format&fit=crop',
-                alt: 'Preschool children playing on the green outdoor playground',
+                image: '/images/playground.jpg',
+                alt: 'Happy Hearts toddlers playing on the outdoor playground with slides and climbing structures',
                 bg: '#EAFAF1',
                 border: '#6BCB77',
                 iconBg: 'rgba(107, 203, 119, 0.22)'
@@ -236,7 +236,7 @@ export default function About() {
                   alt={facility.alt} 
                   className={styles.facilityImg} 
                   onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop';
+                    e.currentTarget.src = '/images/story-circle.jpg';
                   }}
                 />
                 <div className={styles.facilityHeader}>

@@ -131,7 +131,7 @@ export default function Admission() {
                   alt={p.alt} 
                   className={styles.programImg}
                   onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop';
+                    e.currentTarget.src = '/images/story-circle.jpg';
                   }}
                 />
                 <span className={styles.programBadge} style={{ backgroundColor: 'rgba(255,255,255,0.9)', color: p.badgeColor }}>

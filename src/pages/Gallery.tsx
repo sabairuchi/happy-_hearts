@@ -58,10 +58,10 @@ export default function Gallery() {
       id: 3, 
       category: 'Playtime', 
       color: '#6BCB77', 
-      img: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/playground.jpg', 
       title: 'Outdoor Playground & Green Nature Walk 🌿', 
       desc: 'Toddlers enjoying fresh air, soft-impact climbing mounds, sensory garden exploration, and gross motor physical development.',
-      alt: 'Preschool children playing on the green outdoor playground with climbing structures and grass'
+      alt: 'Happy Hearts toddlers playing on the outdoor playground with slides, climbing structures, and merry-go-round under teacher supervision'
     },
     { 
       id: 4, 
@@ -85,7 +85,7 @@ export default function Gallery() {
       id: 6, 
       category: 'Activities', 
       color: '#6BCB77', 
-      img: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/montessori-puzzle.jpg', 
       title: 'Montessori Shape Matching & Puzzles 🧩', 
       desc: 'Fostering cognitive problem solving, hand-eye precision, and geometric pattern recognition with child-safe Montessori puzzle kits.',
       alt: 'Preschool toddler actively solving a wooden Montessori shape-matching puzzle at a low table'
@@ -94,7 +94,7 @@ export default function Gallery() {
       id: 7, 
       category: 'Events', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/birthday-celebration.jpg', 
       title: 'Preschool Birthday Celebrations 🎂', 
       desc: 'Celebrating milestone birthdays with organic fruit treats, festive party hats, group songs, and warm hugs from classmates.',
       alt: 'Preschool children wearing party hats and celebrating a classmate birthday together at table'
@@ -103,7 +103,7 @@ export default function Gallery() {
       id: 8, 
       category: 'Events', 
       color: '#FFD93D', 
-      img: 'https://images.unsplash.com/photo-1472162072942-cd5147eb3902?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/sports-day.jpg', 
       title: 'Annual Junior Sports & Obstacle Day 🏆', 
       desc: 'Encouraging team cooperation, active balance, physical stamina, and sportsmanship through gentle toddler obstacle courses.',
       alt: 'Preschool toddlers participating in an active outdoor sports obstacle game on green grass'
@@ -112,10 +112,10 @@ export default function Gallery() {
       id: 9, 
       category: 'Activities', 
       color: '#4D96FF', 
-      img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/music-class.jpg', 
       title: 'Rhyme & Percussion Music Class 🎵', 
       desc: 'Singing nursery rhymes, shaking wooden maracas, and developing rhythmic auditory processing with specialized music educators.',
-      alt: 'Preschool teacher and children playing rhythm instruments and singing songs together in music class'
+      alt: 'Happy Hearts teacher and toddlers sitting together playing maracas, drum, tambourine, and xylophone in music class'
     },
     { 
       id: 10, 
@@ -130,7 +130,7 @@ export default function Gallery() {
       id: 11, 
       category: 'Classroom', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/snack-time.jpg', 
       title: 'Nutritious Organic Snack & Table Etiquette 🍎', 
       desc: 'Freshly sliced fruit bowls, organic milk, and social mealtime etiquette guided by attentive classroom teachers.',
       alt: 'Preschool children sitting together at a classroom table eating healthy fruit snacks with teacher guidance'
@@ -139,7 +139,7 @@ export default function Gallery() {
       id: 12, 
       category: 'Playtime', 
       color: '#845EC2', 
-      img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/peer-friendship.jpg', 
       title: 'Empathy & Peer Friendship Building 🧸', 
       desc: 'Building emotional intelligence, turn-taking cooperation, and genuine lifelong peer friendships in a loving community.',
       alt: 'Two preschool toddlers playing and building together happily in classroom'
@@ -247,7 +247,7 @@ export default function Gallery() {
                       alt={photo.alt} 
                       className={styles.galleryImg} 
                       onError={(e) => {
-                        e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';
+                        e.currentTarget.src = '/images/music-class.jpg';
                       }}
                     />
                     <div className={styles.photoOverlay}>
@@ -330,7 +330,7 @@ export default function Gallery() {
                 alt={selectedPhoto.alt} 
                 className={styles.lightboxImg}
                 onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';
+                  e.currentTarget.src = '/images/music-class.jpg';
                 }}
               />
               <div className={styles.lightboxMeta}>

@@ -40,7 +40,7 @@ export default function Gallery() {
       id: 1, 
       category: 'Activities', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=900&auto=format&fit=crop', 
       title: 'Playgroup Finger Painting & Art Studio 🎨', 
       desc: 'Playgroup toddlers exploring primary color mixing, tactile canvas creation, and fine motor finger expression with certified non-toxic washable paints.',
       alt: 'Preschool children actively finger painting with colorful paints at a classroom art table under teacher guidance'
@@ -49,7 +49,7 @@ export default function Gallery() {
       id: 2, 
       category: 'Playtime', 
       color: '#FFD93D', 
-      img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=900&auto=format&fit=crop', 
       title: 'Tactile Wooden Block & Train Track Play 🧱', 
       desc: 'Developing early spatial awareness, cause-and-effect reasoning, and cooperative tower building with natural wooden Montessori toys.',
       alt: 'Preschool toddlers building wooden block towers and train tracks together on the playroom floor'
@@ -85,7 +85,7 @@ export default function Gallery() {
       id: 6, 
       category: 'Activities', 
       color: '#6BCB77', 
-      img: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=900&auto=format&fit=crop', 
       title: 'Montessori Shape Matching & Puzzles 🧩', 
       desc: 'Fostering cognitive problem solving, hand-eye precision, and geometric pattern recognition with child-safe Montessori puzzle kits.',
       alt: 'Preschool toddler actively solving a wooden Montessori shape-matching puzzle at a low table'
@@ -97,7 +97,7 @@ export default function Gallery() {
       img: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=900&auto=format&fit=crop', 
       title: 'Preschool Birthday Celebrations 🎂', 
       desc: 'Celebrating milestone birthdays with organic fruit treats, festive party hats, group songs, and warm hugs from classmates.',
-      alt: 'Preschool children wearing party hats and celebrating a classmate birthday together'
+      alt: 'Preschool children wearing party hats and celebrating a classmate birthday together at table'
     },
     { 
       id: 8, 
@@ -112,7 +112,7 @@ export default function Gallery() {
       id: 9, 
       category: 'Activities', 
       color: '#4D96FF', 
-      img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=900&auto=format&fit=crop', 
       title: 'Rhyme & Percussion Music Class 🎵', 
       desc: 'Singing nursery rhymes, shaking wooden maracas, and developing rhythmic auditory processing with specialized music educators.',
       alt: 'Preschool teacher and children playing rhythm instruments and singing songs together in music class'
@@ -139,10 +139,10 @@ export default function Gallery() {
       id: 12, 
       category: 'Playtime', 
       color: '#845EC2', 
-      img: 'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop', 
       title: 'Empathy & Peer Friendship Building 🧸', 
       desc: 'Building emotional intelligence, turn-taking cooperation, and genuine lifelong peer friendships in a loving community.',
-      alt: 'Two preschool children sharing toys and smiling together in classroom'
+      alt: 'Two preschool toddlers playing and building together happily in classroom'
     }
   ];
 

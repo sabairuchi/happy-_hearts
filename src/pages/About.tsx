@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Heart, Star, Shield, Smile, Blocks, Trees, Utensils, CloudMoon, ArrowRight } from 'lucide-react';
+import { Heart, Star, Shield, Smile, Blocks, Trees, Utensils, CloudMoon, ArrowRight, Sparkles, CheckCircle2, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
@@ -35,16 +35,16 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="badge-pill">✨ About Happy Hearts</span>
+            <span className="badge-pill badge-yellow">✨ About Happy Hearts</span>
             <h1>Nurturing Minds, <span className="text-gradient">Inspiring Futures</span> 🎨</h1>
             <p>Dedicated to providing a loving, creative, and safe foundation for early childhood development since our founding.</p>
           </motion.div>
         </div>
       </section>
 
-      <WavyDivider fill="#FFFBEB" />
+      <WavyDivider fill="#FFF0D6" />
 
-      {/* PHILOSOPHY SECTION (Alternating Background 1: Soft Yellow Tint) */}
+      {/* PHILOSOPHY SECTION */}
       <section className={styles.philosophySection}>
         <div className={`container ${styles.splitLayout}`}>
           <div className={styles.visualColumn}>
@@ -59,22 +59,37 @@ export default function About() {
           <div className={styles.textColumn}>
             <span className="badge-pill badge-purple">🌱 Educational Approach</span>
             <h2>Our Core Educational Philosophy</h2>
-            <p className={styles.leadText}>
+            <div className={styles.leadText}>
               We believe every child is uniquely gifted, inherently curious, and deserving of a nurturing environment where learning feels like play.
-            </p>
+            </div>
             <p>
               At Happy Hearts, our holistic framework integrates play-based exploration with structured early learning. We build foundational social, emotional, and cognitive skills that prepare children for kindergarten and life beyond.
             </p>
             <p>
               Our educators act as compassionate guides—listening to each child's voice, encouraging creative expression, and fostering an inclusive community where everyone belongs.
             </p>
+
+            <div className={styles.philosophyList}>
+              <div className={styles.philosophyItem} style={{ borderColor: '#FF6B6B', color: '#FF5252' }}>
+                <CheckCircle2 size={20} color="#FF6B6B" />
+                <span>Play-Based Exploration & Discovery</span>
+              </div>
+              <div className={styles.philosophyItem} style={{ borderColor: '#4D96FF', color: '#0284C7' }}>
+                <BookOpen size={20} color="#4D96FF" />
+                <span>Structured Early STEM & Phonics</span>
+              </div>
+              <div className={styles.philosophyItem} style={{ borderColor: '#6BCB77', color: '#059669' }}>
+                <Sparkles size={20} color="#6BCB77" />
+                <span>Inclusive & Warm Community</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <WavyDivider fill="#FFF1F2" />
+      <WavyDivider fill="#FFE6EC" />
 
-      {/* CORE VALUES SECTION (Alternating Background 2: Soft Coral Pink Tint) */}
+      {/* CORE VALUES SECTION */}
       <section className={styles.valuesSection}>
         <div className="container">
           <div className={styles.valuesHeader}>
@@ -88,13 +103,13 @@ export default function About() {
               className={styles.valueCard}
               hoverEffect={true}
               style={{
-                backgroundColor: '#FFF0F0',
-                border: '2.5px solid #FF6B5A',
-                borderTop: '6px solid #FF5240'
+                backgroundColor: '#FFE5E5',
+                border: '2.5px solid #FF6B6B',
+                borderTop: '6px solid #FF5252'
               }}
             >
-              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 107, 90, 0.16)' }}>
-                <Heart size={36} color="#FF5240" fill="#FFD0CB" />
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 107, 107, 0.18)' }}>
+                <Heart size={36} color="#FF5252" fill="#FFCDD2" />
               </div>
               <h3>Love & Empathy</h3>
               <p>We treat every child with the utmost care, creating a second home where they feel emotionally safe and cherished.</p>
@@ -104,13 +119,13 @@ export default function About() {
               className={styles.valueCard}
               hoverEffect={true}
               style={{
-                backgroundColor: '#FFFBEB',
-                border: '2.5px solid #FFC107',
-                borderTop: '6px solid #D97706'
+                backgroundColor: '#FFF3E0',
+                border: '2.5px solid #FFD93D',
+                borderTop: '6px solid #B78103'
               }}
             >
-              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 193, 7, 0.22)' }}>
-                <Star size={36} color="#D97706" fill="#FDE68A" />
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 217, 61, 0.25)' }}>
+                <Star size={36} color="#B78103" fill="#FFF2B2" />
               </div>
               <h3>Creative Expression</h3>
               <p>We encourage hands-on discovery through painting, music, drama, and storytelling to unlock creative potential.</p>
@@ -120,13 +135,13 @@ export default function About() {
               className={styles.valueCard}
               hoverEffect={true}
               style={{
-                backgroundColor: '#F0F9FF',
-                border: '2.5px solid #0284C7',
-                borderTop: '6px solid #0284C7'
+                backgroundColor: '#EBF5FF',
+                border: '2.5px solid #4D96FF',
+                borderTop: '6px solid #1565C0'
               }}
             >
-              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(2, 132, 199, 0.18)' }}>
-                <Shield size={36} color="#0284C7" fill="#BAE6FD" />
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(77, 150, 255, 0.18)' }}>
+                <Shield size={36} color="#1565C0" fill="#D6E4FF" />
               </div>
               <h3>Safety & Health First</h3>
               <p>Uncompromising standards in hygiene, secure access control, and certified pediatric first aid trained staff.</p>
@@ -136,13 +151,13 @@ export default function About() {
               className={styles.valueCard}
               hoverEffect={true}
               style={{
-                backgroundColor: '#ECFDF5',
-                border: '2.5px solid #10B981',
-                borderTop: '6px solid #059669'
+                backgroundColor: '#EAFAF1',
+                border: '2.5px solid #6BCB77',
+                borderTop: '6px solid #2E7D32'
               }}
             >
-              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(16, 185, 129, 0.18)' }}>
-                <Smile size={36} color="#059669" fill="#A7F3D0" />
+              <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(107, 203, 119, 0.22)' }}>
+                <Smile size={36} color="#2E7D32" fill="#C8E6C9" />
               </div>
               <h3>Joyful Learning</h3>
               <p>We craft interactive learning experiences that spark laughter, curiosity, and a lifelong passion for knowledge.</p>
@@ -151,9 +166,9 @@ export default function About() {
         </div>
       </section>
 
-      <WavyDivider fill="#F0F9FF" />
+      <WavyDivider fill="#EAFAF1" />
 
-      {/* AMENITIES SECTION (Alternating Background 3: Soft Sky Blue Tint) */}
+      {/* AMENITIES SECTION */}
       <section className={styles.facilitiesSection}>
         <div className="container">
           <div className={styles.valuesHeader}>
@@ -165,36 +180,36 @@ export default function About() {
           <div className={styles.facilitiesGrid}>
             {[
               {
-                icon: <Blocks size={30} color="#FF5240" fill="#FFD0CB" />,
+                icon: <Blocks size={32} color="#FF5252" fill="#FFCDD2" />,
                 title: 'Interactive Learning Zones',
                 desc: 'Equipped with Montessori toys, reading nooks, and STEM discovery kits.',
-                bg: '#FFF0F0',
-                border: '#FF6B5A',
-                iconBg: 'rgba(255, 107, 90, 0.18)'
+                bg: '#FFE5E5',
+                border: '#FF6B6B',
+                iconBg: 'rgba(255, 107, 107, 0.18)'
               },
               {
-                icon: <Trees size={30} color="#059669" fill="#A7F3D0" />,
+                icon: <Trees size={32} color="#2E7D32" fill="#C8E6C9" />,
                 title: 'Outdoor Green Playground',
                 desc: 'Soft-impact flooring, sensory garden, and child-safe climbing structures.',
-                bg: '#ECFDF5',
-                border: '#10B981',
-                iconBg: 'rgba(16, 185, 129, 0.18)'
+                bg: '#EAFAF1',
+                border: '#6BCB77',
+                iconBg: 'rgba(107, 203, 119, 0.22)'
               },
               {
-                icon: <Utensils size={30} color="#D97706" fill="#FDE68A" />,
+                icon: <Utensils size={32} color="#B78103" fill="#FFF2B2" />,
                 title: 'Nutritious Meal Service',
                 desc: 'Freshly prepared organic meals and snacks planned by pediatric nutritionists.',
-                bg: '#FFFBEB',
-                border: '#FFC107',
-                iconBg: 'rgba(255, 193, 7, 0.22)'
+                bg: '#FFF3E0',
+                border: '#FFD93D',
+                iconBg: 'rgba(255, 217, 61, 0.25)'
               },
               {
-                icon: <CloudMoon size={30} color="#0284C7" fill="#BAE6FD" />,
+                icon: <CloudMoon size={32} color="#1565C0" fill="#D6E4FF" />,
                 title: 'Rest & Quiet Rooms',
                 desc: 'Sanitized, peaceful sleeping quarters for infants and crèche toddlers.',
-                bg: '#F0F9FF',
-                border: '#0284C7',
-                iconBg: 'rgba(2, 132, 199, 0.18)'
+                bg: '#EBF5FF',
+                border: '#4D96FF',
+                iconBg: 'rgba(77, 150, 255, 0.18)'
               }
             ].map((facility, idx) => (
               <Card

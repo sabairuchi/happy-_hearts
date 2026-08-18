@@ -1,5 +1,5 @@
 .hero {
-  padding: 80px 0 60px;
+  padding: 90px 0 70px;
   background: linear-gradient(180deg, #FFE6EC 0%, #FFF0D6 50%, #E6F7ED 100%);
   text-align: center;
   position: relative;
@@ -7,27 +7,30 @@
 }
 
 .heroContent {
-  max-width: 760px;
+  max-width: 780px;
   margin: 0 auto;
 }
 
 .heroContent h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  margin: 16px 0 20px;
+  font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+  margin: 18px 0 22px;
   color: var(--color-text-main);
-  font-weight: 800;
+  font-weight: 900;
+  line-height: 1.12;
 }
 
 .heroContent p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--color-text-muted);
   font-weight: 500;
+  line-height: 1.65;
 }
 
 /* Philosophy Section */
 .philosophySection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #FFFBEB 0%, #FFF1F2 100%);
+  background: linear-gradient(135deg, #FFF0D6 0%, #FFE6EC 50%, #E6F3FF 100%);
+  position: relative;
 }
 
 .splitLayout {
@@ -45,6 +48,7 @@
 
 .visualColumn {
   width: 100%;
+  position: relative;
 }
 
 .imageFrame {
@@ -52,9 +56,14 @@
   aspect-ratio: 4/3;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(255, 107, 90, 0.2);
-  border: 8px solid var(--color-bg-white);
-  transform: rotate(-1.5deg);
+  box-shadow: 0 22px 48px rgba(255, 107, 107, 0.28);
+  border: 6px solid #FF6B6B;
+  transform: rotate(-2deg);
+  transition: transform 0.35s ease;
+}
+
+.imageFrame:hover {
+  transform: rotate(0deg) scale(1.02);
 }
 
 .aboutImg {
@@ -64,46 +73,74 @@
 }
 
 .textColumn h2 {
-  font-size: 2.4rem;
-  margin: 14px 0 20px;
-  font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  margin: 16px 0 20px;
+  font-weight: 900;
+  color: var(--color-text-main);
 }
 
 .leadText {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #FF5240;
-  margin-bottom: 20px;
-  line-height: 1.6;
+  color: var(--color-text-main);
+  background: #FFFFFF;
+  border-left: 6px solid #FF5252;
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 24px rgba(38, 50, 56, 0.08);
+  margin-bottom: 24px;
+  line-height: 1.65;
 }
 
 .textColumn p {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   color: var(--color-text-muted);
   font-size: 1.05rem;
   line-height: 1.7;
+  font-weight: 500;
+}
+
+.philosophyList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.philosophyItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  border: 2px solid;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
 /* Core Values Section */
 .valuesSection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #FFF1F2 0%, #FFFBEB 100%);
+  background: linear-gradient(180deg, #FFE6EC 0%, #FFF0D6 50%, #EAFAF1 100%);
 }
 
 .valuesHeader {
   text-align: center;
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto 50px;
 }
 
 .valuesHeader h2 {
-  font-size: 2.5rem;
-  margin: 12px 0;
-  font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  margin: 14px 0;
+  font-weight: 900;
 }
 
 .valuesHeader p {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--color-text-muted);
   font-weight: 500;
 }
@@ -122,31 +159,31 @@
 
 .valueCard {
   text-align: center;
-  padding: 36px 26px;
+  padding: 38px 28px;
   border-radius: var(--radius-md);
-  box-shadow: 0 12px 28px rgba(30, 41, 59, 0.07);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 12px 28px rgba(38, 50, 56, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .valueCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(255, 107, 90, 0.16);
+  box-shadow: 0 20px 45px rgba(255, 107, 107, 0.22);
 }
 
 .iconWrapper {
-  width: 76px;
-  height: 76px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 24px;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
   background-color: #FFFFFF;
 }
 
 .valueCard h3 {
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   margin-bottom: 12px;
   font-weight: 800;
   color: var(--color-text-main);
@@ -155,14 +192,14 @@
 .valueCard p {
   color: var(--color-text-muted);
   line-height: 1.65;
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 /* Facilities / Amenities Section */
 .facilitiesSection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #FFFBEB 0%, #F0F9FF 100%);
+  background: linear-gradient(180deg, #EAFAF1 0%, #EBF5FF 50%, #FFF0D6 100%);
 }
 
 .facilitiesGrid {
@@ -180,31 +217,31 @@
 .facilityCard {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
-  padding: 30px 24px;
+  gap: 22px;
+  padding: 32px 26px;
   border-radius: var(--radius-md);
-  box-shadow: 0 10px 24px rgba(30, 41, 59, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 12px 28px rgba(38, 50, 56, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .facilityCard:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 36px rgba(30, 41, 59, 0.12);
+  box-shadow: 0 20px 40px rgba(38, 50, 56, 0.14);
 }
 
 .facilityIconWrapper {
-  width: 62px;
-  height: 62px;
-  border-radius: 20px;
+  width: 66px;
+  height: 66px;
+  border-radius: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 .facilityCard h4 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   margin-bottom: 8px;
   color: var(--color-text-main);
   font-weight: 800;
@@ -212,7 +249,7 @@
 
 .facilityCard p {
   color: var(--color-text-muted);
-  font-size: 0.98rem;
+  font-size: 1rem;
   line-height: 1.6;
   font-weight: 500;
 }
@@ -220,17 +257,17 @@
 /* CTA Callout Band */
 .ctaSection {
   padding: var(--spacing-section) 0;
-  background: linear-gradient(180deg, #F0F9FF 0%, #FFFCF5 100%);
+  background: linear-gradient(180deg, #FFF0D6 0%, #FFF9F0 100%);
 }
 
 .ctaContent {
   text-align: center;
-  max-width: 840px;
+  max-width: 860px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #FF6B5A 0%, #FF9800 60%, #8B5CF6 100%);
-  padding: 64px 40px;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF9800 60%, #845EC2 100%);
+  padding: 68px 42px;
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 45px rgba(255, 107, 90, 0.3);
+  box-shadow: 0 20px 45px rgba(255, 107, 107, 0.3);
   color: #FFFFFF;
   position: relative;
   overflow: hidden;

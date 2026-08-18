@@ -111,8 +111,11 @@ export default function ParentDashboard() {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <img
-                src={selectedChild.photo || 'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&q=80&w=400'}
+                src={selectedChild.photo || 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=400'}
                 alt={selectedChild.name}
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=400';
+                }}
                 style={{
                   width: '80px',
                   height: '80px',

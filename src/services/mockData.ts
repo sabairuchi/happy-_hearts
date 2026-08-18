@@ -182,7 +182,7 @@ export const initialStudents: Student[] = [
     name: 'Leo Watson',
     dob: '2024-11-02',
     gender: 'Boy',
-    photo: 'https://images.unsplash.com/photo-1595454038955-4dfe8de81be8?auto=format&fit=crop&q=80&w=400',
+    photo: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=400',
     classId: 'cls-4',
     className: 'Toddler Crèche & Daycare',
     teacherId: 'tch-2',

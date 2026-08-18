@@ -18,8 +18,11 @@ export default function ParentChildren() {
           <Card key={child.id} hoverEffect={false}>
             <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
               <img
-                src={child.photo || 'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&q=80&w=400'}
+                src={child.photo || 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=400'}
                 alt={child.name}
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=400';
+                }}
                 style={{
                   width: '140px',
                   height: '140px',

@@ -53,31 +53,42 @@
 
 /* Variants */
 .primary {
-  background-color: var(--color-accent-coral);
-  color: var(--color-bg-white);
-  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+  background: linear-gradient(135deg, #FF6B5A 0%, #FF8A50 100%);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px rgba(255, 107, 90, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .primary:hover {
-  background-color: var(--color-accent-coral-hover);
-  box-shadow: 0 12px 26px rgba(255, 107, 107, 0.4);
+  background: linear-gradient(135deg, #FF5240 0%, #FF7433 100%);
+  box-shadow: 0 14px 28px rgba(255, 107, 90, 0.45);
+  transform: translateY(-3px) scale(1.03);
 }
 
 .secondary {
   background-color: var(--color-bg-white);
   color: var(--color-text-main);
   box-shadow: var(--shadow-md);
+  border: 1.5px solid rgba(30, 41, 59, 0.08);
 }
 
 .secondary:hover {
-  background-color: #FAFAFA;
+  background-color: #FFFDF8;
   box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 107, 90, 0.3);
 }
 
 .accent {
-  background: var(--gradient-warm);
-  color: var(--color-bg-white);
-  box-shadow: 0 8px 20px rgba(255, 209, 102, 0.4);
+  background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px rgba(255, 160, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.accent:hover {
+  background: linear-gradient(135deg, #FFA000 0%, #F57C00 100%);
+  box-shadow: 0 14px 28px rgba(255, 160, 0, 0.45);
+  transform: translateY(-3px) scale(1.03);
 }
 
 .outline {

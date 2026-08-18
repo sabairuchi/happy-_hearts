@@ -1,55 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap');
 
 :root {
-  /* Warm cream primary background */
-  --color-bg-primary: #FFFCF7;
-  --color-bg-secondary: #FFF5E6;
+  /* Warm cream primary background base */
+  --color-bg-primary: #FFFCF5;
+  --color-bg-secondary: #FFFBEB; /* Soft sunny yellow section tint */
+  --color-bg-blue-tint: #F0F9FF; /* Soft sky blue section tint */
+  --color-bg-pink-tint: #FFF1F2; /* Soft coral pink section tint */
+  --color-bg-mint-tint: #ECFDF5; /* Soft grass green section tint */
   --color-bg-white: #FFFFFF;
-  --color-bg-glass: rgba(255, 252, 247, 0.85);
+  --color-bg-glass: rgba(255, 252, 245, 0.92);
   
-  /* Brand Vibrant Accents */
-  --color-accent-coral: #FF6B6B;
-  --color-accent-coral-hover: #EE5253;
-  --color-accent-yellow: #FFD166;
-  --color-accent-yellow-hover: #F3C649;
-  --color-accent-mint: #06D6A0;
-  --color-accent-mint-hover: #05B386;
-  --color-accent-sky: #118AB2;
-  --color-accent-sky-hover: #0F7597;
-  --color-accent-purple: #9B5DE5;
-  --color-accent-pink: #F15BB5;
+  /* Saturated Candy Palette */
+  --color-accent-coral: #FF6B5A;
+  --color-accent-coral-hover: #FF5240;
+  --color-accent-yellow: #FFC107;
+  --color-accent-yellow-hover: #FFA000;
+  --color-accent-mint: #10B981;
+  --color-accent-mint-hover: #059669;
+  --color-accent-sky: #0284C7;
+  --color-accent-sky-hover: #0369A1;
+  --color-accent-purple: #8B5CF6;
+  --color-accent-pink: #EC4899;
 
   /* Legacy compatibility map */
   --color-accent-blue: var(--color-accent-mint);
   
-  /* Text */
-  --color-text-main: #2D3142;
-  --color-text-muted: #4F5D75;
+  /* Accessible Contrast Dark Navy/Charcoal Text */
+  --color-text-main: #1E293B;
+  --color-text-muted: #475569;
   --color-text-light: #FFFFFF;
   
   /* Typography */
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   
-  /* Modern Gradients */
-  --gradient-warm: linear-gradient(135deg, #FF6B6B 0%, #FFD166 100%);
-  --gradient-playful: linear-gradient(135deg, #118AB2 0%, #06D6A0 100%);
-  --gradient-soft: linear-gradient(135deg, #FFF5E6 0%, #FFFCF7 100%);
-  --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #FFFCF7 100%);
+  /* Modern Candy Gradients (Max 2 colors) */
+  --gradient-warm: linear-gradient(135deg, #FF6B5A 0%, #FF9800 100%);
+  --gradient-button: linear-gradient(135deg, #FF6B5A 0%, #FF8A50 100%);
+  --gradient-sky: linear-gradient(135deg, #0284C7 0%, #10B981 100%);
+  --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #FFFCF5 100%);
 
   /* Shadows */
-  --shadow-sm: 0 4px 14px rgba(45, 49, 66, 0.04);
-  --shadow-md: 0 10px 30px rgba(45, 49, 66, 0.08);
-  --shadow-lg: 0 20px 40px rgba(45, 49, 66, 0.12);
-  --shadow-hover: 0 16px 36px rgba(255, 107, 107, 0.18);
+  --shadow-sm: 0 4px 14px rgba(30, 41, 59, 0.05);
+  --shadow-md: 0 10px 28px rgba(30, 41, 59, 0.08);
+  --shadow-lg: 0 20px 40px rgba(255, 107, 90, 0.16);
+  --shadow-button: 0 10px 24px rgba(255, 107, 90, 0.35);
 
   /* Spacing */
-  --spacing-section: 6rem;
+  --spacing-section: 5.5rem;
   --spacing-section-mobile: 3.5rem;
   
   /* Radius */
-  --radius-sm: 12px;
-  --radius-md: 20px;
+  --radius-sm: 14px;
+  --radius-md: 22px;
   --radius-lg: 32px;
   --radius-full: 9999px;
 }
@@ -101,8 +104,8 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 800;
+  line-height: 1.18;
   color: var(--color-text-main);
   letter-spacing: -0.02em;
 }
@@ -132,77 +135,86 @@ button {
   }
 }
 
-/* Global utility classes */
+/* Confident 2-color headline gradient */
 .text-gradient {
-  background: var(--gradient-warm);
+  background: linear-gradient(135deg, #FF6B5A 0%, #FF9800 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Badge Pill variants with contrast compliant text */
 .badge-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 209, 102, 0.25) 100%);
-  color: var(--color-accent-coral);
+  background-color: rgba(255, 107, 90, 0.12);
+  color: #D93829; /* Contrast ratio > 4.5:1 on cream */
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.92rem;
-  border: 1.5px solid rgba(255, 107, 107, 0.2);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.1);
+  border: 1.5px solid rgba(255, 107, 90, 0.25);
+  box-shadow: 0 4px 12px rgba(255, 107, 90, 0.1);
 }
 
 .badge-mint {
-  background: linear-gradient(135deg, rgba(6, 214, 160, 0.15) 0%, rgba(17, 138, 178, 0.15) 100%);
-  color: #05B386;
-  border-color: rgba(6, 214, 160, 0.3);
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #047857; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
 .badge-yellow {
-  background: linear-gradient(135deg, rgba(255, 209, 102, 0.3) 0%, rgba(255, 107, 107, 0.15) 100%);
-  color: #B38600;
-  border-color: rgba(255, 209, 102, 0.5);
+  background-color: rgba(255, 193, 7, 0.2);
+  color: #B45309; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(255, 193, 7, 0.4);
+}
+
+.badge-sky {
+  background-color: rgba(2, 132, 199, 0.12);
+  color: #0369A1; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(2, 132, 199, 0.3);
 }
 
 .badge-purple {
-  background: linear-gradient(135deg, rgba(155, 93, 229, 0.15) 0%, rgba(241, 91, 181, 0.15) 100%);
-  color: #9B5DE5;
-  border-color: rgba(155, 93, 229, 0.3);
+  background-color: rgba(139, 92, 246, 0.12);
+  color: #6D28D9; /* Contrast ratio > 4.5:1 */
+  border-color: rgba(139, 92, 246, 0.3);
 }
 
 /* Floating Animation Keyframes */
 @keyframes floatSlow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(3deg); }
+  50% { transform: translateY(-14px) rotate(4deg); }
 }
 
-@keyframes pulseGlow {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.05); opacity: 1; }
-}
-
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-4deg); }
 }
 
 .floating-sticker {
   position: absolute;
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   user-select: none;
   pointer-events: none;
-  animation: floatSlow 4s ease-in-out infinite;
+  animation: floatSlow 4.5s ease-in-out infinite;
   z-index: 2;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
 }
 
-/* Playful Card & Glass Enhancements */
-.playful-card-glow {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+/* Wavy Section Divider */
+.section-divider-wave {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  margin-top: -1px;
+  margin-bottom: -1px;
 }
 
-.playful-card-glow:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.18), 0 0 0 3px rgba(255, 209, 102, 0.4);
+.section-divider-wave svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 40px;
 }

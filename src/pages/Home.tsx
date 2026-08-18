@@ -72,7 +72,7 @@ export default function Home() {
                 ))}
                 <span><strong>4.9/5</strong> Parent Satisfaction Rating</span>
               </div>
-            </div >
+            </motion.div>
           </div>
 
           <motion.div 

@@ -1,0 +1,276 @@
+.hero {
+  padding: 70px 0 50px;
+  background-color: var(--color-bg-secondary);
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.heroContent h1 {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  margin: 16px 0 18px;
+}
+
+.heroContent p {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+}
+
+.gallerySection {
+  padding: var(--spacing-section) 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 44px;
+}
+
+.filterBtn {
+  background: white;
+  border: 1px solid rgba(45, 49, 66, 0.12);
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+}
+
+.filterBtn:hover, .filterBtn.active {
+  border-color: var(--color-accent-coral);
+  color: var(--color-accent-coral);
+}
+
+.filterBtn.active {
+  background-color: #FFF0F0;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.15);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.photoItem {
+  border-radius: var(--radius-md);
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background-color: var(--color-bg-secondary);
+}
+
+.photoItem:nth-child(3n) {
+  aspect-ratio: 1;
+}
+
+.galleryImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.photoItem:hover .galleryImg {
+  transform: scale(1.08);
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.75) 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photoItem:hover .photoOverlay {
+  opacity: 1;
+}
+
+.zoomIcon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoTitle {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.photoCatBadge {
+  font-size: 0.75rem;
+  background-color: var(--color-accent-coral);
+  color: white;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(15, 17, 23, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background-color 0.2s;
+}
+
+.closeBtn:hover {
+  background-color: var(--color-accent-coral);
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background-color 0.2s;
+}
+
+.navBtn:hover {
+  background-color: var(--color-accent-coral);
+}
+
+.prevBtn {
+  left: 24px;
+}
+
+.nextBtn {
+  right: 24px;
+}
+
+.lightboxContent {
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+}
+
+.lightboxImg {
+  width: 100%;
+  max-height: 65vh;
+  object-fit: cover;
+}
+
+.lightboxMeta {
+  padding: 24px;
+  position: relative;
+  background-color: var(--color-bg-white);
+}
+
+.lightboxMeta h3 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.lightboxMeta p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.lightboxBadge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: #FFF0F0;
+  color: var(--color-accent-coral);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.brandSection {
+  padding: 40px 0 90px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.bigText {
+  font-size: clamp(3rem, 10vw, 7.5rem);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--color-text-main);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  white-space: nowrap;
+}
+
+.bigHeart {
+  display: inline-block;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15%, 45% { transform: scale(1.15); }
+  30%, 60% { transform: scale(1); }
+}

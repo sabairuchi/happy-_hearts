@@ -111,7 +111,7 @@ export default function Gallery() {
       id: 10, 
       category: 'Playtime', 
       color: '#6BCB77', 
-      img: 'https://images.unsplash.com/photo-1595454038955-4dfe8de81be8?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop', 
       title: 'Sensory Sandbox & Splash Play 🏖️', 
       desc: 'Tactile sand sculpting, sieve pouring, and water float experiments promoting early scientific curiosity and sensory fun.' 
     },
@@ -119,7 +119,7 @@ export default function Gallery() {
       id: 11, 
       category: 'Classroom', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1584727638096-042c45049ebe?q=80&w=900&auto=format&fit=crop', 
       title: 'Nutritious Organic Snack & Table Etiquette 🍎', 
       desc: 'Freshly sliced fruit bowls, organic milk, and social mealtime etiquette guided by attentive classroom teachers.' 
     },
@@ -127,7 +127,7 @@ export default function Gallery() {
       id: 12, 
       category: 'Playtime', 
       color: '#845EC2', 
-      img: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=900&auto=format&fit=crop', 
+      img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=900&auto=format&fit=crop', 
       title: 'Empathy & Peer Friendship Building 🧸', 
       desc: 'Building emotional intelligence, turn-taking cooperation, and genuine lifelong peer friendships in a loving community.' 
     }
@@ -229,7 +229,14 @@ export default function Gallery() {
                   style={{ borderColor: photo.color, borderTop: `6px solid ${photo.color}` }}
                 >
                   <div className={styles.imageContainer}>
-                    <img src={photo.img} alt={photo.title} className={styles.galleryImg} />
+                    <img 
+                      src={photo.img} 
+                      alt={photo.title} 
+                      className={styles.galleryImg} 
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';
+                      }}
+                    />
                     <div className={styles.photoOverlay}>
                       <span className={styles.zoomIcon}><Maximize2 size={24} /></span>
                       <span className={styles.photoHoverText}>Click to View Fullscreen</span>
@@ -305,7 +312,14 @@ export default function Gallery() {
               exit={{ scale: 0.85, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={selectedPhoto.img} alt={selectedPhoto.title} className={styles.lightboxImg} />
+              <img 
+                src={selectedPhoto.img} 
+                alt={selectedPhoto.title} 
+                className={styles.lightboxImg}
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';
+                }}
+              />
               <div className={styles.lightboxMeta}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                   <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>{selectedPhoto.title}</h3>

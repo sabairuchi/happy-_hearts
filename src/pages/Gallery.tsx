@@ -1,7 +1,9 @@
 import { useState, useEffect, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Maximize2, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
+import { Button } from '../components/Button';
 import styles from './Gallery.module.css';
 
 type Category = 'All' | 'Classroom' | 'Activities' | 'Events' | 'Playtime';
@@ -15,6 +17,17 @@ interface Photo {
   desc?: string;
 }
 
+const WavyDivider = ({ fill }: { fill: string }) => (
+  <div className="section-divider-wave">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        fill={fill}
+      />
+    </svg>
+  </div>
+);
+
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -22,18 +35,18 @@ export default function Gallery() {
   const categories: Category[] = ['All', 'Classroom', 'Activities', 'Events', 'Playtime'];
 
   const photos: Photo[] = [
-    { id: 1, category: 'Classroom', color: 'var(--color-bg-secondary)', img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=700&auto=format&fit=crop', title: 'Cozy Reading Corner', desc: 'Children enjoying storytelling hour' },
-    { id: 2, category: 'Activities', color: 'var(--color-accent-yellow)', img: 'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=700&auto=format&fit=crop', title: 'Finger Painting Studio', desc: 'Creative expression with non-toxic paints' },
-    { id: 3, category: 'Playtime', color: 'var(--color-accent-coral)', img: 'https://images.unsplash.com/photo-1472162072942-cd5147eb3902?q=80&w=700&auto=format&fit=crop', title: 'Block Architecture', desc: 'Building spatial skills through wooden blocks' },
-    { id: 4, category: 'Events', color: 'var(--color-accent-sky)', img: 'https://images.unsplash.com/photo-1544733422-251e532ca221?q=80&w=700&auto=format&fit=crop', title: 'Annual Sports Day', desc: 'Joyful obstacle races & medal ceremonies' },
-    { id: 5, category: 'Classroom', color: 'var(--color-accent-mint)', img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=700&auto=format&fit=crop', title: 'Montessori Puzzle Time', desc: 'Developing fine motor coordination' },
-    { id: 6, category: 'Activities', color: 'var(--color-bg-secondary)', img: 'https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=700&auto=format&fit=crop', title: 'Music & Percussion Class', desc: 'Singing songs and learning rhythms' },
-    { id: 7, category: 'Playtime', color: 'var(--color-accent-coral)', img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=700&auto=format&fit=crop', title: 'Outdoor Playground Fun', desc: 'Fresh air, slides, and group games' },
-    { id: 8, category: 'Events', color: 'var(--color-accent-yellow)', img: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=700&auto=format&fit=crop', title: 'Birthday Celebrations', desc: 'Blowing candles with preschool classmates' },
-    { id: 9, category: 'Activities', color: 'var(--color-accent-sky)', img: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=700&auto=format&fit=crop', title: 'Group STEM Discovery', desc: 'Exploring plant growth and water play' },
-    { id: 10, category: 'Playtime', color: 'var(--color-bg-secondary)', img: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=700&auto=format&fit=crop', title: 'Little Best Friends', desc: 'Creating lifelong social memories' },
-    { id: 11, category: 'Events', color: 'var(--color-accent-coral)', img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=700&auto=format&fit=crop', title: 'Nature Field Trip', desc: 'Discovering butterflies and flowers' },
-    { id: 12, category: 'Classroom', color: 'var(--color-accent-mint)', img: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=700&auto=format&fit=crop', title: 'Bright Learning Spaces', desc: 'Thoughtfully curated classroom corners' },
+    { id: 1, category: 'Classroom', color: '#FF6B5A', img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=700&auto=format&fit=crop', title: 'Cozy Reading Corner', desc: 'Children enjoying storytelling hour' },
+    { id: 2, category: 'Activities', color: '#FFC107', img: 'https://images.unsplash.com/photo-1519337265831-281ec6cc8514?q=80&w=700&auto=format&fit=crop', title: 'Finger Painting Studio', desc: 'Creative expression with non-toxic paints' },
+    { id: 3, category: 'Playtime', color: '#FF5240', img: 'https://images.unsplash.com/photo-1472162072942-cd5147eb3902?q=80&w=700&auto=format&fit=crop', title: 'Block Architecture', desc: 'Building spatial skills through wooden blocks' },
+    { id: 4, category: 'Events', color: '#0284C7', img: 'https://images.unsplash.com/photo-1544733422-251e532ca221?q=80&w=700&auto=format&fit=crop', title: 'Annual Sports Day', desc: 'Joyful obstacle races & medal ceremonies' },
+    { id: 5, category: 'Classroom', color: '#10B981', img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=700&auto=format&fit=crop', title: 'Montessori Puzzle Time', desc: 'Developing fine motor coordination' },
+    { id: 6, category: 'Activities', color: '#8B5CF6', img: 'https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=700&auto=format&fit=crop', title: 'Music & Percussion Class', desc: 'Singing songs and learning rhythms' },
+    { id: 7, category: 'Playtime', color: '#FF6B5A', img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=700&auto=format&fit=crop', title: 'Outdoor Playground Fun', desc: 'Fresh air, slides, and group games' },
+    { id: 8, category: 'Events', color: '#FFC107', img: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=700&auto=format&fit=crop', title: 'Birthday Celebrations', desc: 'Blowing candles with preschool classmates' },
+    { id: 9, category: 'Activities', color: '#0284C7', img: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=700&auto=format&fit=crop', title: 'Group STEM Discovery', desc: 'Exploring plant growth and water play' },
+    { id: 10, category: 'Playtime', color: '#10B981', img: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=700&auto=format&fit=crop', title: 'Little Best Friends', desc: 'Creating lifelong social memories' },
+    { id: 11, category: 'Events', color: '#FF6B5A', img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=700&auto=format&fit=crop', title: 'Nature Field Trip', desc: 'Discovering butterflies and flowers' },
+    { id: 12, category: 'Classroom', color: '#8B5CF6', img: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=700&auto=format&fit=crop', title: 'Bright Learning Spaces', desc: 'Thoughtfully curated classroom corners' },
   ];
 
   const filteredPhotos = activeCategory === 'All' 
@@ -71,8 +84,13 @@ export default function Gallery() {
 
   return (
     <PageWrapper>
-      {/* Hero Section */}
+      {/* HERO SECTION */}
       <section className={styles.hero}>
+        <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
+        <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
+        <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
+        <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
+
         <div className="container">
           <motion.div 
             className={styles.heroContent}
@@ -80,14 +98,16 @@ export default function Gallery() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="badge-pill">Life at Happy Hearts</span>
-            <h1>Photo Gallery</h1>
+            <span className="badge-pill badge-sky">📸 Life at Happy Hearts</span>
+            <h1>Vibrant <span className="text-gradient">Photo Gallery</span> 🎨</h1>
             <p>Step inside our vibrant world of laughter, creative discovery, and daily adventures.</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Gallery Section */}
+      <WavyDivider fill="#FFFBEB" />
+
+      {/* GALLERY SECTION (Alternating Background 1: Soft Yellow Tint) */}
       <section className={styles.gallerySection}>
         <div className="container">
           
@@ -96,7 +116,7 @@ export default function Gallery() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                className={`${styles.filterBtn} ${activeCategory === cat ? styles.active : ''} interactive`}
+                className={`${styles.filterBtn} ${activeCategory === cat ? styles.active : ''}`}
                 onClick={() => {
                   setActiveCategory(cat);
                   setSelectedPhotoIndex(null);
@@ -118,14 +138,15 @@ export default function Gallery() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
-                  className={`${styles.photoItem} interactive`}
+                  className={styles.photoItem}
                   onClick={() => setSelectedPhotoIndex(idx)}
+                  style={{ borderColor: photo.color }}
                 >
                   <img src={photo.img} alt={photo.title} className={styles.galleryImg} />
                   <div className={styles.photoOverlay}>
-                    <span className={styles.zoomIcon}><Maximize2 size={24} /></span>
+                    <span className={styles.zoomIcon}><Maximize2 size={22} /></span>
                     <span className={styles.photoTitle}>{photo.title}</span>
-                    <span className={styles.photoCatBadge}>{photo.category}</span>
+                    <span className={styles.photoCatBadge} style={{ backgroundColor: photo.color }}>{photo.category}</span>
                   </div>
                 </motion.div>
               ))}
@@ -134,18 +155,16 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Brand Animation */}
+      {/* BRAND CALLOUT BOX */}
       <section className={styles.brandSection}>
         <div className="container">
-          <motion.h2 
-            className={styles.bigText}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            HAPPY <span className={styles.bigHeart}>💛</span> HEARTS
-          </motion.h2>
+          <div className={styles.brandBox}>
+            <h2>Experience Happy Hearts in Person! 🚀</h2>
+            <p>Schedule a campus tour to see our joyful classrooms, spacious green play areas, and loving teachers firsthand.</p>
+            <Link to="/contact">
+              <Button size="lg" variant="secondary" icon={<ArrowRight size={20} />}>Book a Tour Today</Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -194,7 +213,7 @@ export default function Gallery() {
               <div className={styles.lightboxMeta}>
                 <h3>{selectedPhoto.title}</h3>
                 {selectedPhoto.desc && <p>{selectedPhoto.desc}</p>}
-                <span className={styles.lightboxBadge}>{selectedPhoto.category}</span>
+                <span className={styles.lightboxBadge} style={{ backgroundColor: selectedPhoto.color }}>{selectedPhoto.category}</span>
               </div>
             </motion.div>
           </motion.div>

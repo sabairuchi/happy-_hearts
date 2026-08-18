@@ -1,76 +1,100 @@
 .hero {
-  padding: 70px 0 50px;
-  background-color: var(--color-bg-secondary);
+  padding: 80px 0 60px;
+  background: linear-gradient(180deg, #FFFCF5 0%, #FFFBEB 100%);
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .heroContent {
-  max-width: 640px;
+  max-width: 760px;
   margin: 0 auto;
 }
 
 .heroContent h1 {
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
-  margin: 16px 0 18px;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin: 16px 0 20px;
+  font-weight: 800;
+  color: var(--color-text-main);
 }
 
 .heroContent p {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: var(--color-text-muted);
+  font-weight: 500;
 }
 
 .gallerySection {
   padding: var(--spacing-section) 0;
+  background: linear-gradient(180deg, #FFFBEB 0%, #F0F9FF 100%);
 }
 
 .filters {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin-bottom: 44px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 
 .filterBtn {
-  background: white;
-  border: 1px solid rgba(45, 49, 66, 0.12);
-  padding: 10px 24px;
+  padding: 10px 22px;
   border-radius: var(--radius-full);
-  font-family: var(--font-heading);
-  font-weight: 600;
-  color: var(--color-text-muted);
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  border: 2px solid rgba(30, 41, 59, 0.12);
+  background-color: var(--color-bg-white);
+  color: var(--color-text-main);
+  font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.filterBtn:hover, .filterBtn.active {
-  border-color: var(--color-accent-coral);
-  color: var(--color-accent-coral);
+.filterBtn:hover {
+  border-color: #FF6B5A;
+  color: #FF5240;
+  transform: translateY(-2px);
 }
 
 .filterBtn.active {
-  background-color: #FFF0F0;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.15);
+  background: linear-gradient(135deg, #FF6B5A 0%, #FF8A50 100%);
+  color: #FFFFFF;
+  border-color: #FF6B5A;
+  box-shadow: 0 8px 20px rgba(255, 107, 90, 0.35);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
-.photoItem {
-  border-radius: var(--radius-md);
-  aspect-ratio: 4/3;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  background-color: var(--color-bg-secondary);
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.photoItem:nth-child(3n) {
-  aspect-ratio: 1;
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.photoItem {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: 0 10px 24px rgba(30, 41, 59, 0.08);
+  border: 5px solid #FFFFFF;
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.photoItem:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(255, 107, 90, 0.2);
 }
 
 .galleryImg {
@@ -87,14 +111,14 @@
 .photoOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.75) 100%);
-  color: white;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(30, 41, 59, 0.88) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  color: #FFFFFF;
 }
 
 .photoItem:hover .photoOverlay {
@@ -105,41 +129,68 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(4px);
-  width: 40px;
-  height: 40px;
+  padding: 8px;
   border-radius: 50%;
+  color: #FFFFFF;
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .photoTitle {
-  font-family: var(--font-heading);
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 4px;
 }
 
 .photoCatBadge {
-  font-size: 0.75rem;
-  background-color: var(--color-accent-coral);
-  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: #FF6B5A;
+  color: #FFFFFF;
   padding: 3px 10px;
   border-radius: var(--radius-full);
-  width: fit-content;
-  text-transform: uppercase;
-  font-weight: 700;
+  align-self: flex-start;
 }
 
-/* Lightbox */
+/* Brand Section */
+.brandSection {
+  padding: var(--spacing-section) 0;
+  background: linear-gradient(180deg, #F0F9FF 0%, #FFFCF5 100%);
+}
+
+.brandBox {
+  background: linear-gradient(135deg, #FF6B5A 0%, #FF9800 60%, #8B5CF6 100%);
+  border-radius: var(--radius-lg);
+  padding: 60px 36px;
+  text-align: center;
+  color: #FFFFFF;
+  box-shadow: 0 20px 45px rgba(255, 107, 90, 0.3);
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.brandBox h2 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+
+.brandBox p {
+  font-size: 1.15rem;
+  max-width: 600px;
+  margin: 0 auto 32px;
+  opacity: 0.96;
+}
+
+/* Lightbox Modal */
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background-color: rgba(15, 17, 23, 0.92);
+  background: rgba(15, 23, 42, 0.92);
   backdrop-filter: blur(8px);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,44 +201,43 @@
   position: absolute;
   top: 24px;
   right: 24px;
-  background-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
   border: none;
-  color: white;
+  border-radius: 50%;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10000;
-  transition: background-color 0.2s;
+  transition: background 0.2s;
 }
 
 .closeBtn:hover {
-  background-color: var(--color-accent-coral);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .navBtn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
   border: none;
-  color: white;
+  border-radius: 50%;
   width: 52px;
   height: 52px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10000;
-  transition: background-color 0.2s;
+  transition: background 0.2s;
+  z-index: 2;
 }
 
 .navBtn:hover {
-  background-color: var(--color-accent-coral);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .prevBtn {
@@ -199,78 +249,41 @@
 }
 
 .lightboxContent {
+  max-width: 860px;
   width: 100%;
-  max-width: 900px;
-  max-height: 85vh;
-  background-color: var(--color-bg-white);
+  background: var(--color-bg-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
 }
 
 .lightboxImg {
   width: 100%;
-  max-height: 65vh;
+  max-height: 70vh;
   object-fit: cover;
 }
 
 .lightboxMeta {
-  padding: 24px;
-  position: relative;
-  background-color: var(--color-bg-white);
+  padding: 24px 30px;
 }
 
 .lightboxMeta h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 6px;
+  font-weight: 800;
 }
 
 .lightboxMeta p {
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  margin-bottom: 12px;
 }
 
 .lightboxBadge {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  background-color: #FFF0F0;
-  color: var(--color-accent-coral);
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
-.brandSection {
-  padding: 40px 0 90px;
-  text-align: center;
-  overflow: hidden;
-}
-
-.bigText {
-  font-size: clamp(3rem, 10vw, 7.5rem);
-  font-family: var(--font-heading);
-  font-weight: 800;
-  color: var(--color-text-main);
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2vw;
-  white-space: nowrap;
-}
-
-.bigHeart {
   display: inline-block;
-  animation: heartbeat 2s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  15%, 45% { transform: scale(1.15); }
-  30%, 60% { transform: scale(1); }
+  background: #FF6B5A;
+  color: #FFFFFF;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
 }

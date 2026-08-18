@@ -6,6 +6,17 @@ import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import styles from './Contact.module.css';
 
+const WavyDivider = ({ fill }: { fill: string }) => (
+  <div className="section-divider-wave">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        fill={fill}
+      />
+    </svg>
+  </div>
+);
+
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -47,8 +58,13 @@ export default function Contact() {
 
   return (
     <PageWrapper>
-      {/* Hero */}
+      {/* HERO SECTION */}
       <section className={styles.hero}>
+        <span className="floating-sticker" style={{ top: '15%', left: '4%', animationDelay: '0s' }}>🎈</span>
+        <span className="floating-sticker" style={{ top: '25%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
+        <span className="floating-sticker" style={{ bottom: '15%', left: '6%', animationDelay: '2.4s' }}>🧸</span>
+        <span className="floating-sticker" style={{ bottom: '10%', right: '8%', animationDelay: '0.8s' }}>⭐</span>
+
         <div className="container">
           <motion.div 
             className={styles.heroContent}
@@ -56,49 +72,59 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="badge-pill">Get in Touch</span>
-            <h1>Contact Happy Hearts</h1>
+            <span className="badge-pill badge-yellow">💌 Get in Touch</span>
+            <h1>Contact <span className="text-gradient">Happy Hearts</span> 🎨</h1>
             <p>Have questions about enrollment, curriculum, or scheduling a visit? We're here to help!</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Main Content */}
+      <WavyDivider fill="#FFFBEB" />
+
+      {/* MAIN SECTION (Alternating Background 1: Soft Yellow Tint) */}
       <section className={styles.mainSection}>
         <div className={`container ${styles.grid}`}>
           
           {/* Contact Info */}
           <div className={styles.infoCol}>
             <Card hoverEffect={false} className={styles.infoCard}>
-              <h2>Contact Information</h2>
+              <h2>Contact Information 📍</h2>
               <p className={styles.infoDesc}>
                 Reach out to our friendly admissions office or stop by for a visit. We look forward to welcoming your family!
               </p>
               
               <ul className={styles.infoList}>
                 <li>
-                  <div className={styles.iconWrapper}><MapPin size={22} /></div>
+                  <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 107, 90, 0.18)' }}>
+                    <MapPin size={24} color="#FF5240" fill="#FFD0CB" />
+                  </div>
                   <div>
                     <strong>Our Location</strong>
                     <p>123 Sunny Lane, Happyville, ST 12345</p>
                   </div>
                 </li>
                 <li>
-                  <div className={styles.iconWrapper}><Phone size={22} /></div>
+                  <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(255, 193, 7, 0.22)' }}>
+                    <Phone size={24} color="#D97706" fill="#FDE68A" />
+                  </div>
                   <div>
                     <strong>Direct Phone Line</strong>
                     <p><a href="tel:+1234567890" className="interactive">+1 (234) 567-890</a></p>
                   </div>
                 </li>
                 <li>
-                  <div className={styles.iconWrapper}><Mail size={22} /></div>
+                  <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(2, 132, 199, 0.18)' }}>
+                    <Mail size={24} color="#0284C7" fill="#BAE6FD" />
+                  </div>
                   <div>
                     <strong>Admissions Email</strong>
                     <p><a href="mailto:hello@happyhearts.edu" className="interactive">hello@happyhearts.edu</a></p>
                   </div>
                 </li>
                 <li>
-                  <div className={styles.iconWrapper}><Clock size={22} /></div>
+                  <div className={styles.iconWrapper} style={{ backgroundColor: 'rgba(16, 185, 129, 0.18)' }}>
+                    <Clock size={24} color="#059669" fill="#A7F3D0" />
+                  </div>
                   <div>
                     <strong>School Hours</strong>
                     <p>Mon - Fri: 7:30 AM - 6:00 PM</p>
@@ -111,11 +137,11 @@ export default function Contact() {
           {/* Form */}
           <div className={styles.formCol}>
             <Card hoverEffect={false} className={styles.formCard}>
-              <h2>Send an Admissions Enquiry</h2>
+              <h2>Send an Admissions Enquiry 📝</h2>
 
               {submitted ? (
                 <div className={styles.successState}>
-                  <CheckCircle2 size={56} color="var(--color-accent-mint)" />
+                  <CheckCircle2 size={56} color="#10B981" />
                   <h3>Enquiry Sent Successfully!</h3>
                   <p>Thank you, {formData.parentName}. Our admissions officer will get in touch with you within 24 hours.</p>
                   <Button variant="outline" onClick={() => setSubmitted(false)}>Send Another Message</Button>
@@ -218,11 +244,13 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* FAQ SECTION */}
+      <WavyDivider fill="#F0F9FF" />
+
+      {/* FAQ SECTION (Alternating Background 2: Soft Sky Blue Tint) */}
       <section className={styles.faqSection}>
         <div className="container">
           <div className={styles.faqHeader}>
-            <span className="badge-pill">Parent Questions</span>
+            <span className="badge-pill badge-sky">❓ Parent Questions</span>
             <h2>Frequently Asked Questions</h2>
           </div>
 
@@ -258,9 +286,9 @@ export default function Contact() {
         <div className="container">
           <div className={styles.mapContainer}>
             <div className={styles.mapPinOverlay}>
-              <MapPin size={32} color="var(--color-accent-coral)" />
+              <MapPin size={32} color="#FF5240" fill="#FFD0CB" />
               <div>
-                <strong>Happy Hearts Campus</strong>
+                <strong>Happy Hearts Campus 🎈</strong>
                 <span>123 Sunny Lane, Happyville</span>
               </div>
             </div>

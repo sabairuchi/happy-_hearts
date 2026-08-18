@@ -12,54 +12,58 @@
   pointer-events: none;
   z-index: 999999;
   transform: translate3d(-100px, -100px, 0);
-  transition: transform 0.03s linear;
+  transition: transform 0.02s linear;
   will-change: transform;
 }
 
 .wallBrushWrapper {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  transform-origin: 2px 2px;
-  transform: rotate(-20deg);
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transform: rotate(-18deg);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .wallBrushWrapper.hovering {
-  transform: rotate(-25deg) scale(1.08);
+  transform: rotate(-22deg) scale(1.08);
 }
 
 .wallBrushWrapper.clicking {
-  transform: rotate(-15deg) scale(0.94);
+  transform: rotate(-12deg) scale(0.94);
 }
 
 .brushSvg {
   filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.16));
 }
 
-/* Wall Paint Splash Droplet */
+/* Organic Wet Paint Splash Droplet */
 .splashBlob {
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
   z-index: 999998;
-  animation: splashFade 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  animation: paintDropletFade 0.75s ease-out forwards;
   will-change: transform, opacity;
 }
 
-@keyframes splashFade {
+@keyframes paintDropletFade {
   0% {
     opacity: 0;
-    transform: scale(0.4) rotate(0deg);
+    transform: scale(0.65) rotate(0deg);
   }
-  20% {
-    opacity: 0.95;
-    transform: scale(1) rotate(15deg);
+  30% {
+    opacity: 0.85;
+    transform: scale(1.04) rotate(12deg);
+  }
+  60% {
+    opacity: 0.7;
+    transform: scale(1) rotate(18deg);
   }
   100% {
     opacity: 0;
-    transform: scale(0.2) translate3d(0, 4px, 0) rotate(45deg);
+    transform: scale(0.3) translate3d(0, 3px, 0) rotate(35deg);
   }
 }
 
@@ -71,17 +75,17 @@
   pointer-events: none;
   z-index: 999998;
   border-radius: 50%;
-  animation: splatterBurst 0.4s ease-out forwards;
+  animation: clickDabBurst 0.45s ease-out forwards;
   will-change: transform, opacity;
 }
 
-@keyframes splatterBurst {
+@keyframes clickDabBurst {
   0% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(0.4);
+    opacity: 0.9;
+    transform: translate3d(0, 0, 0) scale(0.5);
   }
   100% {
     opacity: 0;
-    transform: translate3d(var(--dx), var(--dy), 0) scale(1.1);
+    transform: translate3d(var(--dx), var(--dy), 0) scale(1.05);
   }
 }

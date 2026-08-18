@@ -8,6 +8,7 @@ export interface WallPaintSplash {
   color: string;
   rotation: number;
   borderRadius: string;
+  aspectRatio: string;
 }
 
 export interface ClickSplatter {
@@ -40,6 +41,7 @@ export const useCustomCursor = () => {
   const lastPos = useRef({ x: -100, y: -100 });
   const particleId = useRef(0);
   const colorIdx = useRef(0);
+  const strokeCount = useRef(0);
 
   useEffect(() => {
     // Check coarse pointer (touch devices) or prefers-reduced-motion
@@ -57,51 +59,69 @@ export const useCustomCursor = () => {
       const { clientX, clientY } = e;
       setPosition({ x: clientX, y: clientY });
 
-      // Calculate distance moved since last splash
+      // Calculate distance moved since last paint dab
       const dx = clientX - lastPos.current.x;
       const dy = clientY - lastPos.current.y;
       const distance = Math.hypot(dx, dy);
 
-      // Create a wall paint splash ONLY after ~20px of movement
-      if (distance > 20) {
+      // Create a paint dab ONLY after 28px of cursor movement
+      if (distance > 28) {
         lastPos.current = { x: clientX, y: clientY };
 
-        const color = HAPPY_HEARTS_PALETTE[colorIdx.current % HAPPY_HEARTS_PALETTE.length];
-        colorIdx.current++;
-        setCurrentColor(color);
+        // Keep 3-4 dabs of one color before switching to create natural paint strokes
+        strokeCount.current++;
+        if (strokeCount.current % 4 === 0) {
+          colorIdx.current++;
+        }
 
-        // Irregular wet wall paint droplet shapes
-        const shapes = [
+        const activeColor = HAPPY_HEARTS_PALETTE[colorIdx.current % HAPPY_HEARTS_PALETTE.length];
+        setCurrentColor(activeColor);
+
+        // Organic shapes: droplets, blobs, elongated dabs
+        const organicShapes = [
           '50%',
           '40% 60% 70% 30% / 50% 40% 60% 50%',
           '60% 40% 30% 70% / 40% 60% 40% 60%',
           '35% 65% 55% 45% / 60% 40% 60% 40%',
+          '70% 30% 50% 50% / 30% 70% 50% 50%',
         ];
 
-        const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-        const offsetX = (Math.random() - 0.5) * 10;
-        const offsetY = (Math.random() - 0.5) * 10 + 4;
+        const randomShape = organicShapes[Math.floor(Math.random() * organicShapes.length)];
+        const offsetX = (Math.random() - 0.5) * 8;
+        const offsetY = (Math.random() - 0.5) * 8 + 4;
+
+        // Size distribution: Most 3-7px, some 8-12px, max 14px
+        const randVal = Math.random();
+        let particleSize = 5;
+        if (randVal < 0.6) {
+          particleSize = Math.floor(Math.random() * 5) + 3; // 3-7px
+        } else if (randVal < 0.9) {
+          particleSize = Math.floor(Math.random() * 5) + 8; // 8-12px
+        } else {
+          particleSize = 14;
+        }
 
         const newSplash: WallPaintSplash = {
           id: particleId.current++,
           x: clientX + offsetX,
           y: clientY + offsetY,
-          size: Math.floor(Math.random() * 6) + 4, // 4px to 10px wet paint blob
-          color,
+          size: particleSize,
+          color: activeColor,
           rotation: Math.floor(Math.random() * 360),
           borderRadius: randomShape,
+          aspectRatio: Math.random() > 0.6 ? '1 / 1.4' : '1 / 1',
         };
 
         setSplashes((prev) => {
           const updated = [...prev, newSplash];
-          // Keep maximum 22 active paint splashes for 60fps lightweight performance
+          // Limit maximum active splashes to 22 for lightweight 60fps performance
           return updated.length > 22 ? updated.slice(updated.length - 22) : updated;
         });
 
-        // Splash disappears after 700ms (500–900ms range)
+        // Softly fade away after 750ms (600–1000ms specification range)
         setTimeout(() => {
           setSplashes((prev) => prev.filter((s) => s.id !== newSplash.id));
-        }, 700);
+        }, 750);
       }
     };
 
@@ -126,20 +146,20 @@ export const useCustomCursor = () => {
     const handleMouseDown = (e: MouseEvent) => {
       setIsMouseDown(true);
 
-      // Create a wall-paint click splatter at click location (6-8 tiny droplets)
-      const count = Math.floor(Math.random() * 3) + 6;
+      // Create a small paint dab at click location (5-7 tiny droplets)
+      const count = Math.floor(Math.random() * 3) + 5;
       const newSplatters: ClickSplatter[] = [];
 
       for (let i = 0; i < count; i++) {
         const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
-        const distance = Math.random() * 16 + 6;
+        const distance = Math.random() * 12 + 6;
         const color = HAPPY_HEARTS_PALETTE[(colorIdx.current + i) % HAPPY_HEARTS_PALETTE.length];
 
         newSplatters.push({
           id: particleId.current++,
           x: e.clientX,
           y: e.clientY,
-          size: Math.floor(Math.random() * 4) + 3,
+          size: Math.floor(Math.random() * 3) + 3,
           color,
           dx: Math.cos(angle) * distance,
           dy: Math.sin(angle) * distance,

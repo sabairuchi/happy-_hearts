@@ -11,7 +11,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Wall Paint Splash Droplets */}
+      {/* Organic Wall Paint Splash Droplets */}
       {splashes.map((s) => (
         <div
           key={s.id}
@@ -22,7 +22,8 @@ export default function CustomCursor() {
             height: `${s.size}px`,
             backgroundColor: s.color,
             borderRadius: s.borderRadius,
-            boxShadow: `0 2px 6px ${s.color}66`,
+            aspectRatio: s.aspectRatio,
+            boxShadow: `0 2px 5px ${s.color}55`,
           }}
         />
       ))}
@@ -44,7 +45,7 @@ export default function CustomCursor() {
         />
       ))}
 
-      {/* Small Wall Painting Brush Cursor */}
+      {/* Small Wall Painting Brush Cursor (Hotspot at 0,0) */}
       <div
         className={styles.wallBrushContainer}
         style={{
@@ -56,29 +57,29 @@ export default function CustomCursor() {
             isMouseDown ? styles.clicking : ''
           }`}
         >
-          {/* Authentic Small Wall Paint Brush SVG (24px, flat bristles, ferrule, small handle) */}
+          {/* Miniature 20px Wall Painting Brush SVG */}
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
             fill="none"
             className={styles.brushSvg}
           >
-            {/* Wet Wall Paint Tip on Bristle Edge */}
+            {/* Wet Paint Tip on Bristle Edge */}
             <path
-              d="M 2 2 C 2 1.2 2.8 0.5 3.8 0.5 H 12.2 C 13.2 0.5 14 1.2 14 2 V 6 H 2 Z"
+              d="M 1 1 C 1 0.5 1.5 0 2.2 0 H 10.8 C 11.5 0 12 0.5 12 1 V 5 H 1 Z"
               fill={currentColor}
             />
 
-            {/* Flat Wall Brush Bristles */}
-            <rect x="2" y="6" width="12" height="4" fill="#CBD5E1" />
+            {/* Flat Bristle Base */}
+            <rect x="1" y="5" width="11" height="3" fill="#CBD5E1" />
 
             {/* Metal Ferrule Band */}
-            <rect x="2.5" y="10" width="11" height="3" fill="#64748B" rx="0.5" />
+            <rect x="1.5" y="8" width="10" height="2.5" fill="#64748B" rx="0.5" />
 
-            {/* Small Wooden Handle */}
+            {/* Short Wooden Handle */}
             <path
-              d="M 6 13 V 21 C 6 22 7 23 8 23 C 9 23 10 22 10 21 V 13 Z"
+              d="M 5 10.5 V 18 C 5 19 6 19.5 6.5 19.5 C 7 19.5 8 19 8 18 V 10.5 Z"
               fill="#B45309"
             />
           </svg>

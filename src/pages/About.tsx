@@ -51,8 +51,11 @@ export default function About() {
             <div className={styles.imageFrame}>
               <img 
                 src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=900&auto=format&fit=crop" 
-                alt="Children in bright classroom" 
+                alt="Preschool teacher and children engaging in interactive story circle learning in a bright Happy Hearts classroom" 
                 className={styles.aboutImg} 
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=900&auto=format&fit=crop';
+                }}
               />
             </div>
           </div>
@@ -180,33 +183,41 @@ export default function About() {
           <div className={styles.facilitiesGrid}>
             {[
               {
-                icon: <Blocks size={32} color="#FF5252" fill="#FFCDD2" />,
+                icon: <Blocks size={28} color="#FF5252" fill="#FFCDD2" />,
                 title: 'Interactive Learning Zones',
                 desc: 'Equipped with Montessori toys, reading nooks, and STEM discovery kits.',
+                image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=600&auto=format&fit=crop',
+                alt: 'Preschool toddlers exploring interactive Montessori learning zones and puzzles',
                 bg: '#FFE5E5',
                 border: '#FF6B6B',
                 iconBg: 'rgba(255, 107, 107, 0.18)'
               },
               {
-                icon: <Trees size={32} color="#2E7D32" fill="#C8E6C9" />,
+                icon: <Trees size={28} color="#2E7D32" fill="#C8E6C9" />,
                 title: 'Outdoor Green Playground',
                 desc: 'Soft-impact flooring, sensory garden, and child-safe climbing structures.',
+                image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600&auto=format&fit=crop',
+                alt: 'Preschool children playing on the green outdoor playground',
                 bg: '#EAFAF1',
                 border: '#6BCB77',
                 iconBg: 'rgba(107, 203, 119, 0.22)'
               },
               {
-                icon: <Utensils size={32} color="#B78103" fill="#FFF2B2" />,
+                icon: <Utensils size={28} color="#B78103" fill="#FFF2B2" />,
                 title: 'Nutritious Meal Service',
                 desc: 'Freshly prepared organic meals and snacks planned by pediatric nutritionists.',
+                image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop',
+                alt: 'Preschool children sitting at a table eating fresh fruit snacks with teacher guidance',
                 bg: '#FFF3E0',
                 border: '#FFD93D',
                 iconBg: 'rgba(255, 217, 61, 0.25)'
               },
               {
-                icon: <CloudMoon size={32} color="#1565C0" fill="#D6E4FF" />,
+                icon: <CloudMoon size={28} color="#1565C0" fill="#D6E4FF" />,
                 title: 'Rest & Quiet Rooms',
                 desc: 'Sanitized, peaceful sleeping quarters for infants and crèche toddlers.',
+                image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop',
+                alt: 'Sanitized peaceful sleeping quarters and daycare nursery for crèche toddlers',
                 bg: '#EBF5FF',
                 border: '#4D96FF',
                 iconBg: 'rgba(77, 150, 255, 0.18)'
@@ -220,12 +231,22 @@ export default function About() {
                   border: `2.5px solid ${facility.border}`
                 }}
               >
-                <div className={styles.facilityIconWrapper} style={{ backgroundColor: facility.iconBg }}>
-                  {facility.icon}
-                </div>
-                <div>
-                  <h4>{facility.title}</h4>
-                  <p>{facility.desc}</p>
+                <img 
+                  src={facility.image} 
+                  alt={facility.alt} 
+                  className={styles.facilityImg} 
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop';
+                  }}
+                />
+                <div className={styles.facilityHeader}>
+                  <div className={styles.facilityIconWrapper} style={{ backgroundColor: facility.iconBg }}>
+                    {facility.icon}
+                  </div>
+                  <div>
+                    <h4>{facility.title}</h4>
+                    <p>{facility.desc}</p>
+                  </div>
                 </div>
               </Card>
             ))}

@@ -23,6 +23,8 @@ export default function Admission() {
       age: '6 Months - 2 Years',
       desc: 'Safe, nurturing environment with sensory play, loving caregivers, and structured nap & meal routines.',
       fee: '$200/mo + Crèche Care',
+      image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop',
+      alt: 'Daycare caregiver nurturing toddlers during nap and play routine',
       bg: '#FFF0F0',
       border: '#FF6B5A',
       badgeColor: '#FF5240'
@@ -32,6 +34,8 @@ export default function Admission() {
       age: '1.5 - 2.5 Years',
       desc: 'Interactive social play, language development, music & motor skill activities.',
       fee: '$250/mo tuition',
+      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop',
+      alt: 'Playgroup toddlers finger painting and learning together at a classroom table',
       bg: '#FFFBEB',
       border: '#FFC107',
       badgeColor: '#D97706'
@@ -41,6 +45,8 @@ export default function Admission() {
       age: '2.5 - 3.5 Years',
       desc: 'Early literacy, numbers, creative arts, and foundational independence.',
       fee: '$280/mo tuition',
+      image: 'https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=600&auto=format&fit=crop',
+      alt: 'Nursery children listening to teacher picture book storytelling in library circle',
       bg: '#ECFDF5',
       border: '#10B981',
       badgeColor: '#059669'
@@ -50,6 +56,8 @@ export default function Admission() {
       age: '3.5 - 5.0 Years',
       desc: 'Comprehensive school-readiness curriculum focusing on cognitive, social, and emotional growth.',
       fee: '$300/mo tuition',
+      image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=600&auto=format&fit=crop',
+      alt: 'Kindergarten children building Montessori puzzles and STEM blocks',
       bg: '#F0F9FF',
       border: '#0284C7',
       badgeColor: '#0284C7'
@@ -118,6 +126,14 @@ export default function Admission() {
                   borderTop: `6px solid ${p.badgeColor}`
                 }}
               >
+                <img 
+                  src={p.image} 
+                  alt={p.alt} 
+                  className={styles.programImg}
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop';
+                  }}
+                />
                 <span className={styles.programBadge} style={{ backgroundColor: 'rgba(255,255,255,0.9)', color: p.badgeColor }}>
                   {p.age}
                 </span>

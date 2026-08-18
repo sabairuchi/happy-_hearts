@@ -34,7 +34,7 @@ export default function Admission() {
       age: '1.5 - 2.5 Years',
       desc: 'Interactive social play, language development, music & motor skill activities.',
       fee: '$250/mo tuition',
-      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop',
+      image: '/images/finger-painting.jpg',
       alt: 'Playgroup toddlers finger painting and learning together at a classroom table',
       bg: '#FFFBEB',
       border: '#FFC107',

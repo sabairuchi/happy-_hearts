@@ -40,10 +40,10 @@ export default function Gallery() {
       id: 1, 
       category: 'Activities', 
       color: '#FF6B6B', 
-      img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=900&auto=format&fit=crop', 
+      img: '/images/finger-painting.jpg', 
       title: 'Playgroup Finger Painting & Art Studio 🎨', 
       desc: 'Playgroup toddlers exploring primary color mixing, tactile canvas creation, and fine motor finger expression with certified non-toxic washable paints.',
-      alt: 'Preschool children actively finger painting with colorful paints at a classroom art table under teacher guidance'
+      alt: 'Preschool teacher and children finger painting together with bright colorful paints under Little Artists At Work sign'
     },
     { 
       id: 2, 

@@ -49,136 +49,147 @@ export default function Login() {
 
   return (
     <PageWrapper>
-      <div className="container">
-        <div className={styles.loginContainer}>
-          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-            <div
-              style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: 'var(--radius-sm)',
-                backgroundColor: 'rgba(255, 107, 107, 0.12)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 12px auto'
-              }}
-            >
-              <Heart size={26} fill="#FF6B6B" color="#FF6B6B" />
-            </div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 800 }}>Portal Sign In</h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
-              Sign in to access your customized portal experience
-            </p>
-          </div>
+      <section className={styles.loginPageSection}>
+        {/* Floating Playful Stickers */}
+        <span className="floating-sticker" style={{ top: '8%', left: '4%', animationDelay: '0s' }}>🎈</span>
+        <span className="floating-sticker" style={{ top: '15%', right: '5%', animationDelay: '1.2s' }}>🎨</span>
+        <span className="floating-sticker" style={{ bottom: '15%', left: '5%', animationDelay: '2.4s' }}>🧸</span>
+        <span className="floating-sticker" style={{ bottom: '10%', right: '6%', animationDelay: '0.8s' }}>⭐</span>
 
-          {/* Role Tabs */}
-          <div className={styles.roleTabs}>
-            <button
-              type="button"
-              className={`${styles.tabBtn} ${role === 'PARENT' ? styles.active : ''}`}
-              onClick={() => setRole('PARENT')}
-            >
-              Parent Portal
-            </button>
-            <button
-              type="button"
-              className={`${styles.tabBtn} ${role === 'TEACHER' ? styles.active : ''}`}
-              onClick={() => setRole('TEACHER')}
-            >
-              Teacher Portal
-            </button>
-            <button
-              type="button"
-              className={`${styles.tabBtn} ${role === 'ADMIN' ? styles.active : ''}`}
-              onClick={() => setRole('ADMIN')}
-            >
-              Admin Portal
-            </button>
-          </div>
-
-          {/* Demo Quick Logins Box */}
-          <div className={styles.demoBanner}>
-            <div style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Zap size={16} color="#B38600" /> One-Click Quick Demo Sign In:
+        <div className="container">
+          <div className={styles.loginContainer}>
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <div
+                style={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '50%',
+                  backgroundColor: '#FFE5E5',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 12px auto',
+                  border: '2px solid #FF6B6B'
+                }}
+              >
+                <Heart size={28} fill="#FF5252" color="#FF5252" />
+              </div>
+              <span className="badge-pill badge-yellow" style={{ marginBottom: '8px' }}>🔐 Portal Access Gateway</span>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 800 }}>Portal Sign In</h2>
+              <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                Sign in to access your customized portal experience
+              </p>
             </div>
-            <div className={styles.demoRow}>
-              <span>Demo Parent:</span>
-              <Button size="sm" variant="accent" onClick={() => handleQuickDemo('PARENT')}>
-                Sign In as Parent
+
+            {/* Role Tabs */}
+            <div className={styles.roleTabs}>
+              <button
+                type="button"
+                className={`${styles.tabBtn} ${role === 'PARENT' ? styles.active : ''}`}
+                onClick={() => setRole('PARENT')}
+              >
+                Parent Portal
+              </button>
+              <button
+                type="button"
+                className={`${styles.tabBtn} ${role === 'TEACHER' ? styles.active : ''}`}
+                onClick={() => setRole('TEACHER')}
+              >
+                Teacher Portal
+              </button>
+              <button
+                type="button"
+                className={`${styles.tabBtn} ${role === 'ADMIN' ? styles.active : ''}`}
+                onClick={() => setRole('ADMIN')}
+              >
+                Admin Portal
+              </button>
+            </div>
+
+            {/* Demo Quick Logins Box */}
+            <div className={styles.demoBanner}>
+              <div style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', color: '#B78103' }}>
+                <Zap size={16} color="#B78103" /> One-Click Quick Demo Sign In:
+              </div>
+              <div className={styles.demoRow}>
+                <span style={{ fontWeight: 600 }}>Demo Parent:</span>
+                <Button size="sm" variant="accent" onClick={() => handleQuickDemo('PARENT')}>
+                  Sign In as Parent
+                </Button>
+              </div>
+              <div className={styles.demoRow}>
+                <span style={{ fontWeight: 600 }}>Demo Teacher:</span>
+                <Button size="sm" variant="secondary" onClick={() => handleQuickDemo('TEACHER')}>
+                  Sign In as Teacher
+                </Button>
+              </div>
+              <div className={styles.demoRow}>
+                <span style={{ fontWeight: 600 }}>Demo Admin:</span>
+                <Button size="sm" variant="outline" onClick={() => handleQuickDemo('ADMIN')}>
+                  Sign In as Admin
+                </Button>
+              </div>
+            </div>
+
+            {errorMsg && (
+              <div
+                style={{
+                  backgroundColor: '#FFE5E5',
+                  color: '#FF5252',
+                  border: '2px solid #FF6B6B',
+                  padding: '10px 14px',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: '0.85rem',
+                  marginBottom: '1rem',
+                  fontWeight: 600
+                }}
+              >
+                {errorMsg}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formGroup}>
+                <label>Email Address</label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Password</span>
+                  <Link to="/forgot-password" style={{ fontSize: '0.8rem', color: '#FF5252', fontWeight: 700 }}>
+                    Forgot?
+                  </Link>
+                </label>
+                <input
+                  type="password"
+                  required
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+              </div>
+
+              <Button fullWidth variant="primary" type="submit" icon={<LogIn size={18} />}>
+                Sign In as {role} →
               </Button>
-            </div>
-            <div className={styles.demoRow}>
-              <span>Demo Teacher:</span>
-              <Button size="sm" variant="secondary" onClick={() => handleQuickDemo('TEACHER')}>
-                Sign In as Teacher
-              </Button>
-            </div>
-            <div className={styles.demoRow}>
-              <span>Demo Admin:</span>
-              <Button size="sm" variant="outline" onClick={() => handleQuickDemo('ADMIN')}>
-                Sign In as Admin
-              </Button>
-            </div>
-          </div>
+            </form>
 
-          {errorMsg && (
-            <div
-              style={{
-                backgroundColor: 'rgba(238, 82, 83, 0.12)',
-                color: '#EE5253',
-                padding: '10px 14px',
-                borderRadius: 'var(--radius-sm)',
-                fontSize: '0.85rem',
-                marginBottom: '1rem',
-                fontWeight: 600
-              }}
-            >
-              {errorMsg}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <label>Email Address</label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Password</span>
-                <Link to="/forgot-password" style={{ fontSize: '0.8rem', color: 'var(--color-accent-coral)' }}>
-                  Forgot?
+            {role === 'PARENT' && (
+              <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
+                Don't have a parent account yet?{' '}
+                <Link to="/register" style={{ fontWeight: 700, color: 'var(--color-accent-coral)' }}>
+                  Register Parent Account
                 </Link>
-              </label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </div>
-
-            <Button fullWidth variant="primary" type="submit" icon={<LogIn size={18} />}>
-              Sign In as {role}
-            </Button>
-          </form>
-
-          {role === 'PARENT' && (
-            <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-              Don't have a parent account yet?{' '}
-              <Link to="/register" style={{ fontWeight: 700, color: 'var(--color-accent-coral)' }}>
-                Register Parent Account
-              </Link>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </section>
     </PageWrapper>
   );
 }

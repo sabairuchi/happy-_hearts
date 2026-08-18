@@ -62,13 +62,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: none;
-}
-
-@media (max-width: 1024px) {
-  * {
-    cursor: auto;
-  }
 }
 
 html {

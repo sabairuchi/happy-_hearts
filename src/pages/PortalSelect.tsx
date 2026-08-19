@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShieldCheck, BookOpen, Users, ArrowRight, Sparkles } from 'lucide-react';
+import { BookOpen, Users, ArrowRight, Sparkles } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';

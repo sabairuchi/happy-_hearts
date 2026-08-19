@@ -167,7 +167,7 @@ export default function Gallery() {
     }
   };
 
-  // Keyboard Navigation for Lightbox Modal
+  // Keyboard Navigation & Body Scroll Lock for Lightbox Modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedPhotoIndex === null) return;
@@ -175,8 +175,18 @@ export default function Gallery() {
       if (e.key === 'ArrowRight') setSelectedPhotoIndex((selectedPhotoIndex + 1) % filteredPhotos.length);
       if (e.key === 'ArrowLeft') setSelectedPhotoIndex((selectedPhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length);
     };
+
+    if (selectedPhotoIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
   }, [selectedPhotoIndex, filteredPhotos.length]);
 
   return (
@@ -302,53 +312,77 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={() => setSelectedPhotoIndex(null)}
           >
-            <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
-              <button 
-                className={styles.closeBtn} 
-                onClick={() => setSelectedPhotoIndex(null)}
-                aria-label="Close Lightbox"
-              >
-                <X size={26} />
-              </button>
+            {/* Top Fixed Close Button */}
+            <button 
+              className={styles.closeBtn} 
+              onClick={() => setSelectedPhotoIndex(null)}
+              aria-label="Close Lightbox"
+            >
+              <X size={26} />
+            </button>
 
-              <button 
-                className={`${styles.navBtn} ${styles.prevBtn}`} 
-                onClick={handlePrev}
-                aria-label="Previous Photo"
-              >
-                <ChevronLeft size={32} />
-              </button>
+            {/* Previous Button */}
+            <button 
+              className={`${styles.navBtn} ${styles.prevBtn}`} 
+              onClick={handlePrev}
+              aria-label="Previous Photo"
+            >
+              <ChevronLeft size={32} />
+            </button>
 
-              <img 
-                src={selectedPhoto.img} 
-                alt={selectedPhoto.alt} 
-                className={styles.lightboxImg}
-                onError={(e) => {
-                  e.currentTarget.src = '/images/music-class.jpg';
-                }}
-              />
+            {/* Next Button */}
+            <button 
+              className={`${styles.navBtn} ${styles.nextBtn}`} 
+              onClick={handleNext}
+              aria-label="Next Photo"
+            >
+              <ChevronRight size={32} />
+            </button>
 
-              <div className={styles.lightboxMeta}>
-                <span className={styles.lightboxCategory} style={{ backgroundColor: selectedPhoto.color }}>
-                  {selectedPhoto.category}
-                </span>
-                <h3>{selectedPhoto.title}</h3>
-                <p>{selectedPhoto.desc}</p>
-                <span className={styles.counterText}>
-                  Photo {selectedPhotoIndex !== null ? selectedPhotoIndex + 1 : 1} of {filteredPhotos.length}
-                </span>
+            {/* Modal Card Box */}
+            <motion.div 
+              className={styles.lightboxContent}
+              initial={{ scale: 0.92, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.92, opacity: 0, y: 15 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={styles.lightboxImgWrapper}>
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={selectedPhoto.id}
+                    src={selectedPhoto.img} 
+                    alt={selectedPhoto.alt} 
+                    className={styles.lightboxImg}
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.2 }}
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/music-class.jpg';
+                    }}
+                  />
+                </AnimatePresence>
               </div>
 
-              <button 
-                className={`${styles.navBtn} ${styles.nextBtn}`} 
-                onClick={handleNext}
-                aria-label="Next Photo"
-              >
-                <ChevronRight size={32} />
-              </button>
-            </div>
+              <div className={styles.lightboxMeta}>
+                <div className={styles.lightboxMetaHeader}>
+                  <span className={styles.lightboxCategory} style={{ backgroundColor: selectedPhoto.color }}>
+                    {selectedPhoto.category}
+                  </span>
+                  <span className={styles.counterText}>
+                    Photo {selectedPhotoIndex !== null ? selectedPhotoIndex + 1 : 1} of {filteredPhotos.length}
+                  </span>
+                </div>
+
+                <h3 className={styles.lightboxTitle}>{selectedPhoto.title}</h3>
+                <p className={styles.lightboxDesc}>{selectedPhoto.desc}</p>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -11,6 +11,7 @@ import type {
   ProgressReport,
   DailyUpdate,
   Notification,
+  Announcement,
   ApplicationStatus
 } from '../types';
 import {
@@ -24,7 +25,8 @@ import {
   initialAttendance,
   initialProgressReports,
   initialDailyUpdates,
-  initialNotifications
+  initialNotifications,
+  initialAnnouncements
 } from '../services/mockData';
 
 interface DataContextType {
@@ -39,20 +41,33 @@ interface DataContextType {
   progressReports: ProgressReport[];
   dailyUpdates: DailyUpdate[];
   notifications: Notification[];
+  announcements: Announcement[];
 
   // Methods
   submitAdmission: (data: Omit<AdmissionApplication, 'id' | 'submittedAt' | 'status'>) => AdmissionApplication;
   updateAdmissionStatus: (id: string, status: ApplicationStatus, remarks?: string, missingDocs?: string) => void;
+  convertAdmissionToStudent: (applicationId: string, classId: string, teacherId: string) => Student | null;
   addStudent: (data: Omit<Student, 'id' | 'admissionNumber'>) => Student;
   updateStudent: (student: Student) => void;
+  deleteStudent: (id: string) => void;
+  toggleStudentStatus: (id: string, status: 'Active' | 'Inactive' | 'Graduated') => void;
+  addParent: (data: Omit<Parent, 'id' | 'childrenIds'>) => Parent;
+  updateParent: (parent: Parent) => void;
+  toggleParentStatus: (id: string) => void;
   addTeacher: (data: Omit<Teacher, 'id' | 'joinedDate'>) => Teacher;
   updateTeacher: (teacher: Teacher) => void;
+  toggleTeacherStatus: (id: string) => void;
+  deleteTeacher: (id: string) => void;
   processPayment: (paymentId: string, paymentMethod: 'UPI' | 'Credit Card' | 'Debit Card' | 'Net Banking' | 'Cash') => boolean;
   markAttendanceBatch: (records: Omit<AttendanceRecord, 'id'>[]) => void;
   saveDailyUpdate: (update: Omit<DailyUpdate, 'id'>) => DailyUpdate;
   saveProgressReport: (report: Omit<ProgressReport, 'id' | 'evaluatedDate'>) => ProgressReport;
   broadcastNotification: (notif: Omit<Notification, 'id' | 'date' | 'isRead'>) => Notification;
   markNotificationRead: (id: string) => void;
+  addAnnouncement: (data: Omit<Announcement, 'id' | 'date'>) => Announcement;
+  updateAnnouncement: (announcement: Announcement) => void;
+  deleteAnnouncement: (id: string) => void;
+  togglePublishAnnouncement: (id: string) => void;
   getStudentById: (id: string) => Student | undefined;
   getParentChildren: (parentId: string) => Student[];
   getTeacherStudents: (teacherId: string) => Student[];
@@ -95,6 +110,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [progressReports, setProgressReports] = useLocalStorageState<ProgressReport[]>('progress_reports', initialProgressReports);
   const [dailyUpdates, setDailyUpdates] = useLocalStorageState<DailyUpdate[]>('daily_updates', initialDailyUpdates);
   const [notifications, setNotifications] = useLocalStorageState<Notification[]>('notifications', initialNotifications);
+  const [announcements, setAnnouncements] = useLocalStorageState<Announcement[]>('announcements', initialAnnouncements);
 
   const submitAdmission = (data: Omit<AdmissionApplication, 'id' | 'submittedAt' | 'status'>): AdmissionApplication => {
     const id = `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -135,7 +151,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
             missingDocumentsNote: missingDocs !== undefined ? missingDocs : app.missingDocumentsNote
           };
 
-          // If approved, ensure parent account exists or link student if auto-admitted
           if (status === 'Admitted') {
             updated.feeStatus = 'PAID';
           }
@@ -144,6 +159,64 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         return app;
       })
     );
+  };
+
+  const convertAdmissionToStudent = (applicationId: string, classId: string, teacherId: string): Student | null => {
+    const app = applications.find(a => a.id === applicationId);
+    if (!app) return null;
+
+    const selClass = classes.find(c => c.id === classId);
+    const selTeacher = teachers.find(t => t.id === teacherId);
+
+    // Check if parent account exists, or create one
+    let parentObj = parents.find(p => p.email.toLowerCase() === app.parentEmail.toLowerCase());
+    if (!parentObj) {
+      parentObj = {
+        id: `prt-${Date.now()}`,
+        userId: `usr-prt-${Date.now()}`,
+        name: app.parentName,
+        email: app.parentEmail,
+        mobile: app.parentMobile,
+        altPhone: app.parentAltPhone,
+        address: app.parentAddress,
+        relationship: app.parentRelationship,
+        childrenIds: [],
+        isActive: true
+      };
+      setParents(prev => [...prev, parentObj!]);
+    }
+
+    const admissionNumber = `HH-2026-${String(students.length + 1).padStart(3, '0')}`;
+    const newStudent: Student = {
+      id: `std-${Date.now()}`,
+      admissionNumber,
+      applicationId: app.id,
+      name: app.childFullName,
+      dob: app.childDob,
+      gender: app.childGender,
+      classId,
+      className: selClass?.name || app.applyingForProgram,
+      teacherId,
+      teacherName: selTeacher?.name || 'Assigned Educator',
+      parentId: parentObj.id,
+      parentName: parentObj.name,
+      parentEmail: parentObj.email,
+      parentMobile: parentObj.mobile,
+      emergencyName: app.emergencyName,
+      emergencyPhone: app.emergencyPhone,
+      joiningDate: new Date().toISOString().split('T')[0],
+      status: 'Active'
+    };
+
+    setStudents(prev => [...prev, newStudent]);
+    setParents(prev =>
+      prev.map(p => (p.id === parentObj!.id ? { ...p, childrenIds: Array.from(new Set([...p.childrenIds, newStudent.id])) } : p))
+    );
+
+    // Update application status to Admitted
+    updateAdmissionStatus(applicationId, 'Admitted', 'Converted to enrolled student profile.');
+
+    return newStudent;
   };
 
   const addStudent = (data: Omit<Student, 'id' | 'admissionNumber'>): Student => {
@@ -155,7 +228,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     };
     setStudents(prev => [...prev, newStudent]);
 
-    // Update parent's linked children
     setParents(prev =>
       prev.map(p => {
         if (p.id === data.parentId) {
@@ -172,6 +244,33 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     setStudents(prev => prev.map(s => (s.id === student.id ? student : s)));
   };
 
+  const deleteStudent = (id: string) => {
+    setStudents(prev => prev.filter(s => s.id !== id));
+  };
+
+  const toggleStudentStatus = (id: string, status: 'Active' | 'Inactive' | 'Graduated') => {
+    setStudents(prev => prev.map(s => (s.id === id ? { ...s, status } : s)));
+  };
+
+  const addParent = (data: Omit<Parent, 'id' | 'childrenIds'>): Parent => {
+    const newParent: Parent = {
+      ...data,
+      id: `prt-${Date.now()}`,
+      childrenIds: [],
+      isActive: true
+    };
+    setParents(prev => [...prev, newParent]);
+    return newParent;
+  };
+
+  const updateParent = (parent: Parent) => {
+    setParents(prev => prev.map(p => (p.id === parent.id ? parent : p)));
+  };
+
+  const toggleParentStatus = (id: string) => {
+    setParents(prev => prev.map(p => (p.id === id ? { ...p, isActive: p.isActive === false ? true : false } : p)));
+  };
+
   const addTeacher = (data: Omit<Teacher, 'id' | 'joinedDate'>): Teacher => {
     const newTeacher: Teacher = {
       ...data,
@@ -184,6 +283,14 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
 
   const updateTeacher = (teacher: Teacher) => {
     setTeachers(prev => prev.map(t => (t.id === teacher.id ? teacher : t)));
+  };
+
+  const toggleTeacherStatus = (id: string) => {
+    setTeachers(prev => prev.map(t => (t.id === id ? { ...t, isActive: !t.isActive } : t)));
+  };
+
+  const deleteTeacher = (id: string) => {
+    setTeachers(prev => prev.filter(t => t.id !== id));
   };
 
   const processPayment = (paymentId: string, paymentMethod: 'UPI' | 'Credit Card' | 'Debit Card' | 'Net Banking' | 'Cash'): boolean => {
@@ -215,7 +322,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
 
   const markAttendanceBatch = (records: Omit<AttendanceRecord, 'id'>[]) => {
     setAttendance(prev => {
-      // Remove any existing records for the same date & student
       const date = records[0]?.date;
       const filtered = prev.filter(r => r.date !== date || !records.some(rec => rec.studentId === r.studentId));
       const newEntries: AttendanceRecord[] = records.map(r => ({
@@ -260,6 +366,43 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     setNotifications(prev => prev.map(n => (n.id === id ? { ...n, isRead: true } : n)));
   };
 
+  const addAnnouncement = (data: Omit<Announcement, 'id' | 'date'>): Announcement => {
+    const today = new Date().toISOString().split('T')[0];
+    const newAnnouncement: Announcement = {
+      ...data,
+      id: `anc-${Date.now()}`,
+      date: today,
+      publishedAt: data.status === 'Published' ? today : undefined
+    };
+    setAnnouncements(prev => [newAnnouncement, ...prev]);
+    return newAnnouncement;
+  };
+
+  const updateAnnouncement = (announcement: Announcement) => {
+    setAnnouncements(prev => prev.map(a => (a.id === announcement.id ? announcement : a)));
+  };
+
+  const deleteAnnouncement = (id: string) => {
+    setAnnouncements(prev => prev.filter(a => a.id !== id));
+  };
+
+  const togglePublishAnnouncement = (id: string) => {
+    const today = new Date().toISOString().split('T')[0];
+    setAnnouncements(prev =>
+      prev.map(a => {
+        if (a.id === id) {
+          const nextStatus = a.status === 'Published' ? 'Unpublished' : 'Published';
+          return {
+            ...a,
+            status: nextStatus,
+            publishedAt: nextStatus === 'Published' ? today : a.publishedAt
+          };
+        }
+        return a;
+      })
+    );
+  };
+
   const getStudentById = (id: string) => students.find(s => s.id === id);
 
   const getParentChildren = (parentId: string) => {
@@ -292,18 +435,31 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         progressReports,
         dailyUpdates,
         notifications,
+        announcements,
         submitAdmission,
         updateAdmissionStatus,
+        convertAdmissionToStudent,
         addStudent,
         updateStudent,
+        deleteStudent,
+        toggleStudentStatus,
+        addParent,
+        updateParent,
+        toggleParentStatus,
         addTeacher,
         updateTeacher,
+        toggleTeacherStatus,
+        deleteTeacher,
         processPayment,
         markAttendanceBatch,
         saveDailyUpdate,
         saveProgressReport,
         broadcastNotification,
         markNotificationRead,
+        addAnnouncement,
+        updateAnnouncement,
+        deleteAnnouncement,
+        togglePublishAnnouncement,
         getStudentById,
         getParentChildren,
         getTeacherStudents,
@@ -322,3 +478,4 @@ export const useData = () => {
   }
   return context;
 };
+

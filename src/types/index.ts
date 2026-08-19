@@ -109,6 +109,7 @@ export interface Parent {
   relationship: string;
   occupation?: string;
   childrenIds: string[];
+  isActive?: boolean;
 }
 
 export interface Student {
@@ -236,3 +237,16 @@ export interface Notification {
   isRead: boolean;
   createdBy: string;
 }
+
+export interface Announcement {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  targetAudience: 'All Parents' | 'Teachers' | 'Specific Program' | 'Everyone';
+  programName?: string;
+  status: 'Published' | 'Draft' | 'Unpublished';
+  author: string;
+  publishedAt?: string;
+}
+

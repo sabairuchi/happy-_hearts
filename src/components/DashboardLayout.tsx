@@ -15,7 +15,8 @@ import {
   User, 
   Settings,
   GraduationCap,
-  BookOpen
+  BookOpen,
+  Megaphone
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { NotificationBell } from './NotificationBell';
@@ -76,6 +77,7 @@ export const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
         { name: 'Teachers Console', path: '/admin/teachers', icon: <BookOpen size={18} /> },
         { name: 'Fee & Payments', path: '/admin/fees', icon: <CreditCard size={18} /> },
         { name: 'School Attendance', path: '/admin/attendance', icon: <CalendarCheck size={18} /> },
+        { name: 'Announcements', path: '/admin/announcements', icon: <Megaphone size={18} /> },
         { name: 'Progress Evaluation', path: '/admin/progress', icon: <TrendingUp size={18} /> },
         { name: 'Daily Log Audit', path: '/admin/daily-updates', icon: <Clock size={18} /> },
         { name: 'Broadcast Notices', path: '/admin/notifications', icon: <Bell size={18} /> },

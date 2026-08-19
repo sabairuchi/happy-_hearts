@@ -51,6 +51,7 @@ import AdminParents from './pages/admin/AdminParents';
 import AdminTeachers from './pages/admin/AdminTeachers';
 import AdminFees from './pages/admin/AdminFees';
 import AdminAttendance from './pages/admin/AdminAttendance';
+import AdminAnnouncements from './pages/admin/AdminAnnouncements';
 import AdminProgress from './pages/admin/AdminProgress';
 import AdminDailyUpdates from './pages/admin/AdminDailyUpdates';
 import AdminNotifications from './pages/admin/AdminNotifications';
@@ -211,6 +212,14 @@ function App() {
 
             {/* Protected Admin Routes */}
             <Route
+              path="/admin"
+              element={
+                <ProtectedRoute allowedRoles={['ADMIN']}>
+                  <Navigate to="/admin/dashboard" replace />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/admin/dashboard"
               element={
                 <ProtectedRoute allowedRoles={['ADMIN']}>
@@ -263,6 +272,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['ADMIN']}>
                   <AdminAttendance />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/announcements"
+              element={
+                <ProtectedRoute allowedRoles={['ADMIN']}>
+                  <AdminAnnouncements />
                 </ProtectedRoute>
               }
             />

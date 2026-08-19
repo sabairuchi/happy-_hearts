@@ -10,7 +10,8 @@ import type {
   AttendanceRecord, 
   ProgressReport, 
   DailyUpdate, 
-  Notification 
+  Notification,
+  Announcement
 } from '../types';
 
 export const initialUsers: User[] = [
@@ -565,3 +566,37 @@ export const initialNotifications: Notification[] = [
     createdBy: 'Sarah Jenkins'
   }
 ];
+
+export const initialAnnouncements: Announcement[] = [
+  {
+    id: 'anc-1',
+    title: 'Annual Sports & Family Fun Day 2026',
+    description: 'Join us for games, races, and family activities on the school grounds. Refreshments and awards will be provided.',
+    date: '2026-08-25',
+    targetAudience: 'Everyone',
+    status: 'Published',
+    author: 'Admin Director',
+    publishedAt: '2026-08-15'
+  },
+  {
+    id: 'anc-2',
+    title: 'Teacher Training & Professional Workshop',
+    description: 'School will operate half-day on Friday for educator professional development in early childhood STEM education.',
+    date: '2026-08-28',
+    targetAudience: 'Teachers',
+    status: 'Published',
+    author: 'Admin Director',
+    publishedAt: '2026-08-16'
+  },
+  {
+    id: 'anc-3',
+    title: 'Playgroup Field Trip to City Botanical Gardens',
+    description: 'Playgroup Sunshine students will go on a guided nature walk to learn about butterflies and spring flowers.',
+    date: '2026-09-02',
+    targetAudience: 'Specific Program',
+    programName: 'Playgroup Sunshine',
+    status: 'Draft',
+    author: 'Sarah Jenkins'
+  }
+];
+

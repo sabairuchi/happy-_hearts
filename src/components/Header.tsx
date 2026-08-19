@@ -111,7 +111,7 @@ export const Header = () => {
                   icon={<User size={16} />}
                   onClick={() => setPortalDropdownOpen(!portalDropdownOpen)}
                 >
-                  Portal Access <ChevronDown size={14} style={{ marginLeft: '4px' }} />
+                  Log In <ChevronDown size={14} style={{ marginLeft: '4px' }} />
                 </Button>
 
                 {portalDropdownOpen && (
@@ -133,21 +133,6 @@ export const Header = () => {
                     }}
                   >
                     <Link
-                      to="/portal"
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.9rem',
-                        fontWeight: 700,
-                        color: 'var(--color-accent-coral)',
-                        textDecoration: 'none',
-                        borderBottom: '1px solid rgba(45,49,66,0.06)'
-                      }}
-                      onClick={() => setPortalDropdownOpen(false)}
-                    >
-                      🚪 Select Portal Role
-                    </Link>
-                    <Link
                       to="/parent/login"
                       style={{
                         padding: '8px 12px',
@@ -159,7 +144,7 @@ export const Header = () => {
                       }}
                       onClick={() => setPortalDropdownOpen(false)}
                     >
-                      👨‍👩‍👧 Parent Login
+                      👨‍👩‍👧 Parent Portal
                     </Link>
                     <Link
                       to="/teacher/login"
@@ -173,21 +158,7 @@ export const Header = () => {
                       }}
                       onClick={() => setPortalDropdownOpen(false)}
                     >
-                      👩‍🏫 Teacher Login
-                    </Link>
-                    <Link
-                      to="/admin/login"
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        color: 'var(--color-text-main)',
-                        textDecoration: 'none'
-                      }}
-                      onClick={() => setPortalDropdownOpen(false)}
-                    >
-                      🔑 Admin Login
+                      👩‍🏫 Teacher Portal
                     </Link>
                   </div>
                 )}
@@ -235,14 +206,11 @@ export const Header = () => {
               </Link>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
-                <Link to="/login?role=PARENT" style={{ width: '100%' }}>
+                <Link to="/parent/login" style={{ width: '100%' }}>
                   <Button fullWidth variant="outline" size="md">Parent Portal Login</Button>
                 </Link>
-                <Link to="/login?role=TEACHER" style={{ width: '100%' }}>
+                <Link to="/teacher/login" style={{ width: '100%' }}>
                   <Button fullWidth variant="outline" size="md">Teacher Portal Login</Button>
-                </Link>
-                <Link to="/login?role=ADMIN" style={{ width: '100%' }}>
-                  <Button fullWidth variant="text" size="sm">Admin Login</Button>
                 </Link>
               </div>
             )}

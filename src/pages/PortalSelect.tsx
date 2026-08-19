@@ -112,30 +112,6 @@ export default function PortalSelect() {
               </Link>
             </Card>
 
-            {/* Admin Card */}
-            <Card
-              hoverEffect={true}
-              style={{
-                backgroundColor: '#F3E8FF',
-                border: '2.5px solid #845EC2',
-                borderTop: '6px solid #6A1B9A',
-                padding: '2.25rem 1.75rem'
-              }}
-            >
-              <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'rgba(132,94,194,0.18)', color: '#6A1B9A', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem', border: '2px solid #845EC2' }}>
-                <ShieldCheck size={28} />
-              </div>
-              <span className="badge-pill badge-purple" style={{ fontSize: '0.75rem', marginBottom: '8px' }}>🔑 Director Gateway</span>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>Admin Portal</h3>
-              <p style={{ color: 'var(--color-text-main)', fontSize: '0.9rem', marginBottom: '1.5rem', minHeight: '54px', lineHeight: 1.5 }}>
-                Manage admissions applications, student & teacher registries, fee structures, revenue oversight, and school notices.
-              </p>
-              <Link to="/admin/login">
-                <Button fullWidth variant="accent" icon={<ArrowRight size={18} />}>
-                  Admin Login →
-                </Button>
-              </Link>
-            </Card>
           </div>
         </div>
       </section>

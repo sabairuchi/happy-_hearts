@@ -237,7 +237,7 @@ export default function About() {
                 icon: <Utensils size={28} color="#B78103" fill="#FFF2B2" />,
                 title: 'Nutritious Meal Service',
                 desc: 'Freshly prepared organic meals and snacks planned by pediatric nutritionists.',
-                image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop',
+                image: '/images/nutritious_meal.jpg',
                 alt: 'Preschool children sitting at a table eating fresh fruit snacks with teacher guidance',
                 bg: '#FFF3E0',
                 border: '#FFD93D',

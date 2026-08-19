@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, ChevronDown } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Button } from './Button';
 import { useAuth } from '../context/AuthContext';
@@ -9,7 +9,6 @@ import styles from './Header.module.css';
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [portalDropdownOpen, setPortalDropdownOpen] = useState(false);
   const { user } = useAuth();
   const location = useLocation();
 
@@ -31,7 +30,6 @@ export const Header = () => {
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    setPortalDropdownOpen(false);
   }, [location.pathname]);
 
   const navLinks = [
@@ -104,64 +102,17 @@ export const Header = () => {
                 </Button>
               </Link>
             ) : (
-              <div>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  icon={<User size={16} />}
-                  onClick={() => setPortalDropdownOpen(!portalDropdownOpen)}
-                >
-                  Log In <ChevronDown size={14} style={{ marginLeft: '4px' }} />
-                </Button>
-
-                {portalDropdownOpen && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      right: 0,
-                      top: '44px',
-                      backgroundColor: 'var(--color-bg-white)',
-                      borderRadius: 'var(--radius-md)',
-                      boxShadow: 'var(--shadow-md)',
-                      border: '1px solid rgba(45, 49, 66, 0.08)',
-                      padding: '8px',
-                      width: '180px',
-                      zIndex: 1000,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '4px'
-                    }}
-                  >
-                    <Link
-                      to="/parent/login"
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        color: 'var(--color-text-main)',
-                        textDecoration: 'none'
-                      }}
-                      onClick={() => setPortalDropdownOpen(false)}
-                    >
-                      👨‍👩‍👧 Parent Portal
-                    </Link>
-                    <Link
-                      to="/teacher/login"
-                      style={{
-                        padding: '8px 12px',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        color: 'var(--color-text-main)',
-                        textDecoration: 'none'
-                      }}
-                      onClick={() => setPortalDropdownOpen(false)}
-                    >
-                      👩‍🏫 Teacher Portal
-                    </Link>
-                  </div>
-                )}
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <Link to="/parent/login">
+                  <Button size="sm" variant="outline">
+                    👨‍👩‍👧 Parent Portal
+                  </Button>
+                </Link>
+                <Link to="/teacher/login">
+                  <Button size="sm" variant="outline">
+                    👩‍🏫 Teacher Portal
+                  </Button>
+                </Link>
               </div>
             )}
           </div>

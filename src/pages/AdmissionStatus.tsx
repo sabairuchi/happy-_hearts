@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { Search, AlertCircle, FileText, ArrowRight } from 'lucide-react';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
+import { Search, AlertCircle, FileText, ArrowRight, ArrowLeft } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { useData } from '../context/DataContext';
@@ -9,6 +9,7 @@ import type { AdmissionApplication, ApplicationStatus } from '../types';
 import styles from './AdmissionStatus.module.css';
 
 export default function AdmissionStatus() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { applications } = useData();
   const { user } = useAuth();
@@ -64,6 +65,16 @@ export default function AdmissionStatus() {
     <PageWrapper>
       <div className="container">
         <div className={styles.statusContainer}>
+          <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => navigate(-1)}
+              icon={<ArrowLeft size={16} />}
+            >
+              Go Back
+            </Button>
+          </div>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, textAlign: 'center', marginBottom: '0.5rem' }}>
             Admission Status Tracker
           </h2>

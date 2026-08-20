@@ -40,8 +40,8 @@ export default function TeacherChat() {
   // Filter messages between this teacher and the active parent
   const activeChat = chatMessages.filter(
     m =>
-      (m.senderId === user?.id && m.receiverId === parentUserId) ||
-      (m.senderId === parentUserId && m.receiverId === user?.id)
+      (m.senderId === teacherId && m.receiverId === parentUserId) ||
+      (m.senderId === parentUserId && m.receiverId === teacherId)
   );
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function TeacherChat() {
     setMessageText('');
 
     sendChatMessage(
-      user.id,
+      teacherId,
       user.name,
       'TEACHER',
       parentUserId,

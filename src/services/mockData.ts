@@ -11,7 +11,8 @@ import type {
   ProgressReport, 
   DailyUpdate, 
   Notification,
-  Announcement
+  Announcement,
+  ChatMessage
 } from '../types';
 
 export const initialUsers: User[] = [
@@ -599,4 +600,41 @@ export const initialAnnouncements: Announcement[] = [
     author: 'Sarah Jenkins'
   }
 ];
+
+export const initialChatMessages: ChatMessage[] = [
+  {
+    id: 'msg-1',
+    senderId: 'usr-teacher-1',
+    senderName: 'Sarah Jenkins',
+    senderRole: 'TEACHER',
+    receiverId: 'usr-parent-1',
+    receiverName: 'Emily Watson',
+    receiverRole: 'PARENT',
+    message: 'Hello Emily! Welcome to the Happy Hearts portal. Let me know if you have any questions about Lilys classroom transition.',
+    timestamp: '2026-08-18T09:00:00.000Z'
+  },
+  {
+    id: 'msg-2',
+    senderId: 'usr-parent-1',
+    senderName: 'Emily Watson',
+    senderRole: 'PARENT',
+    receiverId: 'usr-teacher-1',
+    receiverName: 'Sarah Jenkins',
+    receiverRole: 'TEACHER',
+    message: 'Hi Sarah! Thank you. I was wondering what time they usually have their morning fruit snacks and nap time?',
+    timestamp: '2026-08-18T09:15:00.000Z'
+  },
+  {
+    id: 'msg-3',
+    senderId: 'usr-teacher-1',
+    senderName: 'Sarah Jenkins',
+    senderRole: 'TEACHER',
+    receiverId: 'usr-parent-1',
+    receiverName: 'Emily Watson',
+    receiverRole: 'PARENT',
+    message: 'Of course! Morning snack is served at 10:15 AM, and nap time starts at 1:00 PM after lunch. Lily is transitioning beautifully!',
+    timestamp: '2026-08-18T09:20:00.000Z'
+  }
+];
+
 

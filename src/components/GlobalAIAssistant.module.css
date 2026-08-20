@@ -1,0 +1,362 @@
+/* Global AI Assistant Sliding Drawer Styles */
+
+/* Backdrop overlay behind the drawer */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(38, 50, 56, 0.35);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 99998; /* Under the drawer but above the page */
+}
+
+/* Sliding Right Drawer Panel */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background-color: var(--color-bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 2.5px solid rgba(255, 107, 107, 0.22);
+  box-shadow: -12px 0 45px rgba(38, 50, 56, 0.16);
+  display: flex;
+  flex-direction: column;
+  z-index: 99999; /* Topmost layer */
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+/* Drawer Header */
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: var(--gradient-button);
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Header buttons (Clear, Close) */
+.headerBtn {
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.headerBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.03);
+}
+
+.headerBtn:active {
+  transform: scale(0.97);
+}
+
+.closeBtn {
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
+/* Messages Scroll Area */
+.messagesContainer {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  background-color: rgba(255, 249, 240, 0.45);
+}
+
+.messagesContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messagesContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background: #EADBC8;
+  border-radius: var(--radius-full);
+}
+
+/* Message Bubbles */
+.messageWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.userWrapper {
+  justify-content: flex-end;
+}
+
+.aiWrapper {
+  justify-content: flex-start;
+}
+
+.bubble {
+  max-width: 82%;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  box-shadow: var(--shadow-sm);
+  white-space: pre-wrap;
+}
+
+.userBubble {
+  background-color: var(--color-accent-coral);
+  color: white;
+  border-radius: 18px 18px 4px 18px;
+}
+
+.aiBubble {
+  background-color: var(--color-bg-white);
+  color: var(--color-text-main);
+  border: 1.5px solid var(--color-bg-secondary);
+  border-radius: 18px 18px 18px 4px;
+}
+
+/* Format custom links dynamically generated */
+.aiBubble a {
+  color: var(--color-accent-coral);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.aiBubble a:hover {
+  color: var(--color-accent-coral-hover);
+}
+
+/* Typing Loading Dots */
+.typingBubble {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 18px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--color-text-muted);
+  border-radius: 50%;
+  animation: typingDot 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typingDot {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Chat Input Bar */
+.inputForm {
+  display: flex;
+  align-items: center;
+  padding: 1.1rem;
+  background-color: var(--color-bg-white);
+  border-top: 1.5px solid var(--color-bg-secondary);
+  gap: 12px;
+}
+
+.textInput {
+  flex-grow: 1;
+  border: 1.5px solid #E4E7EC;
+  border-radius: var(--radius-sm);
+  padding: 11px 15px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  outline: none;
+  background: var(--color-bg-primary);
+  transition: all 0.2s ease;
+}
+
+.textInput:focus {
+  border-color: var(--color-accent-coral);
+  background-color: var(--color-bg-white);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.14);
+}
+
+.sendBtn {
+  background: var(--gradient-button);
+  border: none;
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sendBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 14px rgba(255, 107, 107, 0.28);
+}
+
+.sendBtn:active {
+  transform: scale(0.9);
+}
+
+.sendBtn:disabled {
+  background: #D0D5DD;
+  color: #98A2B3;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Public Floating Button */
+.publicFloatBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gradient-button);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99997; /* Just below the drawer overlay */
+  box-shadow: var(--shadow-button);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.publicFloatBtn:hover {
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 10px 24px rgba(255, 107, 107, 0.45);
+}
+
+.publicFloatBtn:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-8px);
+}
+
+/* CSS Tooltip on Hover */
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background-color: var(--color-text-main);
+  color: white;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 18px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--color-text-main) transparent transparent transparent;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .drawer {
+    width: 360px;
+  }
+}
+
+@media (max-width: 480px) {
+  .drawer {
+    width: 100% !important;
+    border-left: none;
+  }
+  
+  .backdrop {
+    display: none; /* Hide backdrop on full screen mobile drawer */
+  }
+
+  .publicFloatBtn {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .bubble {
+    max-width: 86%;
+  }
+}

@@ -12,7 +12,8 @@ import type {
   DailyUpdate,
   Notification,
   Announcement,
-  ApplicationStatus
+  ApplicationStatus,
+  ChatMessage
 } from '../types';
 import {
   initialAdmissions,
@@ -26,7 +27,8 @@ import {
   initialProgressReports,
   initialDailyUpdates,
   initialNotifications,
-  initialAnnouncements
+  initialAnnouncements,
+  initialChatMessages
 } from '../services/mockData';
 
 interface DataContextType {
@@ -42,7 +44,8 @@ interface DataContextType {
   dailyUpdates: DailyUpdate[];
   notifications: Notification[];
   announcements: Announcement[];
-
+  chatMessages: ChatMessage[];
+  
   // Methods
   submitAdmission: (data: Omit<AdmissionApplication, 'id' | 'submittedAt' | 'status'>) => AdmissionApplication;
   updateAdmissionStatus: (id: string, status: ApplicationStatus, remarks?: string, missingDocs?: string) => void;
@@ -72,6 +75,8 @@ interface DataContextType {
   getParentChildren: (parentId: string) => Student[];
   getTeacherStudents: (teacherId: string) => Student[];
   getClassStudents: (classId: string) => Student[];
+  sendChatMessage: (senderId: string, senderName: string, senderRole: any, receiverId: string, receiverName: string, receiverRole: any, message: string) => ChatMessage;
+
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -111,6 +116,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [dailyUpdates, setDailyUpdates] = useLocalStorageState<DailyUpdate[]>('daily_updates', initialDailyUpdates);
   const [notifications, setNotifications] = useLocalStorageState<Notification[]>('notifications', initialNotifications);
   const [announcements, setAnnouncements] = useLocalStorageState<Announcement[]>('announcements', initialAnnouncements);
+  const [chatMessages, setChatMessages] = useLocalStorageState<ChatMessage[]>('chat_messages', initialChatMessages);
+
 
   const submitAdmission = (data: Omit<AdmissionApplication, 'id' | 'submittedAt' | 'status'>): AdmissionApplication => {
     const id = `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -213,10 +220,65 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       prev.map(p => (p.id === parentObj!.id ? { ...p, childrenIds: Array.from(new Set([...p.childrenIds, newStudent.id])) } : p))
     );
 
+    // Auto-generate Fee invoice for the program
+    const feeStruct = feeStructures.find(
+      f => f.programName.toLowerCase().includes(app.applyingForProgram.toLowerCase()) ||
+           app.applyingForProgram.toLowerCase().includes(f.programName.toLowerCase())
+    ) || feeStructures[0];
+
+    if (feeStruct) {
+      const siblingsCount = parentObj.childrenIds.length;
+      const discountPercent = siblingsCount > 0 ? feeStruct.siblingDiscountPercent : 0;
+      
+      const subtotal = feeStruct.monthlyTuitionFee + feeStruct.crecheDaycareFee + feeStruct.activityFee + feeStruct.materialFee + feeStruct.transportFee;
+      const discount = Math.round((subtotal * discountPercent) / 100);
+      const totalAmount = subtotal - discount;
+
+      const newInvoice: FeePayment = {
+        id: `pay-${Date.now()}`,
+        receiptNumber: `RCP-2026-${Math.floor(100 + Math.random() * 900)}`,
+        studentId: newStudent.id,
+        studentName: newStudent.name,
+        className: newStudent.className,
+        parentId: parentObj.id,
+        parentName: parentObj.name,
+        monthYear: 'August 2026',
+        admissionFee: feeStruct.admissionFee,
+        tuitionFee: feeStruct.monthlyTuitionFee,
+        crecheFee: feeStruct.crecheDaycareFee,
+        activityFee: feeStruct.activityFee,
+        materialFee: feeStruct.materialFee,
+        transportFee: feeStruct.transportFee,
+        discount: discount,
+        totalAmount: totalAmount + feeStruct.admissionFee,
+        paidAmount: 0,
+        pendingAmount: totalAmount + feeStruct.admissionFee,
+        dueDate: '2026-09-05',
+        paymentStatus: 'PENDING'
+      };
+
+      setFeePayments(prev => [...prev, newInvoice]);
+
+      // Broadcast fee reminder notification to parent
+      const newNotif: Notification = {
+        id: `notif-${Date.now()}-fee`,
+        date: new Date().toISOString().split('T')[0],
+        title: `Fee Invoice Generated: ${newStudent.name}`,
+        message: `An invoice of $${newInvoice.totalAmount} for ${newStudent.className} enrollment has been generated. Please clear dues by ${newInvoice.dueDate}.`,
+        category: 'Fee Reminder',
+        targetAudience: 'SPECIFIC_PARENT',
+        targetParentId: parentObj.id,
+        isRead: false,
+        createdBy: 'System Billing'
+      };
+      setNotifications(prev => [newNotif, ...prev]);
+    }
+
     // Update application status to Admitted
     updateAdmissionStatus(applicationId, 'Admitted', 'Converted to enrolled student profile.');
 
     return newStudent;
+
   };
 
   const addStudent = (data: Omit<Student, 'id' | 'admissionNumber'>): Student => {
@@ -463,11 +525,28 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         getStudentById,
         getParentChildren,
         getTeacherStudents,
-        getClassStudents
+        getClassStudents,
+        chatMessages,
+        sendChatMessage: (senderId: string, senderName: string, senderRole: any, receiverId: string, receiverName: string, receiverRole: any, message: string): ChatMessage => {
+          const newMsg: ChatMessage = {
+            id: `msg-${Date.now()}`,
+            senderId,
+            senderName,
+            senderRole,
+            receiverId,
+            receiverName,
+            receiverRole,
+            message,
+            timestamp: new Date().toISOString()
+          };
+          setChatMessages(prev => [...prev, newMsg]);
+          return newMsg;
+        }
       }}
     >
       {children}
     </DataContext.Provider>
+
   );
 };
 

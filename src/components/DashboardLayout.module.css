@@ -235,3 +235,64 @@
     padding: 1.25rem;
   }
 }
+
+/* Global AI Header Actions styling */
+.headerAiBtn {
+  background: none;
+  border: none;
+  color: var(--color-accent-coral);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.headerAiBtn:hover {
+  background-color: var(--color-bg-secondary);
+  transform: scale(1.08);
+}
+
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(45, 49, 66, 0.1);
+  background-color: var(--color-bg-white);
+  flex-shrink: 0;
+}
+
+.profileLink:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-accent-coral);
+  color: var(--color-accent-coral);
+}
+
+.headerAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--color-accent-coral);
+}
+
+@media (max-width: 580px) {
+  .profileText {
+    display: none;
+  }
+  .profileLink {
+    padding: 6px;
+  }
+}
+

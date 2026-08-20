@@ -1,15 +1,17 @@
-import { useState, type ChangeEvent } from 'react';
+import { useState, useEffect, type ChangeEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, ArrowRight, ArrowLeft, Upload, Edit3, CheckCircle, X } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { useData } from '../context/DataContext';
+import { useAuth } from '../context/AuthContext';
 import type { DocumentFile } from '../types';
 import styles from './AdmissionApply.module.css';
 
 export default function AdmissionApply() {
   const navigate = useNavigate();
   const { submitAdmission } = useData();
+  const { user } = useAuth();
 
   const [step, setStep] = useState(1);
 
@@ -28,6 +30,17 @@ export default function AdmissionApply() {
   const [parentMobile, setParentMobile] = useState('');
   const [parentAltPhone, setParentAltPhone] = useState('');
   const [parentAddress, setParentAddress] = useState('');
+
+  useEffect(() => {
+    if (user && user.role === 'PARENT') {
+      setParentName(user.name);
+      setParentEmail(user.email);
+      if (user.mobile) {
+        setParentMobile(user.mobile);
+      }
+    }
+  }, [user]);
+
 
   // Step 3 Form Data
   const [emergencyName, setEmergencyName] = useState('');

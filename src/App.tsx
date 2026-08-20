@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import CustomCursor from './components/CustomCursor';
+import GlobalAIAssistant from './components/GlobalAIAssistant';
+import { AIAssistantProvider } from './context/AIAssistantContext';
 import Home from './pages/Home';
 import About from './pages/About';
 import Teachers from './pages/Teachers';
@@ -33,6 +35,9 @@ import ParentProgress from './pages/parent/ParentProgress';
 import ParentDailyUpdates from './pages/parent/ParentDailyUpdates';
 import ParentNotifications from './pages/parent/ParentNotifications';
 import ParentProfile from './pages/parent/ParentProfile';
+import ParentChat from './pages/parent/ParentChat';
+
+
 
 // Teacher Dashboard Pages
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
@@ -42,6 +47,8 @@ import TeacherDailyUpdates from './pages/teacher/TeacherDailyUpdates';
 import TeacherProgress from './pages/teacher/TeacherProgress';
 import TeacherNotifications from './pages/teacher/TeacherNotifications';
 import TeacherProfile from './pages/teacher/TeacherProfile';
+import TeacherChat from './pages/teacher/TeacherChat';
+
 
 // Admin Dashboard Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -61,7 +68,8 @@ function App() {
   return (
     <AuthProvider>
       <DataProvider>
-        <Router>
+        <AIAssistantProvider>
+          <Router>
           <CustomCursor />
           <Routes>
             {/* Public Visitor Pages */}
@@ -151,6 +159,23 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/parent/chat"
+              element={
+                <ProtectedRoute allowedRoles={['PARENT']}>
+                  <ParentChat />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/parent/ai-assistant"
+              element={
+                <ProtectedRoute allowedRoles={['PARENT']}>
+                  <Navigate to="/parent/dashboard" replace />
+                </ProtectedRoute>
+              }
+            />
+
 
             {/* Protected Teacher Routes */}
             <Route
@@ -209,6 +234,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/teacher/chat"
+              element={
+                <ProtectedRoute allowedRoles={['TEACHER']}>
+                  <TeacherChat />
+                </ProtectedRoute>
+              }
+            />
+
 
             {/* Protected Admin Routes */}
             <Route
@@ -319,7 +353,9 @@ function App() {
             {/* Fallback route */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          <GlobalAIAssistant />
         </Router>
+        </AIAssistantProvider>
       </DataProvider>
     </AuthProvider>
   );

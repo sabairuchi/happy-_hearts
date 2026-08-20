@@ -250,3 +250,16 @@ export interface Announcement {
   publishedAt?: string;
 }
 
+export interface ChatMessage {
+  id: string;
+  senderId: string;
+  senderName: string;
+  senderRole: Role;
+  receiverId: string;
+  receiverName: string;
+  receiverRole: Role;
+  message: string;
+  timestamp: string;
+}
+
+

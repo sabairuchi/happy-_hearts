@@ -4,12 +4,14 @@ import { Search, AlertCircle, FileText, ArrowRight } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
 import { useData } from '../context/DataContext';
+import { useAuth } from '../context/AuthContext';
 import type { AdmissionApplication, ApplicationStatus } from '../types';
 import styles from './AdmissionStatus.module.css';
 
 export default function AdmissionStatus() {
   const [searchParams] = useSearchParams();
   const { applications } = useData();
+  const { user } = useAuth();
 
   const queryAppId = searchParams.get('appId') || '';
   const [appIdInput, setAppIdInput] = useState(queryAppId);
@@ -19,8 +21,16 @@ export default function AdmissionStatus() {
   useEffect(() => {
     if (queryAppId) {
       handleSearch(queryAppId);
+    } else if (user && user.role === 'PARENT') {
+      const myApp = applications.find(a => a.parentEmail.toLowerCase() === user.email.toLowerCase());
+      if (myApp) {
+        setSelectedApp(myApp);
+        setAppIdInput(myApp.id);
+        setHasSearched(true);
+      }
     }
-  }, [queryAppId, applications]);
+  }, [queryAppId, applications, user]);
+
 
   const handleSearch = (id: string) => {
     const trimmed = id.trim().toUpperCase();

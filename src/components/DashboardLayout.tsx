@@ -16,10 +16,14 @@ import {
   Settings,
   GraduationCap,
   BookOpen,
-  Megaphone
+  Megaphone,
+  MessageSquare,
+  Bot,
+  Sparkles
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { NotificationBell } from './NotificationBell';
+import { useAIAssistant } from '../context/AIAssistantContext';
 import styles from './DashboardLayout.module.css';
 
 interface NavItem {
@@ -35,9 +39,18 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
   const { user, logout } = useAuth();
+  const { openAssistant, toggleAssistant } = useAIAssistant();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const getProfilePath = () => {
+    if (!user) return '/';
+    if (user.role === 'PARENT') return '/parent/profile';
+    if (user.role === 'TEACHER') return '/teacher/profile';
+    if (user.role === 'ADMIN') return '/admin/settings';
+    return '/';
+  };
 
   const getNavItems = (): NavItem[] => {
     if (!user) return [];
@@ -51,10 +64,13 @@ export const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
         { name: 'Fees & Payments', path: '/parent/fees', icon: <CreditCard size={18} /> },
         { name: 'Child Progress', path: '/parent/progress', icon: <TrendingUp size={18} /> },
         { name: 'Daily Updates', path: '/parent/daily-updates', icon: <Clock size={18} /> },
+        { name: 'Teacher Chat', path: '/parent/chat', icon: <MessageSquare size={18} /> },
+        { name: 'AI Assistant', path: '/parent/ai-assistant', icon: <Bot size={18} /> },
         { name: 'Notifications', path: '/parent/notifications', icon: <Bell size={18} /> },
         { name: 'My Profile', path: '/parent/profile', icon: <User size={18} /> }
       ];
     }
+
 
     if (user.role === 'TEACHER') {
       return [
@@ -63,10 +79,12 @@ export const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
         { name: 'Attendance Sheet', path: '/teacher/attendance', icon: <CalendarCheck size={18} /> },
         { name: 'Daily Activity Logs', path: '/teacher/daily-updates', icon: <Clock size={18} /> },
         { name: 'Progress Reports', path: '/teacher/progress', icon: <TrendingUp size={18} /> },
+        { name: 'Parent Chat', path: '/teacher/chat', icon: <MessageSquare size={18} /> },
         { name: 'Notifications', path: '/teacher/notifications', icon: <Bell size={18} /> },
         { name: 'Teacher Profile', path: '/teacher/profile', icon: <User size={18} /> }
       ];
     }
+
 
     if (user.role === 'ADMIN') {
       return [
@@ -112,12 +130,19 @@ export const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
         <nav className={styles.sidebarNav}>
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
+            const isAiLink = item.path === '/parent/ai-assistant';
             return (
               <Link
                 key={item.path}
-                to={item.path}
+                to={isAiLink ? '#' : item.path}
                 className={`${styles.navLink} ${isActive ? styles.active : ''}`}
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => {
+                  setMobileOpen(false);
+                  if (isAiLink) {
+                    e.preventDefault();
+                    openAssistant();
+                  }
+                }}
               >
                 {item.icon}
                 <span>{item.name}</span>
@@ -166,6 +191,22 @@ export const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
               <span>Main Website</span>
             </Link>
             <NotificationBell />
+            <button
+              className={styles.headerAiBtn}
+              onClick={toggleAssistant}
+              title="AI Assistant"
+              aria-label="AI Assistant"
+            >
+              <Sparkles size={16} />
+            </button>
+            <Link to={getProfilePath()} className={styles.profileLink}>
+              <img
+                src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200'}
+                alt="Profile"
+                className={styles.headerAvatar}
+              />
+              <span className={styles.profileText}>Profile</span>
+            </Link>
           </div>
         </header>
 

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Heart, Star, Shield, Smile, Blocks, Trees, Utensils, CloudMoon, ArrowRight, Sparkles, CheckCircle2, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Button } from '../components/Button';
@@ -300,12 +299,25 @@ export default function About() {
             <h2>Experience the Happy Hearts Difference 🚀</h2>
             <p>We invite you to tour our campus, meet our warm educators, and see our philosophy in action.</p>
             <div className={styles.ctaButtons}>
-              <Link to="/contact">
-                <Button size="lg" variant="secondary" icon={<ArrowRight size={20} />}>Book a Campus Tour</Button>
-              </Link>
-              <Link to="/teachers">
-                <Button variant="primary" size="lg" style={{ border: '2px solid #FFFFFF' }}>Meet Our Teachers</Button>
-              </Link>
+              <Button
+                size="lg"
+                variant="secondary"
+                icon={<ArrowRight size={20} />}
+                disabled
+                style={{ pointerEvents: 'none', cursor: 'default' }}
+                aria-disabled="true"
+              >
+                Book a Campus Tour
+              </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                disabled
+                style={{ border: '2px solid #FFFFFF', pointerEvents: 'none', cursor: 'default' }}
+                aria-disabled="true"
+              >
+                Meet Our Teachers
+              </Button>
             </div>
           </motion.div>
         </div>

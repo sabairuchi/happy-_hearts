@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, Sparkles, BookOpen, Heart, Users, CalendarCheck, AlertCircle } from 'lucide-react';
+import { Send, Bot, Sparkles } from 'lucide-react';
 import { DashboardLayout } from '../../components/DashboardLayout';
 import { Button } from '../../components/Button';
 import { useAuth } from '../../context/AuthContext';
@@ -14,7 +14,7 @@ interface Message {
 
 export default function TeacherAIAssistant() {
   const { user } = useAuth();
-  const { students, teachers, dailyUpdates, progressReports, attendance, announcements } = useData();
+  const { students, teachers, attendance, announcements } = useData();
 
   const teacherId = user?.teacherId || user?.id || '';
   const teacherDetails = teachers.find(t => t.id === teacherId || t.email.toLowerCase() === user?.email.toLowerCase());
@@ -90,7 +90,7 @@ export default function TeacherAIAssistant() {
       }
       let resp = `⚠️ **Medical & Dietary Alerts for ${assignedClass}**:\n`;
       allergicKids.forEach(k => {
-        resp += `\n• **${k.name}** (Adm: ${k.admissionNumber}):\n  - Notes: ${k.medicalNotes}\n  - Emergency Contact: ${k.emergencyContactName} (${k.emergencyContactPhone})`;
+        resp += `\n• **${k.name}** (Adm: ${k.admissionNumber}):\n  - Notes: ${k.medicalNotes}\n  - Emergency Contact: ${k.emergencyName} (${k.emergencyPhone})`;
       });
       return resp;
     }
@@ -109,7 +109,7 @@ export default function TeacherAIAssistant() {
       }
       let resp = `📋 **Enrolled Students Roster — ${assignedClass} (${classStudents.length} Students)**:\n`;
       classStudents.forEach((s, idx) => {
-        resp += `\n${idx + 1}. **${s.name}** (Adm: ${s.admissionNumber})\n   • DOB: ${s.dateOfBirth} | Gender: ${s.gender}\n   • Parent: ${s.parentName} (${s.parentMobile})\n   • Status: ${s.status}`;
+        resp += `\n${idx + 1}. **${s.name}** (Adm: ${s.admissionNumber})\n   • DOB: ${s.dob} | Gender: ${s.gender}\n   • Parent: ${s.parentName} (${s.parentMobile})\n   • Status: ${s.status}`;
       });
       return resp;
     }

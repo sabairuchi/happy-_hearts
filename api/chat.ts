@@ -1,16 +1,18 @@
-import { IncomingMessage } from 'http';
+/// <reference types="node" />
+import type { IncomingMessage } from 'node:http';
+import process from 'node:process';
 
 // Helper to buffer raw request body in Node environment
 async function readRequestBody(req: IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => {
     let body = '';
-    req.on('data', chunk => {
+    req.on('data', (chunk: any) => {
       body += chunk;
     });
     req.on('end', () => {
       resolve(body);
     });
-    req.on('error', err => {
+    req.on('error', (err: any) => {
       reject(err);
     });
   });

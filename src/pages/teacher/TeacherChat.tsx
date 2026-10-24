@@ -215,6 +215,55 @@ export default function TeacherChat() {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Quick Teacher Response Preset Chips */}
+            <div
+              style={{
+                padding: '8px 1.5rem',
+                backgroundColor: '#FFF',
+                borderTop: '1px solid rgba(45,49,66,0.06)',
+                display: 'flex',
+                gap: '8px',
+                overflowX: 'auto',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              {[
+                "🌟 Child had a wonderful day and participated joyfully!",
+                "🍎 Finished their entire snack & meal with great appetite.",
+                "😴 Slept peacefully during afternoon nap time.",
+                "✅ Acknowledged! Thank you for letting me know."
+              ].map((chip, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setMessageText(chip)}
+                  style={{
+                    padding: '6px 12px',
+                    borderRadius: 'var(--radius-full)',
+                    border: '1px solid rgba(78, 205, 196, 0.35)',
+                    backgroundColor: 'rgba(78, 205, 196, 0.08)',
+                    color: 'var(--color-accent-teal)',
+                    fontSize: '0.78rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-accent-teal)';
+                    e.currentTarget.style.color = '#FFF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(78, 205, 196, 0.08)';
+                    e.currentTarget.style.color = 'var(--color-accent-teal)';
+                  }}
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
+
             {/* Input Form Footer */}
             <form
               onSubmit={handleSendMessage}

@@ -36,6 +36,7 @@ import ParentDailyUpdates from './pages/parent/ParentDailyUpdates';
 import ParentNotifications from './pages/parent/ParentNotifications';
 import ParentProfile from './pages/parent/ParentProfile';
 import ParentChat from './pages/parent/ParentChat';
+import ParentAIAssistant from './pages/parent/ParentAIAssistant';
 
 
 
@@ -48,6 +49,7 @@ import TeacherProgress from './pages/teacher/TeacherProgress';
 import TeacherNotifications from './pages/teacher/TeacherNotifications';
 import TeacherProfile from './pages/teacher/TeacherProfile';
 import TeacherChat from './pages/teacher/TeacherChat';
+import TeacherAIAssistant from './pages/teacher/TeacherAIAssistant';
 
 
 // Admin Dashboard Pages
@@ -171,7 +173,7 @@ function App() {
               path="/parent/ai-assistant"
               element={
                 <ProtectedRoute allowedRoles={['PARENT']}>
-                  <Navigate to="/parent/dashboard" replace />
+                  <ParentAIAssistant />
                 </ProtectedRoute>
               }
             />
@@ -239,6 +241,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['TEACHER']}>
                   <TeacherChat />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/teacher/ai-assistant"
+              element={
+                <ProtectedRoute allowedRoles={['TEACHER']}>
+                  <TeacherAIAssistant />
                 </ProtectedRoute>
               }
             />

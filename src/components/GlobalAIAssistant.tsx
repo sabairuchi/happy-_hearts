@@ -134,6 +134,123 @@ Executive System Access:
     ]);
   };
 
+  const generateOfflineAIResponse = (userMsg: string, role: string, userContext: string): string => {
+    const msg = userMsg.toLowerCase().trim();
+
+    // Guard check for Public visitors
+    if (role === 'PUBLIC' && (
+      msg.includes('attendance') || 
+      msg.includes('grade') || 
+      msg.includes('report') || 
+      msg.includes('child') || 
+      msg.includes('my son') || 
+      msg.includes('my daughter') ||
+      msg.includes('fee invoice') ||
+      msg.includes('my payment')
+    )) {
+      return "Hi there! 👋 To view student attendance, progress reports, fees, or other personal dashboard details, please log in to the Parent or Teacher Portal. Public visitors do not have access to private student records.";
+    }
+
+    // Role-based Parent specific questions
+    if (role === 'PARENT' && userContext) {
+      if (msg.includes('attendance') || msg.includes('present') || msg.includes('absent')) {
+        return `Here is your child's attendance record from the Parent Portal:\n\n${userContext.split('\n\n')[1] || userContext}\n\nYou can view full monthly logs under 'Attendance' on your dashboard.`;
+      }
+      if (msg.includes('fee') || msg.includes('balance') || msg.includes('pay') || msg.includes('due') || msg.includes('invoice')) {
+        return `Here is the current fee overview for your registered child(ren):\n\n${userContext}\n\nYou can settle pending invoices directly via the 'Fees & Payments' section.`;
+      }
+      if (msg.includes('update') || msg.includes('meal') || msg.includes('food') || msg.includes('nap') || msg.includes('activity')) {
+        return `Here is today's daily log update from the classroom educator:\n\n${userContext}\n\nCheck 'Daily Updates' for activity photo attachments and educator remarks!`;
+      }
+      if (msg.includes('child') || msg.includes('student') || msg.includes('profile')) {
+        return `Here are your authorized child profile records:\n\n${userContext}`;
+      }
+    }
+
+    // Role-based Teacher specific questions
+    if (role === 'TEACHER' && userContext) {
+      if (msg.includes('student') || msg.includes('class') || msg.includes('roster') || msg.includes('who')) {
+        return `Here is your assigned classroom student overview:\n\n${userContext}`;
+      }
+      if (msg.includes('activity') || msg.includes('lesson') || msg.includes('plan')) {
+        return `🎨 **Montessori Lesson Plan Suggestion**:\n• Sensory finger-painting & color mixing station (25m)\n• Tactile kinetic sand exploration (20m)\n• Rhyme circle & alphabet story time (15m)\n\nTip: You can log notes in 'Daily Activity Logs' in your sidebar menu!`;
+      }
+    }
+
+    // Role-based Admin specific questions
+    if (role === 'ADMIN' && userContext) {
+      if (msg.includes('stat') || msg.includes('total') || msg.includes('count') || msg.includes('revenue') || msg.includes('summary')) {
+        return `Here is the executive system overview from your Admin Dashboard:\n\n${userContext}`;
+      }
+    }
+
+    // Admissions & Programs general
+    if (msg.includes('admission') || msg.includes('apply') || msg.includes('enroll') || msg.includes('register')) {
+      return "Applying to Happy Hearts is quick and fully digital! 🎒\n1. Visit our Admission page (/admission) or start the application form directly at /admission/apply.\n2. Complete the 4-step wizard (Child Info, Parent Info, Emergency Contacts, Document Uploads).\n3. Submit and track status anytime at /admission/status using your Application ID.";
+    }
+
+    if (msg.includes('program') || msg.includes('class') || msg.includes('age') || msg.includes('creche') || msg.includes('toddler')) {
+      return "Happy Hearts offers 4 age-appropriate programs:\n• **Toddler Crèche & Daycare** (6 Mos - 2 Yrs): Sensory play, loving daycare caregivers ($200/mo).\n• **Playgroup Sunshine** (1.5 - 2.5 Yrs): Social play, language & fine motor skills ($250/mo).\n• **Nursery Explorers** (2.5 - 3.5 Yrs): Early literacy, numbers, story circles ($280/mo).\n• **Kindergarten Stars** (3.5 - 5 Yrs): Academic readiness, early math & writing ($300/mo).";
+    }
+
+    if (msg.includes('fee') || msg.includes('cost') || msg.includes('price') || msg.includes('discount')) {
+      return "Our monthly tuition fees are:\n• Toddler Crèche: $200/mo\n• Playgroup: $250/mo\n• Nursery: $280/mo\n• Kindergarten: $300/mo\n\n🎉 **Sibling Discount**: We automatically apply a 15% discount for second siblings enrolled!";
+    }
+
+    if (msg.includes('timing') || msg.includes('hour') || msg.includes('schedule') || msg.includes('time')) {
+      return "Our operating hours are:\n• 🏫 **Preschool Program**: 8:00 AM – 2:00 PM (Monday – Friday)\n• 🧸 **Daycare Service**: 7:30 AM – 6:00 PM (Monday – Friday)\n• 🗺️ **Campus Tours**: Monday – Saturday, 9 AM – 3 PM.";
+    }
+
+    if (msg.includes('contact') || msg.includes('phone') || msg.includes('email') || msg.includes('address') || msg.includes('visit') || msg.includes('tour')) {
+      return "Reach out to our campus team anytime:\n• 📧 Email: hello@happyhearts.edu\n• 📞 Phone: +1 (234) 567-890\n• 📍 Address: 123 Sunny Lane, Happyville, ST 12345\n• 🕒 Campus Visits: Mon-Sat 9 AM - 3 PM.";
+    }
+
+    if (msg.includes('meal') || msg.includes('food') || msg.includes('lunch') || msg.includes('snack')) {
+      return "🍎 We provide pediatrician-approved organic morning snacks and warm, balanced lunches for full-day students. All allergies and dietary preferences are strictly observed.";
+    }
+
+    return "I'm the Happy Hearts AI Assistant! 🧸 I can help you with:\n• 🏫 Programs and age requirements\n• 📝 Admission steps and required documentation\n• 💰 Tuition fees and 15% sibling discount\n• ⏰ School and daycare operating timings\n• 📍 Campus address and visit schedules\n\nHow can I help you today?";
+  };
+
+  const getQuickPrompts = () => {
+    if (!user) {
+      return [
+        "🎒 Admission fees & sibling discounts",
+        "🧸 Programs & age criteria",
+        "⏰ Operating timings & daycare hours",
+        "📍 Campus tour & contact details"
+      ];
+    }
+    if (user.role === 'PARENT') {
+      return [
+        "📊 Check Emma's attendance rate",
+        "💰 Outstanding fee balance",
+        "🍎 Today's meal & snack update",
+        "📝 Daily learning activities log"
+      ];
+    }
+    if (user.role === 'TEACHER') {
+      return [
+        "📋 Assigned class student roster",
+        "🎨 Montessori sensory lesson plan",
+        "⚠️ Student dietary & allergy notes",
+        "📊 Today's class attendance summary"
+      ];
+    }
+    if (user.role === 'ADMIN') {
+      return [
+        "📊 Executive system metrics",
+        "👥 Total enrolled students count",
+        "💳 Total fee revenue collected",
+        "📝 Pending admission applications"
+      ];
+    }
+    return [
+      "🎒 Admission process",
+      "🧸 Preschool programs"
+    ];
+  };
+
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
@@ -145,6 +262,9 @@ Executive System Access:
     const newMessages: Message[] = [...messages, { role: 'user', content: userMessage }];
     setMessages(newMessages);
     setIsLoading(true);
+
+    const userRole = user ? user.role : 'PUBLIC';
+    const userContext = buildUserContext();
 
     try {
       // Map message history
@@ -161,8 +281,8 @@ Executive System Access:
         body: JSON.stringify({
           message: userMessage,
           history: historyPayload,
-          userRole: user ? user.role : 'PUBLIC',
-          context: buildUserContext()
+          userRole,
+          context: userContext
         })
       });
 
@@ -176,16 +296,17 @@ Executive System Access:
         ...prev,
         {
           role: 'model',
-          content: result.response || "I'm sorry, I couldn't formulate a response right now. Please try again."
+          content: result.response || generateOfflineAIResponse(userMessage, userRole, userContext)
         }
       ]);
-    } catch (err) {
-      console.error('Error fetching AI response:', err);
+    } catch {
+      // Graceful offline fallback
+      const offlineReply = generateOfflineAIResponse(userMessage, userRole, userContext);
       setMessages(prev => [
         ...prev,
         {
           role: 'model',
-          content: "I'm sorry, I am experiencing connection issues. Please check your network and try again. You can also visit our Contact Page (/contact) if you need immediate assistance."
+          content: offlineReply
         }
       ]);
     } finally {
@@ -296,6 +417,7 @@ Executive System Access:
                                 /\/parent\/fees/g,
                                 '<a href="/parent/fees" class="interactive">Fees Page</a>'
                               )
+                              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                               .replace(/\n/g, '<br />')
                           }}
                         />
@@ -318,6 +440,23 @@ Executive System Access:
                 )}
                 
                 <div ref={messagesEndRef} />
+              </div>
+
+              {/* Quick Suggestion Chips */}
+              <div className={styles.suggestionsContainer}>
+                {getQuickPrompts().map((chip, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={styles.suggestionChip}
+                    onClick={() => {
+                      setInputValue(chip);
+                      inputRef.current?.focus();
+                    }}
+                  >
+                    {chip}
+                  </button>
+                ))}
               </div>
 
               {/* Input Form */}

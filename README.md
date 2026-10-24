@@ -1,99 +1,105 @@
-# Happy Hearts Preschool & Crèche — Milestone 3
+# Happy Hearts Preschool & Crèche — Milestone 4
 
-**Happy Hearts Preschool & Crèche** is a modern, responsive, and secure web platform featuring a vibrant public website, role-based portals for Parents & Teachers, and a full-featured **Admin Dashboard & School Management System**.
+**Happy Hearts Preschool & Crèche** is a modern, responsive, and secure web platform designed for early childhood education. Milestone 4 introduces an intelligent **Global AI Assistant**, a **Secure Real-Time Parent-Teacher Communication Console**, **Dedicated Role-Based AI Assistants**, and an offline-resilient **Hybrid AI Architecture** alongside the existing comprehensive Admin, Teacher, and Parent portals.
 
 ---
 
-## 🌟 Key Features (Milestone 3 Complete)
+## 🌟 What's New in Milestone 4
 
-### 1. Executive Admin Dashboard
-- Real-time overview cards:
-  - **TOTAL STUDENTS**: Active enrolled pupil count
-  - **TOTAL PARENTS**: Registered parent accounts
-  - **TOTAL TEACHERS**: Active teaching staff
-  - **NEW ADMISSIONS**: Recently submitted applications
-  - **PENDING ADMISSIONS**: Applications awaiting review
-  - **TOTAL FEES COLLECTED**: Cleared revenue total ($)
-  - **PENDING FEES**: Outstanding balance ($)
-  - **TODAY'S ATTENDANCE**: School-wide attendance rate (%)
-- Quick action shortcuts for instant operations.
-- Activity tables for recent admissions, fee transactions, and announcements.
+### 1. Global AI Assistant Sliding Drawer
+- **Site-Wide Accessibility**: Triggered via the floating sparkle button on public pages and the top-bar "Ask AI" button across all authenticated portals (`/parent/*`, `/teacher/*`, `/admin/*`).
+- **Dynamic Role-Based Context Injection**:
+  - **Public Visitors**: Answers inquiries about preschool programs, tuition fees, age criteria, operating timings, campus tours, and admission requirements without leaking private data.
+  - **Parents**: Securely retrieves their linked child's attendance rate, outstanding fee balances, meal and nap logs, and daily teacher updates.
+  - **Teachers**: Injects classroom rosters, student medical/allergy alerts, and class attendance statistics.
+  - **Admins**: Summarizes executive metrics (total students, parents, active staff, revenue collected, and pending admission applications).
+- **One-Click Quick Suggestion Chips**: Dynamic, role-sensitive prompt chips for instant answers.
+- **Rich Markdown Formatting**: Bold highlights, clean bullet points, and clickable in-app links (e.g. directly to `/admission/apply`, `/admission/status`, `/parent/fees`).
 
-### 2. Student Management (`/admin/students`)
-- Search by student name, admission number, or parent.
-- Filter by program/class and enrollment status (Active, Inactive, Graduated).
-- Full Student Profile drawer displaying parent links, DOB, gender, emergency contact, and medical notes.
-- Add/Edit student records with class and educator assignment.
-- Status toggle (Active / Inactive) and permanent deletion with confirmation modal.
+### 2. Dedicated Role-Based AI Assistants
+- **Parent AI Assistant (`/parent/ai-assistant`)**:
+  - Queries daily meal intake, sleep/nap logs, and special educator remarks.
+  - Reviews developmental evaluations (Communication, Social, Motor, and Cognitive development).
+  - Checks live attendance rates and itemized fee payment invoices with due dates.
+- **Teacher AI Assistant (`/teacher/ai-assistant`)**:
+  - **Montessori & Sensory Lesson Planner**: Generates structured, age-appropriate activity plans (Sensory exploration, gross motor games, circle-time songs).
+  - **Report Card Remark Assistant**: Crafts constructive, encouraging developmental remarks for student term evaluations.
+  - **Roster & Health Audit**: Instantly surfaces students with dietary restrictions, allergies, or emergency contact requirements.
+  - **Class Attendance Summary**: Real-time breakdown of present, absent, and leave counts for assigned classrooms.
 
-### 3. Parent Management (`/admin/parents`)
-- Search by parent name, email, or mobile.
-- View Parent Profile showing linked children accounts.
-- Register new parent accounts & edit existing records.
-- Link parent accounts to one or multiple student profiles.
-- Activate / Deactivate parent accounts with visual status badges.
+### 3. Interactive Parent-Teacher Chat Console (`/parent/chat` & `/teacher/chat`)
+- **Direct Bidirectional Communication**: Connects parents directly with the educators assigned to their enrolled children.
+- **Simulated Pedagogical Responses**: Teachers automatically reply with contextually appropriate responses regarding illness/absence, progress, meals, and pickup schedule changes.
+- **Quick Response Chips**: Preset conversation starters for parents (absence reports, pickup delays, meal checks) and one-tap replies for teachers.
+- **Local Persistence**: Messages persist in browser `localStorage` across page reloads and portal sessions.
 
-### 4. Teacher Management (`/admin/teachers`)
-- Educator directory cards with photos, qualifications, experience, and contact details.
-- Search and filter by active/inactive staff.
-- Add/Edit teacher records and assign program/classes.
-- Toggle active teacher account status.
+### 4. Hybrid AI Architecture & Offline Resilience
+- **Dual-Layer Fallback Engine**:
+  - **Cloud AI Layer**: Connects to the Google Gemini 1.5 Flash API via the `/api/chat` serverless endpoint when `GEMINI_API_KEY` is provided.
+  - **Local Knowledge Engine**: If the API key is not configured or if network connectivity is interrupted, the client automatically falls back to an intelligent local rule-based knowledge engine. The AI never crashes or displays broken connection states.
 
-### 5. Admission Management (`/admin/admissions`)
-- Filter applications by status: `Submitted`, `Under Review`, `Documents Required`, `Approved`, `Admitted`, `Rejected`.
-- Detailed review modal with child details, parent details, emergency info, and document verification notes.
-- Approval/Rejection workflow with confirmation dialogs.
-- **Enroll Student**: Direct conversion of approved applicants into active enrolled Student records with auto-generated admission numbers (e.g. `HH-2026-042`).
+---
 
-### 6. Fee & Payment Overview (`/admin/fees`)
-- Financial overview metrics (Total revenue collected, pending balance, settled vs outstanding invoices).
-- Configured Program Fee Structures overview table.
-- Search and filter fee payment ledger by receipt #, student name, parent name, or status (`PAID`, `PENDING`, `OVERDUE`).
-- Printable fee receipt modal with itemized breakdown.
-- Manual fee payment recorder allowing admins to mark pending invoices as paid via cash, UPI, card, or net banking.
+## 🏛️ Comprehensive Platform Features
 
-### 7. Attendance Overview (`/admin/attendance`)
-- Today's attendance summary: Present count, Absent count, Leave count, Attendance % progress bar.
-- Date selector filter & class filter.
-- Detailed attendance logs master table.
-- **Batch Attendance Marker**: Admin tool to quickly mark batch attendance for any class on a selected date.
+### Executive Admin Dashboard (`/admin/*`)
+- **Real-Time KPI Cards**: Total students, parents, teachers, new & pending admissions, fees collected, pending balances, and school-wide attendance rate.
+- **Student Management**: Add, edit, filter by program, view student profile drawers, toggle status, and delete records.
+- **Parent Directory**: Manage parent profiles, link multiple children accounts, and manage account statuses.
+- **Teacher Console**: Educator directory with credentials, assigned classes, and contact information.
+- **Admission Portal**: Multi-stage review workflow (`Submitted` ➔ `Under Review` ➔ `Approved` ➔ `Admitted`), document verification notes, and 1-click student enrollment.
+- **Fee Ledger & Payments**: Search and filter invoices by receipt #, student name, status (`PAID`, `PENDING`, `OVERDUE`), printable fee receipts, and manual payment recording.
+- **Attendance Registry**: Date selector, class filter, and **Batch Attendance Marker** for fast attendance logging.
+- **Announcements**: Publish, edit, and target bulletins to Everyone, Parents, Teachers, or Specific Programs.
 
-### 8. Announcements Management (`/admin/announcements`)
-- Create, Edit, and Delete announcements with confirmation.
-- Target Audience selection: `Everyone`, `All Parents`, `Teachers`, `Specific Program`.
-- Publish / Unpublish status toggle and announcement history log.
+### Parent Portal (`/parent/*`)
+- **Child Profiles**: Full view of enrolled children, assigned educators, and class programs.
+- **Attendance Tracking**: Visual attendance rate (%) and historical logs.
+- **Fee Management**: Sibling discounts (15% on 2nd child), payment history, itemized receipts, and instant simulated checkout (UPI, Card, Net Banking).
+- **Daily Classroom Logs**: Real-time updates on today's activities, meals/snacks, nap rest times, and teacher observations.
+- **Progress Reports**: Term-by-term developmental report cards.
+- **Direct Teacher Chat & AI Assistant**: Instant educator messaging and AI assistant queries.
+
+### Teacher Portal (`/teacher/*`)
+- **My Students Roster**: Student directory with parent contacts and emergency details.
+- **Attendance Sheet**: Mark daily attendance (Present, Absent, Leave) with batch save.
+- **Daily Activity Logger**: Record daily meals, naps, learning activities, and observations.
+- **Progress Report Evaluator**: Submit developmental assessments across cognitive, social, motor, and language skills.
+- **Parent Chat Console & AI Teaching Assistant**: Direct communication and curriculum planning.
 
 ---
 
 ## 🔒 Security & Route Protection
 
-- **Protected Routes**: All `/admin/*`, `/teacher/*`, and `/parent/*` routes require role-based authentication. Unauthenticated users attempting to access protected endpoints are automatically redirected to `/admin/login`, `/teacher/login`, or `/parent/login`.
-- **Session Expiration**: Inactivity monitor automatically logs out users after 30 minutes of inactivity.
+- **Role-Based Protected Routes (`<ProtectedRoute />`)**: Strict enforcement on `/admin/*`, `/teacher/*`, and `/parent/*` routes.
+- **Session Expiration**: Automatic logout and session termination after 30 minutes of inactivity.
 - **Rate-Limiting Lockout**: Account lockout after 5 consecutive failed login attempts.
-- **Data Protection**: Sensitive credentials, payment secrets, and private keys are decoupled from frontend bundles.
+- **Data Isolation**: Role-scoped data querying prevents unauthorized cross-tenant data access.
 
 ---
 
-## 💻 Technologies Used
+## 💻 Tech Stack
 
 - **Frontend**: React 19, TypeScript, Vite 8, React Router DOM 7
-- **Icons & UI Components**: Lucide React icons, Vanilla CSS Design System with Happy Hearts design tokens
-- **Animations**: Framer Motion & CSS keyframe animations
-- **State Architecture**: Context API (`AuthContext`, `DataContext`) with local storage persistence
+- **Styling**: Vanilla CSS Design System with Happy Hearts tokens & CSS Modules
+- **Animations**: Framer Motion & CSS Keyframe animations
+- **Icons**: Lucide React
+- **AI Integration**: Google Gemini 1.5 Flash API + Local Offline Fallback Engine
+- **State Management**: Context API (`AuthContext`, `DataContext`, `AIAssistantContext`) with `localStorage` persistence
 
 ---
 
-## 🚀 Getting Started & Installation
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher recommended)
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
 - npm or yarn
 
-### Installation Steps
+### Installation
 
-1. Clone or extract the project repository into your workspace:
+1. Navigate to the project directory:
    ```bash
-   cd "Happy Hearts/M3"
+   cd "Happy Hearts/M4"
    ```
 
 2. Install dependencies:
@@ -101,18 +107,26 @@
    npm install
    ```
 
-3. Run local development server:
+3. (Optional) Configure Gemini API Key:
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_APP_TITLE="Happy Hearts Preschool & Crèche"
+   GEMINI_API_KEY="your-gemini-api-key-here"
+   ```
+   *Note: If `GEMINI_API_KEY` is omitted, the AI Assistant automatically operates in offline-resilient local knowledge mode.*
+
+4. Launch the development server:
    ```bash
    npm run dev
    ```
-   Open `http://localhost:5173` in your browser.
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-4. Build for production:
+5. Build for production:
    ```bash
    npm run build
    ```
 
-5. Preview production build locally:
+6. Preview production build:
    ```bash
    npm run preview
    ```
@@ -121,28 +135,11 @@
 
 ## 🔑 Demo Login Credentials
 
-- **Admin Portal (`/admin/login`)**:
-  - Email: `admin@happyhearts.com`
-  - Password: `password123`
-
-- **Teacher Portal (`/teacher/login`)**:
-  - Email: `teacher@happyhearts.com`
-  - Password: `password123`
-
-- **Parent Portal (`/parent/login`)**:
-  - Email: `parent@happyhearts.com`
-  - Password: `password123`
-
----
-
-## 🌐 Environment Variables Setup
-
-Create a `.env` file in the root directory (optional for production deployments):
-
-```env
-VITE_APP_TITLE="Happy Hearts Preschool & Crèche"
-VITE_RAZORPAY_KEY_ID="rzp_test_9842109384721"
-```
+| Portal | URL | Email | Password |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `/admin/login` | `admin@happyhearts.com` | `password123` |
+| **Class Teacher** | `/teacher/login` | `teacher@happyhearts.com` | `password123` |
+| **Parent** | `/parent/login` | `parent@happyhearts.com` | `password123` |
 
 ---
 

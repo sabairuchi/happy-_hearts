@@ -272,6 +272,37 @@
   transform: none;
 }
 
+/* Quick Suggestion Chips */
+.suggestionsContainer {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 1.25rem;
+  background-color: #FFF;
+  border-top: 1px solid rgba(45, 49, 66, 0.06);
+  white-space: nowrap;
+}
+
+.suggestionChip {
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+  background-color: rgba(255, 107, 107, 0.05);
+  color: var(--color-accent-coral);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+}
+
+.suggestionChip:hover {
+  background-color: var(--color-accent-coral);
+  color: #FFF;
+  transform: translateY(-1px);
+}
+
 /* Public Floating Button */
 .publicFloatBtn {
   position: fixed;

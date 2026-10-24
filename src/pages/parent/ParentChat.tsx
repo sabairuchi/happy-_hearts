@@ -270,6 +270,55 @@ export default function ParentChat() {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Quick Prompt Chips */}
+            <div
+              style={{
+                padding: '8px 1.5rem',
+                backgroundColor: '#FFF',
+                borderTop: '1px solid rgba(45,49,66,0.06)',
+                display: 'flex',
+                gap: '8px',
+                overflowX: 'auto',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              {[
+                "👋 Checking on today's classroom update",
+                "🤒 Reporting absence: child is unwell",
+                "🍎 Inquiring about today's meals & snacks",
+                "🚗 Running 15 mins late for afternoon pickup"
+              ].map((chip, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setMessageText(chip)}
+                  style={{
+                    padding: '6px 12px',
+                    borderRadius: 'var(--radius-full)',
+                    border: '1px solid rgba(255, 107, 107, 0.25)',
+                    backgroundColor: 'rgba(255, 107, 107, 0.05)',
+                    color: 'var(--color-accent-coral)',
+                    fontSize: '0.78rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-accent-coral)';
+                    e.currentTarget.style.color = '#FFF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 107, 107, 0.05)';
+                    e.currentTarget.style.color = 'var(--color-accent-coral)';
+                  }}
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
+
             {/* Input Form Footer */}
             <form
               onSubmit={handleSendMessage}

@@ -80,6 +80,7 @@ export const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
         { name: 'Daily Activity Logs', path: '/teacher/daily-updates', icon: <Clock size={18} /> },
         { name: 'Progress Reports', path: '/teacher/progress', icon: <TrendingUp size={18} /> },
         { name: 'Parent Chat', path: '/teacher/chat', icon: <MessageSquare size={18} /> },
+        { name: 'AI Teaching Assistant', path: '/teacher/ai-assistant', icon: <Bot size={18} /> },
         { name: 'Notifications', path: '/teacher/notifications', icon: <Bell size={18} /> },
         { name: 'Teacher Profile', path: '/teacher/profile', icon: <User size={18} /> }
       ];

@@ -604,7 +604,7 @@ export const initialAnnouncements: Announcement[] = [
 export const initialChatMessages: ChatMessage[] = [
   {
     id: 'msg-1',
-    senderId: 'usr-teacher-1',
+    senderId: 'tch-1',
     senderName: 'Sarah Jenkins',
     senderRole: 'TEACHER',
     receiverId: 'usr-parent-1',
@@ -618,7 +618,7 @@ export const initialChatMessages: ChatMessage[] = [
     senderId: 'usr-parent-1',
     senderName: 'Emily Watson',
     senderRole: 'PARENT',
-    receiverId: 'usr-teacher-1',
+    receiverId: 'tch-1',
     receiverName: 'Sarah Jenkins',
     receiverRole: 'TEACHER',
     message: 'Hi Sarah! Thank you. I was wondering what time they usually have their morning fruit snacks and nap time?',
@@ -626,7 +626,7 @@ export const initialChatMessages: ChatMessage[] = [
   },
   {
     id: 'msg-3',
-    senderId: 'usr-teacher-1',
+    senderId: 'tch-1',
     senderName: 'Sarah Jenkins',
     senderRole: 'TEACHER',
     receiverId: 'usr-parent-1',

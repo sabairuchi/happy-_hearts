@@ -7,6 +7,8 @@ import About from './pages/About';
 import Teachers from './pages/Teachers';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
 
 // Milestone 2 Core Security & Providers
 import { AuthProvider } from './context/AuthContext';
@@ -80,6 +82,11 @@ function App() {
             <Route path="/teachers" element={<Teachers />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
+            <Route path="/terms" element={<TermsConditions />} />
+            <Route path="/terms-and-conditions" element={<Navigate to="/terms" replace />} />
+            <Route path="/terms-of-service" element={<Navigate to="/terms" replace />} />
 
             {/* Admission Pages */}
             <Route path="/admission" element={<Admission />} />

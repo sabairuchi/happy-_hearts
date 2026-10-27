@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { Search, AlertCircle, FileText, ArrowRight, ArrowLeft } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
@@ -19,6 +19,13 @@ export default function AdmissionStatus() {
   const [selectedApp, setSelectedApp] = useState<AdmissionApplication | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
 
+  const handleSearch = useCallback((id: string) => {
+    const trimmed = id.trim().toUpperCase();
+    const found = applications.find(a => a.id.toUpperCase() === trimmed);
+    setSelectedApp(found || null);
+    setHasSearched(true);
+  }, [applications]);
+
   useEffect(() => {
     if (queryAppId) {
       handleSearch(queryAppId);
@@ -30,15 +37,7 @@ export default function AdmissionStatus() {
         setHasSearched(true);
       }
     }
-  }, [queryAppId, applications, user]);
-
-
-  const handleSearch = (id: string) => {
-    const trimmed = id.trim().toUpperCase();
-    const found = applications.find(a => a.id.toUpperCase() === trimmed);
-    setSelectedApp(found || null);
-    setHasSearched(true);
-  };
+  }, [queryAppId, applications, user, handleSearch]);
 
   const getStatusClass = (status: ApplicationStatus) => {
     switch (status) {

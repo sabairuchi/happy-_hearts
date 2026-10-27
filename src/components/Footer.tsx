@@ -126,9 +126,9 @@ export const Footer = () => {
         <div className={styles.bottom}>
           <p>&copy; {new Date().getFullYear()} Happy Hearts Preschool & Crèche. All rights reserved.</p>
           <div className={styles.bottomLinks}>
-            <a href="#" className="interactive">Privacy Policy</a>
+            <Link to="/privacy" className="interactive">Privacy Policy</Link>
             <span>•</span>
-            <a href="#" className="interactive">Terms of Service</a>
+            <Link to="/terms" className="interactive">Terms & Conditions</Link>
           </div>
         </div>
       </div>

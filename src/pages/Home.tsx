@@ -75,10 +75,10 @@ export default function Home() {
   useEffect(() => {
     if (isTestimonialHovered) return;
     const timer = setInterval(() => {
-      handleNextTestimonial();
+      setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [isTestimonialHovered]);
+  }, [isTestimonialHovered, testimonials.length]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
